@@ -1,0 +1,17 @@
+{
+  "name": "electron-seed",
+  "version": "1.0.0",
+  "description": "seed of desktop application",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error:\" && exit 1"
+  },
+  "homepage": "",
+  "author": "paolo mococci",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "electron": "^8.0.1",
+    "spectre.css": "^0.5.8"
+  },
+  "os": ["linux"]
+}
