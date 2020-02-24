@@ -16,3 +16,9 @@
  *
  */
 
+require('electron-reload');
+const {app, ipcMain} = require('electron');
+const path = require('path');
+const Window = require('./Window.js');
+const DataStore = require('./DataStore.js');
+const dataTask = new DataStore({name:"task list"});
