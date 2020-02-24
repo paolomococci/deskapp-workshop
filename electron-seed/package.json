@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error:\" && exit 1"
   },
-  "homepage": "",
+  "homepage": "https://github.com/paolomococci/deskapp-workshop/tree/master/electron-seed",
   "author": "paolo mococci",
   "license": "Apache-2.0",
   "dependencies": {
