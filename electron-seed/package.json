@@ -1,14 +1,21 @@
 {
   "name": "electron-seed",
   "version": "1.0.0",
-  "description": "seed of desktop application",
+  "description": "template of desktop application",
   "main": "main.js",
   "scripts": {
+    "start": "electron .",
     "test": "echo \"Error:\" && exit 1"
   },
   "homepage": "https://github.com/paolomococci/deskapp-workshop/tree/master/electron-seed",
   "author": "paolo mococci",
   "license": "Apache-2.0",
+  "keywords": [
+    "Electron",
+    "desktop",
+    "application",
+    "template"
+  ],
   "dependencies": {
     "electron": "^8.0.1",
     "spectre.css": "^0.5.8"
