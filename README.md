@@ -1,4 +1,4 @@
-# deskapp-workshop
+# webapp-workshop
 
 ## Web application workshop
 
