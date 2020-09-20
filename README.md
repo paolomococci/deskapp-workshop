@@ -1,2 +1,2 @@
 # deskapp-workshop
-JavaScript desktop application workshop
+Web application workshop
