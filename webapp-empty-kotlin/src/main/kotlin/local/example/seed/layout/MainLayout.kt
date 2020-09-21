@@ -71,4 +71,15 @@ class MainLayout : AppLayout() {
         verticalLayout.add(horizontalLayout, menu)
         return verticalLayout
     }
+
+    fun createMenu() : Tabs {
+        val tabs = Tabs()
+        tabs.orientation = Tabs.Orientation.VERTICAL
+        // TODO
+        return tabs
+    }
+
+    fun createMenuItems() {
+        // TODO
+    }
 }
