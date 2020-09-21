@@ -19,5 +19,11 @@
 package local.example.seed.view
 
 import com.vaadin.flow.component.html.Div
+import com.vaadin.flow.component.html.Label
 
-class ErrorView : Div()
+class ErrorView : Div() {
+
+    init {
+        add(Label("content to be developed"))
+    }
+}
