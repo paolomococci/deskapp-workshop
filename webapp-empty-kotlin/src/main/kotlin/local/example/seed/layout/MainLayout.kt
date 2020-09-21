@@ -23,6 +23,7 @@ import com.vaadin.flow.component.applayout.AppLayout
 import com.vaadin.flow.component.applayout.DrawerToggle
 import com.vaadin.flow.component.dependency.CssImport
 import com.vaadin.flow.component.html.H1
+import com.vaadin.flow.component.icon.Icon
 import com.vaadin.flow.component.orderedlayout.FlexComponent
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
@@ -47,7 +48,7 @@ class MainLayout : AppLayout() {
         val horizontalLayout = HorizontalLayout()
         horizontalLayout.setId("header")
         horizontalLayout.themeList.set("dark", true)
-        horizontalLayout.setWidthFull()
+        horizontalLayout.setSizeFull()
         horizontalLayout.isSpacing = false
         horizontalLayout.alignItems = FlexComponent.Alignment.CENTER
         horizontalLayout.add(DrawerToggle())
@@ -56,9 +57,18 @@ class MainLayout : AppLayout() {
         return horizontalLayout
     }
 
-    fun createDrawerContent() : Component {
+    fun createDrawerContent(menu: Tabs) : Component {
         val verticalLayout = VerticalLayout()
+        val horizontalLayout = HorizontalLayout()
+        verticalLayout.setSizeFull()
+        verticalLayout.isPadding = false
+        verticalLayout.isSpacing = false
+        verticalLayout.alignItems = FlexComponent.Alignment.STRETCH
+        horizontalLayout.alignItems = FlexComponent.Alignment.CENTER
         // TODO
+        horizontalLayout.add("icon")
+        horizontalLayout.add("label")
+        verticalLayout.add(horizontalLayout, menu)
         return verticalLayout
     }
 }
