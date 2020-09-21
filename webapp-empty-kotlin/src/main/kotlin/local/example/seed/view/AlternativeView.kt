@@ -24,9 +24,11 @@ import com.vaadin.flow.component.button.Button
 import com.vaadin.flow.component.dependency.CssImport
 import com.vaadin.flow.component.notification.Notification
 import com.vaadin.flow.component.textfield.TextField
+import com.vaadin.flow.router.PageTitle
 import com.vaadin.flow.router.Route
 
 @Route("alternative")
+@PageTitle("alternative")
 @CssImport(value = "style.css")
 class AlternativeView  : KComposite() {
 
