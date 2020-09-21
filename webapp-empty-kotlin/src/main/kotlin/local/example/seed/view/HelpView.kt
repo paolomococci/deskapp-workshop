@@ -20,7 +20,11 @@ package local.example.seed.view
 
 import com.vaadin.flow.component.html.Div
 import com.vaadin.flow.component.html.Label
+import com.vaadin.flow.router.PageTitle
+import com.vaadin.flow.router.Route
 
+@Route("help")
+@PageTitle("help")
 class HelpView : Div() {
 
     init {
