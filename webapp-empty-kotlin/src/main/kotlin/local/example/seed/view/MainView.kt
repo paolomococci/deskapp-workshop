@@ -22,6 +22,7 @@ import com.github.mvysny.karibudsl.v10.button
 import com.github.mvysny.karibudsl.v10.formLayout
 import com.github.mvysny.karibudsl.v10.onLeftClick
 import com.github.mvysny.karibudsl.v10.textField
+import com.vaadin.flow.component.dependency.CssImport
 import com.vaadin.flow.component.html.Main
 import com.vaadin.flow.component.icon.Icon
 import com.vaadin.flow.component.icon.VaadinIcon
@@ -30,6 +31,7 @@ import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.router.Route
 
 @Route("")
+@CssImport(value = "style.css")
 class MainView : Main() {
 
     private lateinit var nameField: TextField
@@ -37,6 +39,7 @@ class MainView : Main() {
 
     init {
         formLayout {
+            addClassName("main")
             nameField = textField("name")
             surnameField = textField("surname")
         }
