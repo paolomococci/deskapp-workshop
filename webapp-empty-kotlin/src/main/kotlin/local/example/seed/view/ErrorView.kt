@@ -18,6 +18,7 @@
 
 package local.example.seed.view
 
+import com.vaadin.flow.component.dependency.CssImport
 import com.vaadin.flow.component.html.Div
 import com.vaadin.flow.component.html.Label
 import com.vaadin.flow.router.PageTitle
@@ -25,9 +26,11 @@ import com.vaadin.flow.router.Route
 
 @Route("error")
 @PageTitle("error")
+@CssImport(value = "style.css")
 class ErrorView : Div() {
 
     init {
+        addClassName("main")
         add(Label("content to be developed"))
     }
 }
