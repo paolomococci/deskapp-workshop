@@ -19,32 +19,37 @@
 package local.example.seed.layout
 
 import com.vaadin.flow.component.Component
+import com.vaadin.flow.component.ComponentUtil
 import com.vaadin.flow.component.applayout.AppLayout
 import com.vaadin.flow.component.applayout.DrawerToggle
-import com.vaadin.flow.component.dependency.CssImport
 import com.vaadin.flow.component.html.H1
-import com.vaadin.flow.component.icon.Icon
+import com.vaadin.flow.component.icon.VaadinIcon
 import com.vaadin.flow.component.orderedlayout.FlexComponent
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
+import com.vaadin.flow.component.tabs.Tab
 import com.vaadin.flow.component.tabs.Tabs
+import com.vaadin.flow.component.tabs.TabsVariant
+import com.vaadin.flow.router.PageTitle
+import com.vaadin.flow.router.RouterLink
 import com.vaadin.flow.theme.Theme
 import com.vaadin.flow.theme.lumo.Lumo
+import local.example.seed.view.AboutView
+import local.example.seed.view.AlternativeView
+import local.example.seed.view.HelpView
+import local.example.seed.view.MainView
+import java.util.*
 
-
-@CssImport(value = "style.css")
 @Theme(value = Lumo::class, variant = Lumo.DARK)
 class MainLayout : AppLayout() {
 
-    private lateinit var menu: Tabs
+    private var menu: Tabs
     private lateinit var title: H1
 
-    init {
-        primarySection = Section.DRAWER
-        addToNavbar(true)
-    }
+    private val currentPageTitle: String get() = content
+            .javaClass.getAnnotation(PageTitle::class.java).value
 
-    fun createHeaderContent() : Component {
+    private fun createHeaderContent() : Component {
         val horizontalLayout = HorizontalLayout()
         horizontalLayout.setId("header")
         horizontalLayout.themeList.set("dark", true)
@@ -57,29 +62,70 @@ class MainLayout : AppLayout() {
         return horizontalLayout
     }
 
-    fun createDrawerContent(menu: Tabs) : Component {
+    private fun createDrawerContent(menu: Tabs) : Component {
         val verticalLayout = VerticalLayout()
         val horizontalLayout = HorizontalLayout()
         verticalLayout.setSizeFull()
         verticalLayout.isPadding = false
         verticalLayout.isSpacing = false
         verticalLayout.alignItems = FlexComponent.Alignment.STRETCH
-        horizontalLayout.alignItems = FlexComponent.Alignment.CENTER
-        // TODO
-        horizontalLayout.add("icon")
-        horizontalLayout.add("label")
+        horizontalLayout.setId("logo")
+        horizontalLayout.alignItems = FlexComponent.Alignment.BASELINE
+        horizontalLayout.add(VaadinIcon.FOLDER_OPEN.create())
+        horizontalLayout.add(" ")
+        horizontalLayout.add("example-empty")
         verticalLayout.add(horizontalLayout, menu)
         return verticalLayout
     }
 
-    fun createMenu() : Tabs {
+    private fun createMenu() : Tabs {
         val tabs = Tabs()
         tabs.orientation = Tabs.Orientation.VERTICAL
-        // TODO
+        tabs.addThemeVariants(TabsVariant.LUMO_MINIMAL)
+        tabs.setId("tabs")
+        tabs.add(*createMenuItems())
         return tabs
     }
 
-    fun createMenuItems() {
-        // TODO
+    private fun createMenuItems(): Array<Tab> {
+        return arrayOf(
+                createTab("Main", MainView::class.java),
+                createTab("Alternative", AlternativeView::class.java),
+                createTab("Help", HelpView::class.java),
+                createTab("About", AboutView::class.java)
+        )
+    }
+
+    private fun getTabForComponent(component: Component): Optional<Tab> {
+        return menu.children
+                .filter { tab: Component? ->
+                    (ComponentUtil.getData(tab, Class::class.java)
+                            == component.javaClass)
+                }
+                .findFirst().map { obj: Component? -> Tab::class.java.cast(obj) }
+    }
+
+    init {
+        primarySection = Section.DRAWER
+        addToNavbar(true, createHeaderContent())
+        menu = createMenu()
+        addToDrawer(createDrawerContent(menu))
+    }
+
+    override fun afterNavigation() {
+        super.afterNavigation()
+        getTabForComponent(content).ifPresent {
+            selectedTab: Tab? -> menu.selectedTab = selectedTab
+        }
+        title.text = currentPageTitle
+    }
+
+    companion object {
+        private fun createTab(text: String, navigationTarget: Class<out Component>): Tab {
+            val tab = Tab()
+            tab.add(RouterLink(text, navigationTarget))
+            ComponentUtil.setData(tab, Class::class.java, navigationTarget)
+            return tab
+        }
     }
 }
