@@ -30,10 +30,13 @@ import com.vaadin.flow.component.notification.Notification
 import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.router.PageTitle
 import com.vaadin.flow.router.Route
+import com.vaadin.flow.router.RouteAlias
+import local.example.seed.layout.MainLayout
 
-@Route("")
 @PageTitle("main")
 @CssImport(value = "style.css")
+@Route("main", layout = MainLayout::class)
+@RouteAlias("", layout = MainLayout::class)
 class MainView : Main() {
 
     private lateinit var nameField: TextField
