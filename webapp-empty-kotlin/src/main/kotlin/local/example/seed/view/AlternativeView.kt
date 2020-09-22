@@ -26,10 +26,11 @@ import com.vaadin.flow.component.notification.Notification
 import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.router.PageTitle
 import com.vaadin.flow.router.Route
+import local.example.seed.layout.MainLayout
 
-@Route("alternative")
 @PageTitle("alternative")
 @CssImport(value = "style.css")
+@Route("alternative", layout = MainLayout::class)
 class AlternativeView  : KComposite() {
 
     private lateinit var nameField: TextField
