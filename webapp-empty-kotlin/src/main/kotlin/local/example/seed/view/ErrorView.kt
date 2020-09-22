@@ -31,6 +31,6 @@ class ErrorView : Div() {
 
     init {
         addClassName("main")
-        add(Label("content to be developed"))
+        add(Label("the content of the error page has yet to be developed"))
     }
 }
