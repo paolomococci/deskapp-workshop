@@ -23,14 +23,15 @@ import com.vaadin.flow.component.html.Div
 import com.vaadin.flow.component.html.Label
 import com.vaadin.flow.router.PageTitle
 import com.vaadin.flow.router.Route
+import local.example.seed.layout.MainLayout
 
-@Route("about")
 @PageTitle("about")
 @CssImport(value = "style.css")
+@Route("about", layout = MainLayout::class)
 class AboutView : Div() {
 
     init {
         addClassName("main")
-        add(Label("content to be developed"))
+        add(Label("the content of the about page has yet to be developed"))
     }
 }
