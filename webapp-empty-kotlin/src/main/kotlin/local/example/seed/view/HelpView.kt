@@ -23,14 +23,15 @@ import com.vaadin.flow.component.html.Div
 import com.vaadin.flow.component.html.Label
 import com.vaadin.flow.router.PageTitle
 import com.vaadin.flow.router.Route
+import local.example.seed.layout.MainLayout
 
-@Route("help")
 @PageTitle("help")
 @CssImport(value = "style.css")
+@Route("help", layout = MainLayout::class)
 class HelpView : Div() {
 
     init {
         addClassName("main")
-        add(Label("content to be developed"))
+        add(Label("the content of the help page has yet to be developed"))
     }
 }
