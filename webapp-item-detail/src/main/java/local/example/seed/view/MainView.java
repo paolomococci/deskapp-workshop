@@ -18,5 +18,24 @@
 
 package local.example.seed.view;
 
-public class MainView {
+import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteAlias;
+import local.example.seed.layout.MainLayout;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@PageTitle("main view")
+@CssImport("style.css")
+@Route(value = "main", layout = MainLayout.class)
+@RouteAlias(value = "", layout = MainLayout.class)
+public class MainView
+        extends Main {
+
+    @Autowired
+    public MainView() {
+        super();
+        // TODO
+    }
 }
