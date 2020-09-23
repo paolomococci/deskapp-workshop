@@ -23,6 +23,6 @@ import com.vaadin.flow.server.PWA;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@PWA(name = "example-empty", shortName = "example")
+@PWA(name = "customer-form", shortName = "customer")
 public class ApplicationShellConf
         implements AppShellConfigurator {}
