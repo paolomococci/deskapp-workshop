@@ -29,7 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @PageTitle("main view")
 @CssImport("style.css")
 @Route(value = "main", layout = MainLayout.class)
-@RouteAlias(value = "main", layout = MainLayout.class)
+@RouteAlias(value = "", layout = MainLayout.class)
 public class MainView
         extends Main {
 
