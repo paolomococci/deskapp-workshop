@@ -18,5 +18,22 @@
 
 package local.example.seed.view;
 
-public class HelpView {
+import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+import local.example.seed.layout.MainLayout;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@PageTitle("help view")
+@CssImport("style.css")
+@Route(value = "help", layout = MainLayout.class)
+public class HelpView
+        extends Main {
+
+    @Autowired
+    public HelpView() {
+        super();
+        // TODO
+    }
 }
