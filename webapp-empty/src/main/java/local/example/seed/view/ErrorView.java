@@ -18,5 +18,21 @@
 
 package local.example.seed.view;
 
-public class ErrorView {
+import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@PageTitle("error view")
+@CssImport("style.css")
+@Route(value = "error")
+public class ErrorView
+        extends Main {
+
+    @Autowired
+    public ErrorView() {
+        super();
+        // TODO
+    }
 }
