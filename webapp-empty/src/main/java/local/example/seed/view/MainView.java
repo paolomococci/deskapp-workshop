@@ -37,6 +37,7 @@ public class MainView
     @Autowired
     public MainView() {
         super();
+        addClassName("view");
         setId("main-view");
         add(new Label("the content of the main page has yet to be developed"));
     }
