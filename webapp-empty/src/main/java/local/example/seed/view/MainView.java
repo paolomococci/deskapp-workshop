@@ -19,6 +19,7 @@
 package local.example.seed.view;
 
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -36,6 +37,7 @@ public class MainView
     @Autowired
     public MainView() {
         super();
-        // TODO
+        setId("main-view");
+        add(new Label("the content of the main page has yet to be developed"));
     }
 }
