@@ -34,6 +34,7 @@ public class ErrorView
     @Autowired
     public ErrorView() {
         super();
+        addClassName("view");
         setId("error-view");
         add(new Label("the content of the error page has yet to be developed"));
     }
