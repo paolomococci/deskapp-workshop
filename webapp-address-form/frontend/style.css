@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.centered-content {
-    margin: 0 auto;
-    max-width: 300px;
+view {
+	padding: 10px;
+	font-size: medium;
 }
