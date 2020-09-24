@@ -35,6 +35,7 @@ public class AboutView
     @Autowired
     public AboutView() {
         super();
+        addClassName("view");
         setId("about-view");
         add(new Label("the content of the about page has yet to be developed"));
     }
