@@ -31,7 +31,7 @@ import local.example.seed.layout.MainLayout
 class HelpView : Div() {
 
     init {
-        addClassName("main")
+        addClassName("view")
         add(Label("the content of the help page has yet to be developed"))
     }
 }
