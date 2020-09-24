@@ -19,6 +19,7 @@
 package local.example.seed.view;
 
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -34,6 +35,8 @@ public class HelpView
     @Autowired
     public HelpView() {
         super();
-        // TODO
+        addClassName("view");
+        setId("help-view");
+        add(new Label("the content of the help page has yet to be developed"));
     }
 }
