@@ -19,6 +19,7 @@
 package local.example.seed.view;
 
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -34,6 +35,8 @@ public class AboutView
     @Autowired
     public AboutView() {
         super();
-        // TODO
+        addClassName("view");
+        setId("about-view");
+        add(new Label("the content of the about page has yet to be developed"));
     }
 }
