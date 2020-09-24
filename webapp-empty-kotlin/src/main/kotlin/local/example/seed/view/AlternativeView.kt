@@ -39,7 +39,7 @@ class AlternativeView  : KComposite() {
 
     private val alternateView = ui {
         verticalLayout {
-            addClassName("main")
+            addClassName("view")
             nameField = textField("name")
             surnameField = textField("surname")
             welcomeButton = button("welcome") {
