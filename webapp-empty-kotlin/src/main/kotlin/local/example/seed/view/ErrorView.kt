@@ -30,7 +30,7 @@ import com.vaadin.flow.router.Route
 class ErrorView : Div() {
 
     init {
-        addClassName("main")
+        addClassName("view")
         add(Label("the content of the error page has yet to be developed"))
     }
 }
