@@ -35,6 +35,7 @@ public class HelpView
     @Autowired
     public HelpView() {
         super();
+        addClassName("view");
         setId("help-view");
         add(new Label("the content of the help page has yet to be developed"));
     }
