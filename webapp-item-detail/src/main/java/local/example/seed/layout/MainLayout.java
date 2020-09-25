@@ -36,13 +36,14 @@ import java.util.Optional;
 public class MainLayout
         extends AppLayout {
 
-    private final Tabs tabs;
+    private final Tabs menu;
     private H1 title;
 
     public MainLayout() {
         setPrimarySection(Section.DRAWER);
         addToNavbar(true, createHeaderContent());
-        tabs = null;
+        this.menu = null;
+        addToDrawer(createDrawerContent(null));
     }
 
     private Component createHeaderContent() {
