@@ -20,9 +20,7 @@ package local.example.seed.conf;
 
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
 @PWA(name = "item-detail", shortName = "detail")
 public class ApplicationShellConf
         implements AppShellConfigurator {}
