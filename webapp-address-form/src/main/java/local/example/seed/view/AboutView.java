@@ -18,25 +18,23 @@
 
 package local.example.seed.view;
 
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
-import org.springframework.beans.factory.annotation.Autowired;
 
-@PageTitle("about view")
-@CssImport("style.css")
+@PageTitle("about")
 @Route(value = "about", layout = MainLayout.class)
 public class AboutView
         extends Main {
 
-    @Autowired
     public AboutView() {
-        super();
-        addClassName("view");
-        setId("about-view");
-        add(new Label("the content of the about page has yet to be developed"));
+        add(
+                new VerticalLayout(
+                        new Label("the content of the about page has yet to be developed")
+                )
+        );
     }
 }
