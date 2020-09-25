@@ -30,6 +30,7 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
@@ -96,9 +97,13 @@ public class MainLayout
                 ).findFirst().map(Tab.class::cast);
     }
 
-    private static Tab createTab() {
-        // TODO
-        return null;
+    private static Tab createTab(
+            String text, Class<? extends Component> navigationTarget
+    ) {
+        final Tab tab = new Tab();
+        tab.add(new RouterLink(text, navigationTarget));
+        ComponentUtil.setData(tab, Class.class, navigationTarget);
+        return tab;
     }
 
     private String getCurrentPageTitle() {
