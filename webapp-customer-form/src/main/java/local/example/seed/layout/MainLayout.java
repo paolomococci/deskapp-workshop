@@ -25,7 +25,6 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
@@ -36,7 +35,6 @@ public class MainLayout
     private final Tabs tabs;
     private H1 title;
 
-    @Autowired
     public MainLayout() {
         tabs = null;
     }
