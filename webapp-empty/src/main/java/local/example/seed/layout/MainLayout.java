@@ -43,8 +43,8 @@ public class MainLayout
     public MainLayout() {
         setPrimarySection(Section.DRAWER);
         addToNavbar(true, createHeaderContent());
-        this.menu = null;
-        addToDrawer(createDrawerContent(null));
+        this.menu = createMenu();
+        addToDrawer(createDrawerContent(this.menu));
     }
 
     private Component createHeaderContent() {
