@@ -23,7 +23,6 @@ import com.vaadin.flow.component.ComponentUtil
 import com.vaadin.flow.component.applayout.AppLayout
 import com.vaadin.flow.component.applayout.DrawerToggle
 import com.vaadin.flow.component.html.H1
-import com.vaadin.flow.component.icon.VaadinIcon
 import com.vaadin.flow.component.orderedlayout.FlexComponent
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
@@ -55,7 +54,7 @@ class MainLayout : AppLayout() {
         horizontalLayout.themeList.set("dark", true)
         horizontalLayout.setSizeFull()
         horizontalLayout.isSpacing = false
-        horizontalLayout.alignItems = FlexComponent.Alignment.CENTER
+        horizontalLayout.alignItems = FlexComponent.Alignment.BASELINE
         horizontalLayout.add(DrawerToggle())
         title = H1()
         horizontalLayout.add(title)
@@ -66,14 +65,12 @@ class MainLayout : AppLayout() {
         val verticalLayout = VerticalLayout()
         val horizontalLayout = HorizontalLayout()
         verticalLayout.setSizeFull()
-        verticalLayout.isPadding = false
+        verticalLayout.isPadding = true
         verticalLayout.isSpacing = false
-        verticalLayout.alignItems = FlexComponent.Alignment.STRETCH
+        verticalLayout.alignItems = FlexComponent.Alignment.CENTER
         horizontalLayout.setId("logo")
         horizontalLayout.alignItems = FlexComponent.Alignment.BASELINE
-        horizontalLayout.add(VaadinIcon.FOLDER_OPEN.create())
-        horizontalLayout.add(" ")
-        horizontalLayout.add("example-empty")
+        horizontalLayout.add("Example Empty")
         verticalLayout.add(horizontalLayout, menu)
         return verticalLayout
     }
