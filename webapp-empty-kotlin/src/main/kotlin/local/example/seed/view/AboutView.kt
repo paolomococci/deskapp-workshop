@@ -21,6 +21,7 @@ package local.example.seed.view
 import com.vaadin.flow.component.dependency.CssImport
 import com.vaadin.flow.component.html.Div
 import com.vaadin.flow.component.html.Label
+import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.router.PageTitle
 import com.vaadin.flow.router.Route
 import local.example.seed.layout.MainLayout
@@ -31,7 +32,11 @@ import local.example.seed.layout.MainLayout
 class AboutView : Div() {
 
     init {
-        addClassName("view")
-        add(Label("the content of the about page has yet to be developed"))
+        addClassName("main")
+        add(
+                VerticalLayout(
+                        Label("the content of the about page has yet to be developed")
+                )
+        )
     }
 }
