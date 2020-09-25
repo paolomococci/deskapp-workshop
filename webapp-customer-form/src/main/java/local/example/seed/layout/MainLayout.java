@@ -24,6 +24,7 @@ import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.theme.Theme;
@@ -40,6 +41,7 @@ public class MainLayout
 
     public MainLayout() {
         setPrimarySection(Section.DRAWER);
+        addToNavbar(true, createHeaderContent());
         tabs = null;
     }
 
@@ -55,8 +57,16 @@ public class MainLayout
     }
 
     private Component createDrawerContent(Tabs tabs) {
-        // TODO
-        return null;
+        VerticalLayout verticalLayout = new VerticalLayout();
+        verticalLayout.setSizeFull();
+        verticalLayout.setPadding(true);
+        verticalLayout.setSpacing(false);
+        verticalLayout.setAlignItems(FlexComponent.Alignment.CENTER);
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout.setAlignItems(FlexComponent.Alignment.END);
+        horizontalLayout.add(new H1("empty"));
+        verticalLayout.add(horizontalLayout, tabs);
+        return verticalLayout;
     }
 
     private Tabs createMenu() {
