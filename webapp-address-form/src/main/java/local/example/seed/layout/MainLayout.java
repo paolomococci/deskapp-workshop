@@ -28,6 +28,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabsVariant;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
@@ -95,8 +96,10 @@ public class MainLayout
     }
 
     private String getCurrentPageTitle() {
-        // TODO
-        return null;
+        return getContent()
+                .getClass()
+                .getAnnotation(PageTitle.class)
+                .value();
     }
 
     @Override
