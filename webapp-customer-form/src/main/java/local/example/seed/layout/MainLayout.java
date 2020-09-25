@@ -27,6 +27,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
+import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
@@ -71,8 +72,11 @@ public class MainLayout
     }
 
     private Tabs createMenu() {
-        // TODO
-        return null;
+        final Tabs tabs = new Tabs();
+        tabs.setOrientation(Tabs.Orientation.VERTICAL);
+        tabs.addThemeVariants(TabsVariant.LUMO_MINIMAL);
+        tabs.add(createMenuItems());
+        return tabs;
     }
 
     private Component[] createMenuItems() {
