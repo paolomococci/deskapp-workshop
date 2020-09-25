@@ -33,6 +33,10 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
+import local.example.seed.view.AboutView;
+import local.example.seed.view.CustomerView;
+import local.example.seed.view.HelpView;
+import local.example.seed.view.MainView;
 
 import java.util.Optional;
 
@@ -83,8 +87,12 @@ public class MainLayout
     }
 
     private Component[] createMenuItems() {
-        // TODO
-        return new Component[0];
+        return new Tab[] {
+                createTab("Main", MainView.class),
+                createTab("Customer", CustomerView.class),
+                createTab("Help", HelpView.class),
+                createTab("About", AboutView.class)
+        };
     }
 
     private Optional<Tab> getTabForComponent(Component component) {
