@@ -116,6 +116,7 @@ public class MainLayout
     @Override
     protected void afterNavigation() {
         super.afterNavigation();
-        // TODO
+        getTabForComponent(getContent()).ifPresent(this.menu::setSelectedTab);
+        this.title.setText(getCurrentPageTitle());
     }
 }
