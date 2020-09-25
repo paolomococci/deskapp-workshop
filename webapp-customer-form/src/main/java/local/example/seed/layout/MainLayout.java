@@ -20,7 +20,10 @@ package local.example.seed.layout;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.theme.Theme;
@@ -36,12 +39,19 @@ public class MainLayout
     private H1 title;
 
     public MainLayout() {
+        setPrimarySection(Section.DRAWER);
         tabs = null;
     }
 
     private Component createHeaderContent() {
-        // TODO
-        return null;
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout.setWidthFull();
+        horizontalLayout.setSpacing(false);
+        horizontalLayout.setAlignItems(FlexComponent.Alignment.BASELINE);
+        horizontalLayout.add(new DrawerToggle());
+        this.title = new H1();
+        horizontalLayout.add(this.title);
+        return horizontalLayout;
     }
 
     private Component createDrawerContent(Tabs tabs) {
