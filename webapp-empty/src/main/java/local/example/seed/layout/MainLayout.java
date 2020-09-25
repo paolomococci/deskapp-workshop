@@ -19,6 +19,7 @@
 package local.example.seed.layout;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.H1;
@@ -86,8 +87,13 @@ public class MainLayout
     }
 
     private Optional<Tab> getTabForComponent(Component component) {
-        // TODO
-        return null;
+        return this.menu.getChildren()
+                .filter(
+                        tab -> ComponentUtil.getData(
+                                tab,
+                                Class.class).equals(component.getClass()
+                        )
+                ).findFirst().map(Tab.class::cast);
     }
 
     private static Tab createTab() {
