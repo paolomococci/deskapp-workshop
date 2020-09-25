@@ -25,7 +25,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
 
-@PageTitle("help view")
+@PageTitle("help")
 @Route(value = "help", layout = MainLayout.class)
 public class HelpView
         extends Main {
