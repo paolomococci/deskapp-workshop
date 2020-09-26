@@ -265,3 +265,222 @@ Date: Sat, 26 Sep 2020 05:25:36 GMT
 * Connection #0 to host 127.0.0.1 left intact
 }
 ```
+
+## Finally, I try to send a GET request to uri regarding documents address:
+```
+$ curl -v -i http://127.0.0.1:8080/addresses
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> GET /addresses HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.58.0
+> Accept: */*
+> 
+< HTTP/1.1 200 
+HTTP/1.1 200 
+< Vary: Origin
+Vary: Origin
+< Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Method
+< Vary: Access-Control-Request-Headers
+Vary: Access-Control-Request-Headers
+< Content-Type: application/hal+json
+Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Sat, 26 Sep 2020 05:28:03 GMT
+Date: Sat, 26 Sep 2020 05:28:03 GMT
+
+< 
+{
+  "_embedded" : {
+    "addresses" : [ ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://127.0.0.1:8080/addresses"
+    },
+    "profile" : {
+      "href" : "http://127.0.0.1:8080/profile/addresses"
+    },
+    "search" : {
+      "href" : "http://127.0.0.1:8080/addresses/search"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 0,
+    "totalPages" : 0,
+    "number" : 0
+  }
+* Connection #0 to host 127.0.0.1 left intact
+}
+$ curl -v -i http://127.0.0.1:8080/profile/addresses
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> GET /profile/addresses HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.58.0
+> Accept: */*
+> 
+< HTTP/1.1 200 
+HTTP/1.1 200 
+< Vary: Origin
+Vary: Origin
+< Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Method
+< Vary: Access-Control-Request-Headers
+Vary: Access-Control-Request-Headers
+< Content-Type: application/alps+json
+Content-Type: application/alps+json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Sat, 26 Sep 2020 05:28:45 GMT
+Date: Sat, 26 Sep 2020 05:28:45 GMT
+
+< 
+{
+  "alps" : {
+    "version" : "1.0",
+    "descriptor" : [ {
+      "id" : "address-representation",
+      "href" : "http://127.0.0.1:8080/profile/addresses",
+      "descriptor" : [ {
+        "name" : "country",
+        "type" : "SEMANTIC"
+      }, {
+        "name" : "city",
+        "type" : "SEMANTIC"
+      }, {
+        "name" : "street",
+        "type" : "SEMANTIC"
+      }, {
+        "name" : "civic",
+        "type" : "SEMANTIC"
+      }, {
+        "name" : "code",
+        "type" : "SEMANTIC"
+      }, {
+        "name" : "customer",
+        "type" : "SAFE",
+        "rt" : "http://127.0.0.1:8080/profile/customers#customer-representation"
+      } ]
+    }, {
+      "id" : "get-addresses",
+      "name" : "addresses",
+      "type" : "SAFE",
+      "descriptor" : [ {
+        "name" : "page",
+        "type" : "SEMANTIC",
+        "doc" : {
+          "format" : "TEXT",
+          "value" : "The page to return."
+        }
+      }, {
+        "name" : "size",
+        "type" : "SEMANTIC",
+        "doc" : {
+          "format" : "TEXT",
+          "value" : "The size of the page to return."
+        }
+      }, {
+        "name" : "sort",
+        "type" : "SEMANTIC",
+        "doc" : {
+          "format" : "TEXT",
+          "value" : "The sorting criteria to use to calculate the content of the page."
+        }
+      } ],
+      "rt" : "#address-representation"
+    }, {
+      "id" : "create-addresses",
+      "name" : "addresses",
+      "type" : "UNSAFE",
+      "descriptor" : [ ],
+      "rt" : "#address-representation"
+    }, {
+      "id" : "get-address",
+      "name" : "address",
+      "type" : "SAFE",
+      "descriptor" : [ ],
+      "rt" : "#address-representation"
+    }, {
+      "id" : "patch-address",
+      "name" : "address",
+      "type" : "UNSAFE",
+      "descriptor" : [ ],
+      "rt" : "#address-representation"
+    }, {
+      "id" : "update-address",
+      "name" : "address",
+      "type" : "IDEMPOTENT",
+      "descriptor" : [ ],
+      "rt" : "#address-representation"
+    }, {
+      "id" : "delete-address",
+      "name" : "address",
+      "type" : "IDEMPOTENT",
+      "descriptor" : [ ],
+      "rt" : "#address-representation"
+    }, {
+      "name" : "findByCode",
+      "type" : "SAFE",
+      "descriptor" : [ {
+        "name" : "code",
+        "type" : "SEMANTIC"
+      } ]
+    }, {
+      "name" : "findByCountry",
+      "type" : "SAFE",
+      "descriptor" : [ {
+        "name" : "country",
+        "type" : "SEMANTIC"
+      } ]
+    } ]
+  }
+* Connection #0 to host 127.0.0.1 left intact
+}
+$ curl -v -i http://127.0.0.1:8080/addresses/search
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> GET /addresses/search HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.58.0
+> Accept: */*
+> 
+< HTTP/1.1 200 
+HTTP/1.1 200 
+< Vary: Origin
+Vary: Origin
+< Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Method
+< Vary: Access-Control-Request-Headers
+Vary: Access-Control-Request-Headers
+< Content-Type: application/hal+json
+Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Sat, 26 Sep 2020 05:29:34 GMT
+Date: Sat, 26 Sep 2020 05:29:34 GMT
+
+< 
+{
+  "_links" : {
+    "findByCode" : {
+      "href" : "http://127.0.0.1:8080/addresses/search/findByCode{?code}",
+      "templated" : true
+    },
+    "findByCountry" : {
+      "href" : "http://127.0.0.1:8080/addresses/search/findByCountry{?country}",
+      "templated" : true
+    },
+    "self" : {
+      "href" : "http://127.0.0.1:8080/addresses/search"
+    }
+  }
+* Connection #0 to host 127.0.0.1 left intact
+}
+```
