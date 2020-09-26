@@ -52,7 +52,7 @@ public class AddressWebClient {
 
     public Mono<Address> read(String id) {
         return this.webClient
-                .post()
+                .get()
                 .uri("/addresses/"+id)
                 .retrieve()
                 .onStatus(
@@ -63,8 +63,11 @@ public class AddressWebClient {
     }
 
     public Flux<Address> readAll() {
-        // TODO
-        return null;
+        return this.webClient
+                .get()
+                .uri("/addresses")
+                .retrieve()
+                .bodyToFlux(Address.class);
     }
 
     public Mono<Address> update(Address address, String id) {
