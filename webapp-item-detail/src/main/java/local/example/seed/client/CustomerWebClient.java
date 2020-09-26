@@ -19,15 +19,22 @@
 package local.example.seed.client;
 
 import local.example.seed.model.Customer;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public class CustomerWebClient {
 
-    @Autowired
-    WebClient webClient;
+    private final WebClient webClient;
+
+    public CustomerWebClient() {
+        webClient = WebClient.builder()
+                .baseUrl("http://localhost:8080")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();
+    }
 
     public Mono<Customer> create(Customer customer) {
         // TODO
