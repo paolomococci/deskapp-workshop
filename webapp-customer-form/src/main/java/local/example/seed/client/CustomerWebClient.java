@@ -37,8 +37,12 @@ public class CustomerWebClient {
     }
 
     public Mono<Customer> create(Customer customer) {
-        // TODO
-        return null;
+        return this.webClient
+                .post()
+                .uri("/customers")
+                .body(Mono.just(customer), Customer.class)
+                .retrieve()
+                .bodyToMono(Customer.class);
     }
 
     public Mono<Customer> read(String id) {
