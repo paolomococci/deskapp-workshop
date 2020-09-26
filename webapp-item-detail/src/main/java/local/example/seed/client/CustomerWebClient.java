@@ -71,8 +71,16 @@ public class CustomerWebClient {
     }
 
     public Mono<Customer> update(Customer customer, String id) {
-        // TODO
-        return null;
+        return this.webClient
+                .put()
+                .uri("/customers/"+id)
+                .body(Mono.just(customer), Customer.class)
+                .retrieve()
+                .onStatus(
+                        httpStatus -> !HttpStatus.OK.equals(httpStatus),
+                        clientResponse -> Mono.empty()
+                )
+                .bodyToMono(Customer.class);
     }
 
     public Mono<Customer> partialUpdate(Customer customer, String id) {
