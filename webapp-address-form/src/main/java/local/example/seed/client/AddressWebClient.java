@@ -37,8 +37,12 @@ public class AddressWebClient {
     }
 
     public Mono<Address> create(Address address) {
-        // TODO
-        return null;
+        return this.webClient
+                .post()
+                .uri("/addresses")
+                .body(Mono.just(address), Address.class)
+                .retrieve()
+                .bodyToMono(Address.class);
     }
 
     public Mono<Address> read(Address address) {
