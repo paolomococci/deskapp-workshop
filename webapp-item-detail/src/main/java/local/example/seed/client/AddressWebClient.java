@@ -97,7 +97,10 @@ public class AddressWebClient {
     }
 
     public Mono<Void> delete(String id) {
-        // TODO
-        return null;
+        return this.webClient
+                .delete()
+                .uri("/addresses/"+id)
+                .retrieve()
+                .bodyToMono(Void.class);
     }
 }
