@@ -18,11 +18,44 @@
 
 package local.example.seed.client;
 
+import local.example.seed.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public class CustomerWebClient {
 
     @Autowired
     WebClient webClient;
+
+    public Mono<Customer> create(Customer customer) {
+        // TODO
+        return null;
+    }
+
+    public Mono<Customer> read(String id) {
+        // TODO
+        return null;
+    }
+
+    public Flux<Customer> readAll() {
+        // TODO
+        return null;
+    }
+
+    public Mono<Customer> update(Customer customer, String id) {
+        // TODO
+        return null;
+    }
+
+    public Mono<Customer> partialUpdate(Customer customer, String id) {
+        // TODO
+        return null;
+    }
+
+    public Mono<Void> delete(String id) {
+        // TODO
+        return null;
+    }
 }
