@@ -63,8 +63,11 @@ public class CustomerWebClient {
     }
 
     public Flux<Customer> readAll() {
-        // TODO
-        return null;
+        return this.webClient
+                .get()
+                .uri("/customers")
+                .retrieve()
+                .bodyToFlux(Customer.class);
     }
 
     public Mono<Customer> update(Customer customer, String id) {
