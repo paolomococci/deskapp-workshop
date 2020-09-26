@@ -83,9 +83,17 @@ public class AddressWebClient {
                 .bodyToMono(Address.class);
     }
 
-    public Mono<Address> partialUpdate() {
-        // TODO
-        return null;
+    public Mono<Address> partialUpdate(Address address, String id) {
+        return this.webClient
+                .patch()
+                .uri("/addresses/"+id)
+                .body(Mono.just(address), Address.class)
+                .retrieve()
+                .onStatus(
+                        httpStatus -> !HttpStatus.OK.equals(httpStatus),
+                        clientResponse -> Mono.empty()
+                )
+                .bodyToMono(Address.class);
     }
 
     public Mono<Void> delete(String id) {
