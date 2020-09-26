@@ -97,7 +97,10 @@ public class CustomerWebClient {
     }
 
     public Mono<Void> delete(String id) {
-        // TODO
-        return null;
+        return this.webClient
+                .delete()
+                .uri("/customers/"+id)
+                .retrieve()
+                .bodyToMono(Void.class);
     }
 }
