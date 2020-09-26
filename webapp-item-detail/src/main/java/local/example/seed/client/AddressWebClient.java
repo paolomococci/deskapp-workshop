@@ -20,6 +20,7 @@ package local.example.seed.client;
 
 import local.example.seed.model.Address;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -42,12 +43,23 @@ public class AddressWebClient {
                 .uri("/addresses")
                 .body(Mono.just(address), Address.class)
                 .retrieve()
+                .onStatus(
+                        httpStatus -> !HttpStatus.CREATED.equals(httpStatus),
+                        clientResponse -> Mono.empty()
+                )
                 .bodyToMono(Address.class);
     }
 
-    public Mono<Address> read(Address address) {
-        // TODO
-        return null;
+    public Mono<Address> read(String id) {
+        return this.webClient
+                .post()
+                .uri("/addresses/"+id)
+                .retrieve()
+                .onStatus(
+                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        clientResponse -> Mono.empty()
+                )
+                .bodyToMono(Address.class);
     }
 
     public Flux<Address> readAll() {
