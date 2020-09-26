@@ -18,11 +18,44 @@
 
 package local.example.seed.client;
 
+import local.example.seed.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public class AddressWebClient {
 
     @Autowired
     WebClient webClient;
+
+    public Mono<Address> create(Address address) {
+        // TODO
+        return null;
+    }
+
+    public Mono<Address> read(Address address) {
+        // TODO
+        return null;
+    }
+
+    public Flux<Address> readAll() {
+        // TODO
+        return null;
+    }
+
+    public Mono<Address> update(Address address, String id) {
+        // TODO
+        return null;
+    }
+
+    public Mono<Address> partialUpdate() {
+        // TODO
+        return null;
+    }
+
+    public Mono<Void> delete(String id) {
+        // TODO
+        return null;
+    }
 }
