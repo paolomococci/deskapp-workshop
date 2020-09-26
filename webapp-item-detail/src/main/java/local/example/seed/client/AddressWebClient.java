@@ -71,8 +71,16 @@ public class AddressWebClient {
     }
 
     public Mono<Address> update(Address address, String id) {
-        // TODO
-        return null;
+        return this.webClient
+                .put()
+                .uri("/addresses/"+id)
+                .body(Mono.just(address), Address.class)
+                .retrieve()
+                .onStatus(
+                        httpStatus -> !HttpStatus.OK.equals(httpStatus),
+                        clientResponse -> Mono.empty()
+                )
+                .bodyToMono(Address.class);
     }
 
     public Mono<Address> partialUpdate() {
