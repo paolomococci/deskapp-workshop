@@ -74,6 +74,15 @@ public class CustomerRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void readAllTest() throws Exception {
+        this.mockMvc.perform(get("/customers"))
+                .andExpect(status().isOk());
+    }
+
+    @Disabled
+    @Order(4)
+    @ParameterizedTest
+    @MethodSource("initUri")
+    void updateTest() throws Exception {
         this.mockMvc.perform(put(getUri())
                 .content("{\"name\":\"James\",\"surname\":\"Painter\",\"email\":\"jamespainter@example.local\"}"))
                 .andExpect(status().isNoContent());
@@ -85,19 +94,16 @@ public class CustomerRestRepositoryParametrizedTests {
     }
 
     @Disabled
-    @Order(4)
-    @ParameterizedTest
-    @MethodSource("initUri")
-    void updateTest() throws Exception {
-        // TODO
-    }
-
-    @Disabled
     @Order(5)
     @ParameterizedTest
     @MethodSource("initUri")
     void partialUpdateTest() throws Exception {
-        // TODO
+        this.mockMvc.perform(patch(getUri())
+                .content("{\"email\":\"james.painter@example.local\"}"))
+                .andExpect(status().isNoContent());
+        this.mockMvc.perform(get(getUri()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value("james.painter@example.local"));
     }
 
     @Disabled
