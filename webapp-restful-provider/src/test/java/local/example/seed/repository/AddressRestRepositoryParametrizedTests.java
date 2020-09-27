@@ -32,6 +32,7 @@ import java.util.stream.Stream;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -77,7 +78,9 @@ public class AddressRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void readAllTest() throws Exception {
-        // TODO
+        this.mockMvc.perform(put(getUri())
+                .content("{\"country\":\"Italy\",\"city\":\"Milan\",\"street\":\"millennium\",\"civic\":\"321\",\"code\":\"012345\"}"))
+                .andExpect(status().isNoContent());
     }
 
     @Disabled
