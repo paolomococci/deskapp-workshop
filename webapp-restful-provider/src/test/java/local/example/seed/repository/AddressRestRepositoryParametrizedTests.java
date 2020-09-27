@@ -81,6 +81,13 @@ public class AddressRestRepositoryParametrizedTests {
         this.mockMvc.perform(put(getUri())
                 .content("{\"country\":\"Italy\",\"city\":\"Milan\",\"street\":\"millennium\",\"civic\":\"321\",\"code\":\"012345\"}"))
                 .andExpect(status().isNoContent());
+        this.mockMvc.perform(get(getUri()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.country").value("Italy"))
+                .andExpect(jsonPath("$.city").value("Milan"))
+                .andExpect(jsonPath("$.street").value("millennium"))
+                .andExpect(jsonPath("$.civic").value("321"))
+                .andExpect(jsonPath("$.code").value("012345"));
     }
 
     @Disabled
