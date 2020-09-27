@@ -123,6 +123,15 @@ public class AddressRestRepositoryParametrizedTests {
                 .andExpect(status().isNoContent());
     }
 
+    @Disabled
+    @Order(7)
+    @ParameterizedTest
+    @MethodSource("initUri")
+    void notFoundTest() throws Exception {
+        this.mockMvc.perform(get(getUri()))
+                .andExpect(status().isNotFound());
+    }
+
     public static void setUri(URI uri) {
         AddressRestRepositoryParametrizedTests.uri = uri;
     }
