@@ -31,6 +31,7 @@ import java.net.URI;
 import java.util.stream.Stream;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -78,6 +79,15 @@ public class AddressRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void readAllTest() throws Exception {
+        this.mockMvc.perform(get("/addresses"))
+                .andExpect(status().isOk());
+    }
+
+    @Disabled
+    @Order(4)
+    @ParameterizedTest
+    @MethodSource("initUri")
+    void updateTest() throws Exception {
         this.mockMvc.perform(put(getUri())
                 .content("{\"country\":\"Italy\",\"city\":\"Milan\",\"street\":\"millennium\",\"civic\":\"321\",\"code\":\"012345\"}"))
                 .andExpect(status().isNoContent());
@@ -91,19 +101,16 @@ public class AddressRestRepositoryParametrizedTests {
     }
 
     @Disabled
-    @Order(4)
-    @ParameterizedTest
-    @MethodSource("initUri")
-    void updateTest() throws Exception {
-        // TODO
-    }
-
-    @Disabled
     @Order(5)
     @ParameterizedTest
     @MethodSource("initUri")
     void partialUpdateTest() throws Exception {
-        // TODO
+        this.mockMvc.perform(patch(getUri())
+                .content("{\"name\":\"Twenty-First\"}"))
+                .andExpect(status().isNoContent());
+        this.mockMvc.perform(get(getUri()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.country").value("Italy"));
     }
 
     @Disabled
