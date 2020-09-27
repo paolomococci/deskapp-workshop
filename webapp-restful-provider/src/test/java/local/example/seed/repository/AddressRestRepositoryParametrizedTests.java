@@ -30,6 +30,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import java.net.URI;
 import java.util.stream.Stream;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -118,7 +119,8 @@ public class AddressRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void deleteTest() throws Exception {
-        // TODO
+        this.mockMvc.perform(delete(getUri()))
+                .andExpect(status().isNoContent());
     }
 
     public static void setUri(URI uri) {
