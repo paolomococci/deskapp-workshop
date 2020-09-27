@@ -117,7 +117,9 @@ public class AddressRestRepositoryParametrizedTests {
     @Order(6)
     @ParameterizedTest
     @MethodSource("initUri")
-    void deleteTest() throws Exception {}
+    void deleteTest() throws Exception {
+        // TODO
+    }
 
     public static void setUri(URI uri) {
         AddressRestRepositoryParametrizedTests.uri = uri;
