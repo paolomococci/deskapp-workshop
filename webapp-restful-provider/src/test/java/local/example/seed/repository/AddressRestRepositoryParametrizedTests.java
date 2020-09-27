@@ -25,9 +25,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import java.net.URI;
 import java.util.stream.Stream;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -45,7 +49,11 @@ public class AddressRestRepositoryParametrizedTests {
     @Order(1)
     @Disabled
     void createTest() throws Exception {
-        // TODO
+        MvcResult mvcResult = this.mockMvc
+                .perform(post("/addresses").content(ADDRESS_TEST_STRING))
+                .andExpect(status().isCreated())
+                .andReturn();
+        setUri(new URI(mvcResult.getResponse().getHeader("Location")));
     }
 
     @Disabled
