@@ -18,20 +18,87 @@
 
 package local.example.seed.repository;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.net.URI;
+import java.util.stream.Stream;
+
 @SpringBootTest
-public class CustomerRestRepositoryTests {
+@AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class CustomerRestRepositoryParametrizedTests {
 
     @Autowired
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
 
-    @Autowired
-    private CustomerRestRepository customerRestRepository;
+    private static String CUSTOMER_TEST_STRING =
+            "{\"name\":\"John\",\"surname\":\"Jump\",\"email\":\"johnjump@example.local\"}";
+    private static URI uri;
 
+    @Disabled
     @Test
-    void voidTest() throws Exception {}
+    @Order(1)
+    void createTest() throws Exception {
+        // TODO
+    }
+
+    @Disabled
+    @Order(2)
+    @ParameterizedTest
+    @MethodSource("initUri")
+    void readTest() throws Exception {
+        // TODO
+    }
+
+    @Disabled
+    @Order(3)
+    @ParameterizedTest
+    @MethodSource("initUri")
+    void readAllTest() throws Exception {
+        // TODO
+    }
+
+    @Disabled
+    @Order(4)
+    @ParameterizedTest
+    @MethodSource("initUri")
+    void updateTest() throws Exception {
+        // TODO
+    }
+
+    @Disabled
+    @Order(5)
+    @ParameterizedTest
+    @MethodSource("initUri")
+    void partialUpdateTest() throws Exception {
+        // TODO
+    }
+
+    @Disabled
+    @Order(6)
+    @ParameterizedTest
+    @MethodSource("initUri")
+    void deleteTest() throws Exception {
+        // TODO
+    }
+
+    public static void setUri(URI uri) {
+        CustomerRestRepositoryParametrizedTests.uri = uri;
+    }
+
+    public static URI getUri() {
+        return uri;
+    }
+
+    private static Stream<String> initUri() {
+        return Stream.of(
+                CustomerRestRepositoryParametrizedTests.getUri().getPath()
+        );
+    }
 }
