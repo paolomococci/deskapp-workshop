@@ -77,6 +77,11 @@ public class CustomerRestRepositoryParametrizedTests {
         this.mockMvc.perform(put(getUri())
                 .content("{\"name\":\"James\",\"surname\":\"Painter\",\"email\":\"jamespainter@example.local\"}"))
                 .andExpect(status().isNoContent());
+        this.mockMvc.perform(get(getUri()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("James"))
+                .andExpect(jsonPath("$.surname").value("Painter"))
+                .andExpect(jsonPath("$.email").value("jamespainter@example.local"));
     }
 
     @Disabled
