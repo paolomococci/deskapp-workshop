@@ -111,7 +111,8 @@ public class CustomerRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void deleteTest() throws Exception {
-        // TODO
+        this.mockMvc.perform(delete(getUri()))
+                .andExpect(status().isNoContent());
     }
 
     public static void setUri(URI uri) {
