@@ -18,7 +18,10 @@
 
 package local.example.seed.repository;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +33,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import java.net.URI;
 import java.util.stream.Stream;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -52,21 +51,19 @@ public class AddressRestRepositoryParametrizedTests {
 
     @Test
     @Order(1)
-    @Disabled
     void createTest() throws Exception {
         MvcResult mvcResult = this.mockMvc
                 .perform(post("/addresses").content(ADDRESS_TEST_STRING))
                 .andExpect(status().isCreated())
                 .andReturn();
-        setUri(new URI(mvcResult.getResponse().getHeader("Location")));
+        this.setUri(new URI(mvcResult.getResponse().getHeader("Location")));
     }
 
-    @Disabled
     @Order(2)
     @ParameterizedTest
     @MethodSource("initUri")
     void readTest() throws Exception {
-        this.mockMvc.perform(get(getUri()))
+        this.mockMvc.perform(get(this.getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.country").value("Italy"))
                 .andExpect(jsonPath("$.city").value("Rome"))
@@ -75,24 +72,23 @@ public class AddressRestRepositoryParametrizedTests {
                 .andExpect(jsonPath("$.code").value("054321"));
     }
 
-    @Disabled
     @Order(3)
     @ParameterizedTest
     @MethodSource("initUri")
     void readAllTest() throws Exception {
         this.mockMvc.perform(get("/addresses"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$._embedded").exists());
     }
 
-    @Disabled
     @Order(4)
     @ParameterizedTest
     @MethodSource("initUri")
     void updateTest() throws Exception {
-        this.mockMvc.perform(put(getUri())
+        this.mockMvc.perform(put(this.getUri())
                 .content("{\"country\":\"Italy\",\"city\":\"Milan\",\"street\":\"millennium\",\"civic\":\"321\",\"code\":\"012345\"}"))
                 .andExpect(status().isNoContent());
-        this.mockMvc.perform(get(getUri()))
+        this.mockMvc.perform(get(this.getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.country").value("Italy"))
                 .andExpect(jsonPath("$.city").value("Milan"))
@@ -101,42 +97,39 @@ public class AddressRestRepositoryParametrizedTests {
                 .andExpect(jsonPath("$.code").value("012345"));
     }
 
-    @Disabled
     @Order(5)
     @ParameterizedTest
     @MethodSource("initUri")
     void partialUpdateTest() throws Exception {
-        this.mockMvc.perform(patch(getUri())
+        this.mockMvc.perform(patch(this.getUri())
                 .content("{\"name\":\"Twenty-First\"}"))
                 .andExpect(status().isNoContent());
-        this.mockMvc.perform(get(getUri()))
+        this.mockMvc.perform(get(this.getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.country").value("Italy"));
     }
 
-    @Disabled
     @Order(6)
     @ParameterizedTest
     @MethodSource("initUri")
     void deleteTest() throws Exception {
-        this.mockMvc.perform(delete(getUri()))
+        this.mockMvc.perform(delete(this.getUri()))
                 .andExpect(status().isNoContent());
     }
 
-    @Disabled
     @Order(7)
     @ParameterizedTest
     @MethodSource("initUri")
     void notFoundTest() throws Exception {
-        this.mockMvc.perform(get(getUri()))
+        this.mockMvc.perform(get(this.getUri()))
                 .andExpect(status().isNotFound());
     }
 
-    public static void setUri(URI uri) {
+    private static void setUri(URI uri) {
         AddressRestRepositoryParametrizedTests.uri = uri;
     }
 
-    public static URI getUri() {
+    private static URI getUri() {
         return uri;
     }
 
