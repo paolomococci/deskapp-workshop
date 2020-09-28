@@ -18,7 +18,10 @@
 
 package local.example.seed.repository;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +49,6 @@ public class CustomerRestRepositoryParametrizedTests {
             "{\"name\":\"John\",\"surname\":\"Jump\",\"email\":\"johnjump@example.local\"}";
     private static URI uri;
 
-    @Disabled
     @Test
     @Order(1)
     void createTest() throws Exception {
@@ -54,81 +56,76 @@ public class CustomerRestRepositoryParametrizedTests {
                 .perform(post("/customers").content(CUSTOMER_TEST_STRING))
                 .andExpect(status().isCreated())
                 .andReturn();
-        setUri(new URI(mvcResult.getResponse().getHeader("Location")));
+        this.setUri(new URI(mvcResult.getResponse().getHeader("Location")));
     }
 
-    @Disabled
     @Order(2)
     @ParameterizedTest
     @MethodSource("initUri")
     void readTest() throws Exception {
-        this.mockMvc.perform(get(getUri()))
+        this.mockMvc.perform(get(this.getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("John"))
                 .andExpect(jsonPath("$.surname").value("Jump"))
                 .andExpect(jsonPath("$.email").value("johnjump@example.local"));
     }
 
-    @Disabled
     @Order(3)
     @ParameterizedTest
     @MethodSource("initUri")
     void readAllTest() throws Exception {
         this.mockMvc.perform(get("/customers"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$._embedded").exists());
     }
 
-    @Disabled
     @Order(4)
     @ParameterizedTest
     @MethodSource("initUri")
     void updateTest() throws Exception {
-        this.mockMvc.perform(put(getUri())
+        this.mockMvc.perform(put(this.getUri())
                 .content("{\"name\":\"James\",\"surname\":\"Painter\",\"email\":\"jamespainter@example.local\"}"))
                 .andExpect(status().isNoContent());
-        this.mockMvc.perform(get(getUri()))
+        this.mockMvc.perform(get(this.getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("James"))
                 .andExpect(jsonPath("$.surname").value("Painter"))
                 .andExpect(jsonPath("$.email").value("jamespainter@example.local"));
     }
 
-    @Disabled
     @Order(5)
     @ParameterizedTest
     @MethodSource("initUri")
     void partialUpdateTest() throws Exception {
-        this.mockMvc.perform(patch(getUri())
+        this.mockMvc.perform(patch(this.getUri())
                 .content("{\"email\":\"james.painter@example.local\"}"))
                 .andExpect(status().isNoContent());
-        this.mockMvc.perform(get(getUri()))
+        this.mockMvc.perform(get(this.getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value("james.painter@example.local"));
     }
 
-    @Disabled
     @Order(6)
     @ParameterizedTest
     @MethodSource("initUri")
     void deleteTest() throws Exception {
-        this.mockMvc.perform(delete(getUri()))
+        this.mockMvc.perform(delete(this.getUri()))
                 .andExpect(status().isNoContent());
     }
 
-    @Disabled
     @Order(7)
     @ParameterizedTest
     @MethodSource("initUri")
     void notFoundTest() throws Exception {
-        this.mockMvc.perform(get(getUri()))
+        this.mockMvc.perform(get(this.getUri()))
                 .andExpect(status().isNotFound());
     }
 
-    public static void setUri(URI uri) {
+    private static void setUri(URI uri) {
         CustomerRestRepositoryParametrizedTests.uri = uri;
     }
 
-    public static URI getUri() {
+    private static URI getUri() {
         return uri;
     }
 
