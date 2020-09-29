@@ -1,18 +1,20 @@
 @charset "UTF-8";
 
-header {
+.header-view {
 	margin: 8px;
 	align-items: center;
 	display: flex;
 	font-size: small;
 }
 
-view {
-	padding: 10px;
-	font-size: medium;
+.nav-view {
+	margin: 8px;
+	align-items: left;
+	display: flex;
+	font-size: small;
 }
 
-h1 {
-	margin: 10px;
-	font-size: large;
+.main-view {
+	padding: 10px;
+	font-size: medium;
 }
