@@ -44,7 +44,7 @@ class MainView : Main() {
 
     init {
         formLayout {
-            addClassName("view")
+            addClassName("main-view")
             nameField = textField("name")
             surnameField = textField("surname")
         }
