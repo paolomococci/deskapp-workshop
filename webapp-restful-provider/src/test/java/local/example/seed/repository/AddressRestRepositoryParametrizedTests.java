@@ -47,9 +47,14 @@ public class AddressRestRepositoryParametrizedTests {
     @Autowired
     MockMvc mockMvc;
 
-    private static final AtomicReference<String> ADDRESS_TEST_STRING =
-            new AtomicReference<>("{\"country\":\"Italy\",\"city\":\"Rome\",\"street\":\"some\",\"civic\":\"123\",\"code\":\"054321\"}");
+    private static final AtomicReference<String> ADDRESS_TEST_STRING;
     private static URI uri;
+
+    static {
+        ADDRESS_TEST_STRING = new AtomicReference<>(
+                "{\"country\":\"Italy\",\"city\":\"Rome\",\"street\":\"some\",\"civic\":\"123\",\"code\":\"054321\"}"
+        );
+    }
 
     @Test
     @Order(1)
@@ -89,8 +94,9 @@ public class AddressRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void updateTest() throws Exception {
-        ADDRESS_TEST_STRING
-                .set("{\"country\":\"Italy\",\"city\":\"Milan\",\"street\":\"millennium\",\"civic\":\"321\",\"code\":\"012345\"}");
+        ADDRESS_TEST_STRING.set(
+                "{\"country\":\"Italy\",\"city\":\"Milan\",\"street\":\"millennium\",\"civic\":\"321\",\"code\":\"012345\"}"
+        );
         this.mockMvc.perform(put(getUri())
                 .content(ADDRESS_TEST_STRING.get()))
                 .andExpect(status().isNoContent());
