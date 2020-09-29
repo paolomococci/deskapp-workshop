@@ -32,6 +32,7 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.net.URI;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -46,15 +47,15 @@ public class AddressRestRepositoryParametrizedTests {
     @Autowired
     MockMvc mockMvc;
 
-    private static final String ADDRESS_TEST_STRING =
-            "{\"country\":\"Italy\",\"city\":\"Rome\",\"street\":\"some\",\"civic\":\"123\",\"code\":\"054321\"}";
+    private static final AtomicReference<String> ADDRESS_TEST_STRING =
+            new AtomicReference<>("{\"country\":\"Italy\",\"city\":\"Rome\",\"street\":\"some\",\"civic\":\"123\",\"code\":\"054321\"}");
     private static URI uri;
 
     @Test
     @Order(1)
     void createTest() throws Exception {
         MvcResult mvcResult = this.mockMvc
-                .perform(post("/addresses").content(ADDRESS_TEST_STRING))
+                .perform(post("/addresses").content(ADDRESS_TEST_STRING.get()))
                 .andExpect(status().isCreated())
                 .andReturn();
         setUri(new URI(
@@ -88,8 +89,10 @@ public class AddressRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void updateTest() throws Exception {
+        ADDRESS_TEST_STRING
+                .set("{\"country\":\"Italy\",\"city\":\"Milan\",\"street\":\"millennium\",\"civic\":\"321\",\"code\":\"012345\"}");
         this.mockMvc.perform(put(getUri())
-                .content("{\"country\":\"Italy\",\"city\":\"Milan\",\"street\":\"millennium\",\"civic\":\"321\",\"code\":\"012345\"}"))
+                .content(ADDRESS_TEST_STRING.get()))
                 .andExpect(status().isNoContent());
         this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isOk())
