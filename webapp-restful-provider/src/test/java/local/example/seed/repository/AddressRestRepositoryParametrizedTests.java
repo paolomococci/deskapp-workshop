@@ -45,7 +45,7 @@ public class AddressRestRepositoryParametrizedTests {
     @Autowired
     MockMvc mockMvc;
 
-    private static String ADDRESS_TEST_STRING =
+    private static final String ADDRESS_TEST_STRING =
             "{\"country\":\"Italy\",\"city\":\"Rome\",\"street\":\"some\",\"civic\":\"123\",\"code\":\"054321\"}";
     private static URI uri;
 
@@ -56,14 +56,14 @@ public class AddressRestRepositoryParametrizedTests {
                 .perform(post("/addresses").content(ADDRESS_TEST_STRING))
                 .andExpect(status().isCreated())
                 .andReturn();
-        this.setUri(new URI(mvcResult.getResponse().getHeader("Location")));
+        setUri(new URI(mvcResult.getResponse().getHeader("Location")));
     }
 
     @Order(2)
     @ParameterizedTest
     @MethodSource("initUri")
     void readTest() throws Exception {
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.country").value("Italy"))
                 .andExpect(jsonPath("$.city").value("Rome"))
@@ -85,10 +85,10 @@ public class AddressRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void updateTest() throws Exception {
-        this.mockMvc.perform(put(this.getUri())
+        this.mockMvc.perform(put(getUri())
                 .content("{\"country\":\"Italy\",\"city\":\"Milan\",\"street\":\"millennium\",\"civic\":\"321\",\"code\":\"012345\"}"))
                 .andExpect(status().isNoContent());
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.country").value("Italy"))
                 .andExpect(jsonPath("$.city").value("Milan"))
@@ -101,10 +101,10 @@ public class AddressRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void partialUpdateTest() throws Exception {
-        this.mockMvc.perform(patch(this.getUri())
+        this.mockMvc.perform(patch(getUri())
                 .content("{\"name\":\"Twenty-First\"}"))
                 .andExpect(status().isNoContent());
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.country").value("Italy"));
     }
@@ -113,7 +113,7 @@ public class AddressRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void deleteTest() throws Exception {
-        this.mockMvc.perform(delete(this.getUri()))
+        this.mockMvc.perform(delete(getUri()))
                 .andExpect(status().isNoContent());
     }
 
@@ -121,7 +121,7 @@ public class AddressRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void notFoundTest() throws Exception {
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isNotFound());
     }
 
