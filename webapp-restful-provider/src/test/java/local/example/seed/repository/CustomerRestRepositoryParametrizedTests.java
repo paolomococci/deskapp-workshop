@@ -47,9 +47,14 @@ public class CustomerRestRepositoryParametrizedTests {
     @Autowired
     MockMvc mockMvc;
 
-    private static final AtomicReference<String> CUSTOMER_TEST_STRING =
-            new AtomicReference<>("{\"name\":\"John\",\"surname\":\"Jump\",\"email\":\"johnjump@example.local\"}");
+    private static final AtomicReference<String> CUSTOMER_TEST_STRING;
     private static URI uri;
+
+    static {
+        CUSTOMER_TEST_STRING = new AtomicReference<>(
+                "{\"name\":\"John\",\"surname\":\"Jump\",\"email\":\"johnjump@example.local\"}"
+        );
+    }
 
     @Test
     @Order(1)
@@ -87,8 +92,9 @@ public class CustomerRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void updateTest() throws Exception {
-        CUSTOMER_TEST_STRING
-                .set("{\"name\":\"James\",\"surname\":\"Painter\",\"email\":\"jamespainter@example.local\"}");
+        CUSTOMER_TEST_STRING.set(
+                "{\"name\":\"James\",\"surname\":\"Painter\",\"email\":\"jamespainter@example.local\"}"
+        );
         this.mockMvc.perform(put(getUri())
                 .content(CUSTOMER_TEST_STRING.get()))
                 .andExpect(status().isNoContent());
