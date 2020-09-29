@@ -32,6 +32,7 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.net.URI;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -46,15 +47,15 @@ public class CustomerRestRepositoryParametrizedTests {
     @Autowired
     MockMvc mockMvc;
 
-    private static final String CUSTOMER_TEST_STRING =
-            "{\"name\":\"John\",\"surname\":\"Jump\",\"email\":\"johnjump@example.local\"}";
+    private static final AtomicReference<String> CUSTOMER_TEST_STRING =
+            new AtomicReference<>("{\"name\":\"John\",\"surname\":\"Jump\",\"email\":\"johnjump@example.local\"}");
     private static URI uri;
 
     @Test
     @Order(1)
     void createTest() throws Exception {
         MvcResult mvcResult = this.mockMvc
-                .perform(post("/customers").content(CUSTOMER_TEST_STRING))
+                .perform(post("/customers").content(CUSTOMER_TEST_STRING.get()))
                 .andExpect(status().isCreated())
                 .andReturn();
         setUri(new URI(
@@ -86,8 +87,10 @@ public class CustomerRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void updateTest() throws Exception {
+        CUSTOMER_TEST_STRING
+                .set("{\"name\":\"James\",\"surname\":\"Painter\",\"email\":\"jamespainter@example.local\"}");
         this.mockMvc.perform(put(getUri())
-                .content("{\"name\":\"James\",\"surname\":\"Painter\",\"email\":\"jamespainter@example.local\"}"))
+                .content(CUSTOMER_TEST_STRING.get()))
                 .andExpect(status().isNoContent());
         this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isOk())
