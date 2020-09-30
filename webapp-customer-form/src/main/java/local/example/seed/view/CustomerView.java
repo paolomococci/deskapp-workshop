@@ -18,6 +18,7 @@
 
 package local.example.seed.view;
 
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -26,11 +27,13 @@ import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
 
 @PageTitle("customer")
+@CssImport("style.css")
 @Route(value = "customer", layout = MainLayout.class)
 public class CustomerView
         extends Main {
 
     public CustomerView() {
+        addClassName("main-view");
         add(
                 new VerticalLayout(
                         new Label("the content of the customer page has yet to be developed")
