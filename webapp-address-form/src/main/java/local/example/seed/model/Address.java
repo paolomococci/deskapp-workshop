@@ -18,5 +18,18 @@
 
 package local.example.seed.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Address {
+    private String id;
+    private String country;
+    private String city;
+    private String street;
+    private String civic;
+    private String code;
 }
