@@ -28,12 +28,14 @@ import local.example.seed.layout.MainLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("address")
+@CssImport("style.css")
 @Route(value = "address", layout = MainLayout.class)
 public class AddressView
         extends Main {
 
     @Autowired
     public AddressView() {
+        addClassName("main-view");
         add(
                 new VerticalLayout(
                         new Label("the content of the address page has yet to be developed")
