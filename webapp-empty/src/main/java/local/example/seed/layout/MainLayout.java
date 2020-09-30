@@ -22,6 +22,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -39,6 +40,7 @@ import local.example.seed.view.MainView;
 
 import java.util.Optional;
 
+@CssImport("style.css")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 public class MainLayout
         extends AppLayout {
@@ -61,6 +63,7 @@ public class MainLayout
         horizontalLayout.add(new DrawerToggle());
         this.title = new H1();
         horizontalLayout.add(this.title);
+        horizontalLayout.addClassName("header-view");
         return horizontalLayout;
     }
 
@@ -73,6 +76,7 @@ public class MainLayout
         HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.setAlignItems(FlexComponent.Alignment.END);
         horizontalLayout.add(new H1("empty"));
+        verticalLayout.addClassName("nav-view");
         verticalLayout.add(horizontalLayout, tabs);
         return verticalLayout;
     }
