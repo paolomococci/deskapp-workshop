@@ -28,11 +28,13 @@ import local.example.seed.layout.MainLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("customer")
+@CssImport("style.css")
 @Route(value = "customer", layout = MainLayout.class)
 public class CustomerView
         extends Main {
 
     public CustomerView() {
+        addClassName("main-view");
         add(
                 new VerticalLayout(
                         new Label("the content of the customer page has yet to be developed")
