@@ -25,6 +25,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("help")
 @CssImport("style.css")
@@ -32,6 +33,7 @@ import local.example.seed.layout.MainLayout;
 public class HelpView
         extends Main {
 
+    @Autowired
     public HelpView() {
         addClassName("main-view");
         add(
