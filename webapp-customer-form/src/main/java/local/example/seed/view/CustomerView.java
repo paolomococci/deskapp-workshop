@@ -19,12 +19,16 @@
 package local.example.seed.view;
 
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import local.example.seed.client.CustomerWebClient;
 import local.example.seed.layout.MainLayout;
+import local.example.seed.model.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("customer")
 @CssImport("style.css")
@@ -32,6 +36,12 @@ import local.example.seed.layout.MainLayout;
 public class CustomerView
         extends Main {
 
+    @Autowired
+    private CustomerWebClient customerWebClient;
+
+    private Grid<Customer> customerGrid;
+
+    @Autowired
     public CustomerView() {
         addClassName("main-view");
         add(
