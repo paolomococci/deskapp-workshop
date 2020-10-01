@@ -19,12 +19,15 @@
 package local.example.seed.view;
 
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import local.example.seed.client.AddressWebClient;
 import local.example.seed.layout.MainLayout;
+import local.example.seed.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("address")
@@ -32,6 +35,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route(value = "address", layout = MainLayout.class)
 public class AddressView
         extends Main {
+
+    @Autowired
+    private AddressWebClient addressWebClient;
+
+    private Grid<Address> addressGrid;
 
     @Autowired
     public AddressView() {
