@@ -1,8 +1,13 @@
 @charset "UTF-8";
 
 .header-view h1 {
-	padding-left: 10px;
+    opacity: 0.9;
+	padding: 5px;
+    background: linear-gradient(to top right, #0ad, #bef);
+    border-radius: 15px 3px 3px 7px;
+    width: 150px;
 	display: flex;
+	color: #000;
 	font-size: small;
 	font-weight: bold;
 }
@@ -14,14 +19,24 @@
 }
 
 .nav-view h1 {
-	margin: 7px;
-	padding: 10px;
-	font-size: x-large;
+    opacity: 0.9;
+    margin: 5px;
+    padding: 10px;
+    background: linear-gradient(to top right, #8c4, #eec);
+    border-radius: 6px 30px 14px 6px;
+	color: #000;
+	font-size: xx-large;
 	font-weight: bold;
 	font-variant: small-caps;
 }
 
 .nav-view a {
+    opacity: 0.9;
+    margin: 1px;
+    padding: 5px;
+    background: linear-gradient(to top right, #0ad, #bef);
+    border-radius: 3px 15px 7px 3px;
+	color: #fff;
 	font-size: small;
 	font-weight: normal;
 }
