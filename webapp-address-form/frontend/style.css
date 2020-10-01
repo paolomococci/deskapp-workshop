@@ -2,20 +2,20 @@
 
 .header-view h1 {
     opacity: 0.9;
-	padding: 5px;
+    padding: 5px;
     background: linear-gradient(to top right, #0ad, #bef);
     border-radius: 15px 3px 3px 7px;
     width: 150px;
-	display: flex;
-	color: #000;
-	font-size: small;
-	font-weight: bold;
+    display: flex;
+    color: #000;
+    font-size: small;
+    font-weight: bold;
 }
 
 .main-view {
     margin-left: 5px;
-	padding: 10px;
-	font-size: medium;
+    padding: 10px;
+    font-size: medium;
 }
 
 .nav-view h1 {
@@ -24,10 +24,10 @@
     padding: 10px;
     background: linear-gradient(to top right, #8c4, #eec);
     border-radius: 6px 30px 14px 6px;
-	color: #000;
-	font-size: xx-large;
-	font-weight: bold;
-	font-variant: small-caps;
+    color: #000;
+    font-size: xx-large;
+    font-weight: bold;
+    font-variant: small-caps;
 }
 
 .nav-view a {
@@ -36,7 +36,7 @@
     padding: 5px;
     background: linear-gradient(to top right, #0ad, #bef);
     border-radius: 3px 15px 7px 3px;
-	color: #fff;
-	font-size: small;
-	font-weight: normal;
+    color: #fff;
+    font-size: small;
+    font-weight: normal;
 }
