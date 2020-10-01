@@ -26,6 +26,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 import local.example.seed.layout.MainLayout;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("main")
 @CssImport("style.css")
@@ -34,6 +35,7 @@ import local.example.seed.layout.MainLayout;
 public class MainView
         extends Div {
 
+    @Autowired
     public MainView() {
         addClassName("main-view");
         add(
