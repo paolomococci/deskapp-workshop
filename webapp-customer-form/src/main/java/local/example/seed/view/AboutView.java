@@ -25,7 +25,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("about")
 @CssImport("style.css")
@@ -33,7 +32,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AboutView
         extends Main {
 
-    @Autowired
     public AboutView() {
         addClassName("main-view");
         add(
