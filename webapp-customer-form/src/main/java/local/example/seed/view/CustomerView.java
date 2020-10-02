@@ -18,17 +18,18 @@
 
 package local.example.seed.view;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Main;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.splitlayout.SplitLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.client.CustomerWebClient;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("customer")
 @CssImport("style.css")
@@ -36,18 +37,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CustomerView
         extends Main {
 
-    @Autowired
+    private Grid<Customer> customerGrid;
+    private Binder<Customer> customerBinder;
+
+    private Customer customer;
     private CustomerWebClient customerWebClient;
 
-    private Grid<Customer> customerGrid;
+    private TextField name;
+    private TextField surname;
+    private TextField email;
 
-    @Autowired
-    public CustomerView() {
+    private final Button cancel;
+    private final Button save;
+    private final Button delete;
+
+    private final SplitLayout splitLayout;
+
+    public CustomerView(
+            // TODO
+    ) {
         addClassName("main-view");
-        add(
-                new VerticalLayout(
-                        new Label("the content of the customer page has yet to be developed")
-                )
-        );
+
+        this.customerGrid = new Grid<>(Customer.class);
+        this.customerBinder = new Binder<>(Customer.class);
+
+        this.cancel = new Button("");
+        this.save = new Button("");
+        this.delete = new Button("");
+
+        this.splitLayout = new SplitLayout();
+        this.splitLayout.setSizeFull();
+
+        this.add(this.splitLayout);
     }
 }
