@@ -18,17 +18,18 @@
 
 package local.example.seed.view;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Main;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.splitlayout.SplitLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.client.AddressWebClient;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Address;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle("address")
 @CssImport("style.css")
@@ -36,17 +37,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AddressView
         extends Main {
 
-    @Autowired
+    private final Grid<Address> addressGrid;
+    private final Binder<Address> addressBinder;
+
+    private Address address;
     private AddressWebClient addressWebClient;
 
-    private Grid<Address> addressGrid;
+    private TextField country;
+    private TextField city;
+    private TextField street;
+    private TextField civic;
+    private TextField code;
 
-    public AddressView() {
+    private final Button cancel;
+    private final Button save;
+    private final Button delete;
+
+    private final SplitLayout splitLayout;
+
+    public AddressView(
+            // TODO
+    ) {
         addClassName("main-view");
-        add(
-                new VerticalLayout(
-                        new Label("the content of the address page has yet to be developed")
-                )
-        );
+
+        this.addressGrid = new Grid<>(Address.class);
+        this.addressBinder = new Binder<>(Address.class);
+
+        this.cancel = new Button("");
+        this.save = new Button("");
+        this.delete = new Button("");
+
+        this.splitLayout = new SplitLayout();
+        this.splitLayout.setSizeFull();
+
+        this.add(this.splitLayout);
     }
 }
