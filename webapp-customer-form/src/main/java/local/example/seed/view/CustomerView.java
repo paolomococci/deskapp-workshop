@@ -30,6 +30,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import local.example.seed.client.CustomerWebClient;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
 
@@ -43,7 +44,7 @@ public class CustomerView
     private Binder<Customer> customerBinder;
 
     private Customer customer;
-    // TODO
+    private CustomerWebClient customerWebClient;
 
     private TextField name;
     private TextField surname;
