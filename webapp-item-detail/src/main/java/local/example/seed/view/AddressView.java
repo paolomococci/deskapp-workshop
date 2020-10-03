@@ -130,7 +130,7 @@ public class AddressView
     }
 
     private void clear() {
-        // TODO
+        this.populate(null);
     }
 
     private void populate(Address address) {
