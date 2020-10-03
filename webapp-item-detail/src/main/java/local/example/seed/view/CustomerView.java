@@ -56,13 +56,14 @@ public class CustomerView
 
     private final SplitLayout splitLayout;
 
-    public CustomerView(
-            // TODO
-    ) {
+    public CustomerView() {
         addClassName("main-view");
 
         this.customerGrid = new Grid<>(Customer.class);
         this.customerBinder = new Binder<>(Customer.class);
+
+        this.customer = new Customer();
+        // TODO
 
         this.cancel = new Button("");
         this.save = new Button("");
