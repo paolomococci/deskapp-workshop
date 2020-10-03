@@ -108,7 +108,10 @@ public class AddressView
     private void createGridLayout(
             SplitLayout splitLayout
     ) {
-        // TODO
+        Div divWrapper = new Div();
+        divWrapper.setWidthFull();
+        splitLayout.addToPrimary(divWrapper);
+        divWrapper.add(this.addressGrid);
     }
 
     private void addFormItem(
