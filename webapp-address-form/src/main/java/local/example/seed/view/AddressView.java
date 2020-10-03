@@ -58,9 +58,7 @@ public class AddressView
 
     private final SplitLayout splitLayout;
 
-    public AddressView(
-            // TODO
-    ) {
+    public AddressView() {
         addClassName("main-view");
 
         this.addressGrid = new Grid<>(Address.class);
@@ -79,7 +77,17 @@ public class AddressView
     private void createEditorLayout(
             SplitLayout splitLayout
     ) {
-        // TODO
+        Div divEditorLayout = new Div();
+        Div divEditor = new Div();
+        divEditorLayout.add(divEditor);
+        FormLayout formLayout = new FormLayout();
+        addFormItem(divEditor, formLayout, this.country, "country");
+        addFormItem(divEditor, formLayout, this.city, "city");
+        addFormItem(divEditor, formLayout, this.street, "street");
+        addFormItem(divEditor, formLayout, this.civic, "civic");
+        addFormItem(divEditor, formLayout, this.code, "code");
+        createButtonLayout(divEditorLayout);
+        splitLayout.addToSecondary(divEditorLayout);
     }
 
     private void createButtonLayout(
