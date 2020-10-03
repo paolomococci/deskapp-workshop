@@ -125,7 +125,8 @@ public class AddressView
     }
 
     private void refresh() {
-        // TODO
+        this.addressGrid.select(null);
+        this.addressGrid.getDataProvider().refreshAll();
     }
 
     private void clear() {
