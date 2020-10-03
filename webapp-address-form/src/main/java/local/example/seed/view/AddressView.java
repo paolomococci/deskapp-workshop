@@ -132,4 +132,9 @@ public class AddressView
     private void clear() {
         // TODO
     }
+
+    private void populate(Address address) {
+        this.address = address;
+        this.addressBinder.readBean(this.address);
+    }
 }
