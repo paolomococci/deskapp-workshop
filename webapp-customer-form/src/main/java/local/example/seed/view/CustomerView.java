@@ -30,7 +30,6 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import local.example.seed.client.CustomerWebClient;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
 
@@ -44,7 +43,7 @@ public class CustomerView
     private Binder<Customer> customerBinder;
 
     private Customer customer;
-    private CustomerWebClient customerWebClient;
+    // TODO
 
     private TextField name;
     private TextField surname;
@@ -56,13 +55,14 @@ public class CustomerView
 
     private final SplitLayout splitLayout;
 
-    public CustomerView(
-            // TODO
-    ) {
+    public CustomerView() {
         addClassName("main-view");
 
         this.customerGrid = new Grid<>(Customer.class);
         this.customerBinder = new Binder<>(Customer.class);
+
+        this.customer = new Customer();
+        // TODO
 
         this.cancel = new Button("");
         this.save = new Button("");
