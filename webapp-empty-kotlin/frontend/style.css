@@ -39,6 +39,7 @@
     color: #fff;
     font-size: small;
     font-weight: normal;
+    transition: background 2s;
 }
 
 .nav-view a:hover {
