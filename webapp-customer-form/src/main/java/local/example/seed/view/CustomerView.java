@@ -20,11 +20,13 @@ package local.example.seed.view;
 
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
@@ -92,7 +94,14 @@ public class CustomerView
     private void createButtonLayout(
             Div divEditorLayout
     ) {
-        // TODO
+        HorizontalLayout buttonHorizontalLayout = new HorizontalLayout();
+        buttonHorizontalLayout.setWidthFull();
+        buttonHorizontalLayout.setSpacing(true);
+        this.cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        this.save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        this.delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        buttonHorizontalLayout.add(this.cancel, this.save, this.delete);
+        divEditorLayout.add(buttonHorizontalLayout);
     }
 
     private void createGridLayout(
