@@ -21,6 +21,7 @@ package local.example.seed.service;
 import local.example.seed.client.AddressWebClient;
 import local.example.seed.model.Address;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,7 +36,11 @@ public class AddressRetrieverService {
     }
 
     public Collection<Address> readAll() {
-        // TODO
-        return new ArrayList<>();
+        Flux<Address> addressFlux = this.addressWebClient.readAll();
+        Collection<Address> addresses = addressFlux.collectSortedList().block();
+        if (addresses.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return addresses;
     }
 }
