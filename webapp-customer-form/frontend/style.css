@@ -19,7 +19,7 @@
 }
 
 .nav-view h1 {
-    opacity: 0.9;
+    opacity: 0.2;
     margin: 5px;
     padding: 10px;
     background: linear-gradient(to top right, #8c4, #eec);
@@ -28,6 +28,8 @@
     font-size: xx-large;
     font-weight: bold;
     font-variant: small-caps;
+    transition-property: opacity;
+    transition-duration: 7s;
 }
 
 .nav-view a {
@@ -39,9 +41,11 @@
     color: #fff;
     font-size: small;
     font-weight: normal;
-    transition: background 2s;
+    transition-duration: 1s;
+    transition-timing-function: ease;
+    transition-delay: 0.1s;
 }
 
 .nav-view a:hover {
-    transform: scale(1.2);
+    transform: scale(1.3);
 }
