@@ -24,6 +24,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -32,9 +33,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import local.example.seed.client.CustomerWebClient;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
+import local.example.seed.service.CustomerRetrieverService;
 
 @PageTitle("customer")
 @CssImport("style.css")
@@ -46,7 +47,7 @@ public class CustomerView
     private Binder<Customer> customerBinder;
 
     private Customer customer;
-    private CustomerWebClient customerWebClient;
+    private CustomerRetrieverService customerRetrieverService;
 
     private TextField name;
     private TextField surname;
@@ -63,17 +64,37 @@ public class CustomerView
 
         this.customerGrid = new Grid<>(Customer.class);
         this.customerBinder = new Binder<>(Customer.class);
+        this.customerBinder.bindInstanceFields(this);
 
         this.customer = new Customer();
-        // TODO
+        this.customerRetrieverService = new CustomerRetrieverService();
 
-        this.cancel = new Button("");
-        this.save = new Button("");
-        this.delete = new Button("");
+        this.cancel = new Button("cancel");
+        this.cancel.addClickListener(listener -> {
+            // TODO: behaviour
+        });
+        this.save = new Button("save");
+        this.save.addClickListener(listener -> {
+            // TODO: behaviour
+        });
+        this.delete = new Button("delete");
+        this.delete.addClickListener(listener -> {
+            // TODO: behaviour
+        });
 
         this.splitLayout = new SplitLayout();
         this.splitLayout.setSizeFull();
 
+        this.customerGrid.setColumns(
+                "name", "surname", "email"
+        );
+        // TODO: import data values
+        //this.customerGrid.setItems(Collection<Customer> customers);
+        this.customerGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
+        this.customerGrid.setHeightFull();
+
+        this.createGridLayout(splitLayout);
+        this.createEditorLayout(splitLayout);
         this.add(this.splitLayout);
     }
 
@@ -101,6 +122,8 @@ public class CustomerView
         this.save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         this.delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
         buttonHorizontalLayout.add(this.cancel, this.save, this.delete);
+        buttonHorizontalLayout.setSpacing(true);
+        buttonHorizontalLayout.setMargin(true);
         divEditorLayout.add(buttonHorizontalLayout);
     }
 
