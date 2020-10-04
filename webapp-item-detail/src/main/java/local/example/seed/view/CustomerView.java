@@ -107,7 +107,10 @@ public class CustomerView
     private void createGridLayout(
             SplitLayout splitLayout
     ) {
-        // TODO
+        Div divWrapper = new Div();
+        divWrapper.setWidthFull();
+        splitLayout.addToPrimary(divWrapper);
+        divWrapper.add(this.customerGrid);
     }
 
     private void addFormItem(
