@@ -89,9 +89,12 @@ public class CustomerView
                 "name", "surname", "email"
         );
         // TODO: import data values
-        //this.customerGrid.setItems(Collection<Customer> customers);
+        this.customerGrid.setItems(customerRetrieverService.readAll());
         this.customerGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
         this.customerGrid.setHeightFull();
+        this.customerGrid.asSingleSelect().addValueChangeListener(listener -> {
+            // TODO
+        });
 
         this.createGridLayout(splitLayout);
         this.createEditorLayout(splitLayout);
