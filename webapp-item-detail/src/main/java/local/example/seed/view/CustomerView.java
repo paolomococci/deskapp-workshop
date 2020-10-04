@@ -119,7 +119,8 @@ public class CustomerView
             AbstractField abstractField,
             String fieldName
     ) {
-        // TODO
+        formLayout.addFormItem(abstractField, fieldName);
+        divWrapper.add(formLayout);
     }
 
     private void refresh() {
