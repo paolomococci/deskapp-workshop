@@ -124,7 +124,8 @@ public class CustomerView
     }
 
     private void refresh() {
-        // TODO
+        this.customerGrid.select(null);
+        this.customerGrid.getDataProvider().refreshAll();
     }
 
     private void clear() {
