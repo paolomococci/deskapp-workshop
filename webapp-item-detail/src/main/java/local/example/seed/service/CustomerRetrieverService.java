@@ -21,6 +21,7 @@ package local.example.seed.service;
 import local.example.seed.client.CustomerWebClient;
 import local.example.seed.model.Customer;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,7 +36,11 @@ public class CustomerRetrieverService {
     }
 
     public Collection<Customer> readAll() {
-        // TODO
-        return new ArrayList<>();
+        Flux<Customer> customerFlux = this.customerWebClient.readAll();
+        Collection<Customer> customers = customerFlux.collectSortedList().block();
+        if (customers.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return customers;
     }
 }
