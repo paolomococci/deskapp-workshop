@@ -131,4 +131,9 @@ public class CustomerView
     private void clear() {
         // TODO
     }
+
+    private void populate(Customer customer) {
+        this.customer = customer;
+        this.customerBinder.readBean(this.customer);
+    }
 }
