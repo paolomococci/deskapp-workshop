@@ -91,9 +91,12 @@ public class AddressView
                 "country", "city", "street", "civic", "code"
         );
         // TODO: import data values
-        //this.addressGrid.setItems(Collection<Address> addresses);
+        this.addressGrid.setItems(this.addressRetrieverService.readAll());
         this.addressGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
         this.addressGrid.setHeightFull();
+        this.addressGrid.asSingleSelect().addValueChangeListener(listener -> {
+            // TODO
+        });
 
         this.createGridLayout(splitLayout);
         this.createEditorLayout(splitLayout);
