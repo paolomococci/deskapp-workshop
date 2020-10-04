@@ -22,6 +22,7 @@ import local.example.seed.client.AddressWebClient;
 import local.example.seed.model.Address;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -35,6 +36,6 @@ public class AddressRetrieverService {
 
     public Collection<Address> readAll() {
         // TODO
-        return null;
+        return new ArrayList<>();
     }
 }
