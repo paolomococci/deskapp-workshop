@@ -24,6 +24,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -32,9 +33,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import local.example.seed.client.AddressWebClient;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Address;
+import local.example.seed.service.AddressRetrieverService;
 
 @PageTitle("address")
 @CssImport("style.css")
@@ -46,7 +47,7 @@ public class AddressView
     private final Binder<Address> addressBinder;
 
     private Address address;
-    private AddressWebClient addressWebClient;
+    private AddressRetrieverService addressRetrieverService;
 
     private TextField country;
     private TextField city;
@@ -65,14 +66,37 @@ public class AddressView
 
         this.addressGrid = new Grid<>(Address.class);
         this.addressBinder = new Binder<>(Address.class);
+        this.addressBinder.bindInstanceFields(this);
 
-        this.cancel = new Button("");
-        this.save = new Button("");
-        this.delete = new Button("");
+        this.address = new Address();
+        this.addressRetrieverService = new AddressRetrieverService();
+
+        this.cancel = new Button("cancel");
+        this.cancel.addClickListener(listener -> {
+            // TODO: behaviour
+        });
+        this.save = new Button("save");
+        this.save.addClickListener(listener -> {
+            // TODO: behaviour
+        });
+        this.delete = new Button("delete");
+        this.delete.addClickListener(listener -> {
+            // TODO: behaviour
+        });
 
         this.splitLayout = new SplitLayout();
         this.splitLayout.setSizeFull();
 
+        this.addressGrid.setColumns(
+                "country", "city", "street", "civic", "code"
+        );
+        // TODO: import data values
+        //this.addressGrid.setItems(Collection<Address> addresses);
+        this.addressGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
+        this.addressGrid.setHeightFull();
+
+        this.createGridLayout(splitLayout);
+        this.createEditorLayout(splitLayout);
         this.add(this.splitLayout);
     }
 
@@ -102,6 +126,8 @@ public class AddressView
         this.save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         this.delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
         buttonHorizontalLayout.add(this.cancel, this.save, this.delete);
+        buttonHorizontalLayout.setSpacing(true);
+        buttonHorizontalLayout.setMargin(true);
         divEditorLayout.add(buttonHorizontalLayout);
     }
 
