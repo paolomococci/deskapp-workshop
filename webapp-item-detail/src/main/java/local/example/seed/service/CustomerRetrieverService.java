@@ -22,6 +22,7 @@ import local.example.seed.client.CustomerWebClient;
 import local.example.seed.model.Customer;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -35,6 +36,6 @@ public class CustomerRetrieverService {
 
     public Collection<Customer> readAll() {
         // TODO
-        return null;
+        return new ArrayList<>();
     }
 }
