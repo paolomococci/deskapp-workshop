@@ -129,7 +129,7 @@ public class CustomerView
     }
 
     private void clear() {
-        // TODO
+        this.populate(null);
     }
 
     private void populate(Customer customer) {
