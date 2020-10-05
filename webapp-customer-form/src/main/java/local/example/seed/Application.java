@@ -18,11 +18,17 @@
 
 package local.example.seed;
 
+import com.vaadin.flow.component.page.AppShellConfigurator;
+import com.vaadin.flow.server.PWA;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class Application {
+@PWA(name = "customer-form", shortName = "customer")
+public class Application
+		extends SpringBootServletInitializer
+		implements AppShellConfigurator {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
