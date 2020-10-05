@@ -18,11 +18,15 @@
 
 package local.example.seed
 
+import com.vaadin.flow.component.page.AppShellConfigurator
+import com.vaadin.flow.server.PWA
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
-class Application
+@PWA(name = "example-empty", shortName = "example")
+class Application : AppShellConfigurator, SpringBootServletInitializer()
 
 fun main(args: Array<String>) {
 	runApplication<Application>(*args)
