@@ -37,10 +37,10 @@ public class AddressRetrieverService {
 
     public Collection<Address> readAll() {
         Flux<Address> addressFlux = this.addressWebClient.readAll();
-        Collection<Address> addresses = addressFlux.collectSortedList().block();
-        if (addresses.isEmpty()) {
-            return new ArrayList<>();
+        if (addressFlux != null && !addressFlux.collectList().block().isEmpty()) {
+            Collection<Address> addresses = addressFlux.collectSortedList().block();
+            return addresses;
         }
-        return addresses;
+        return new ArrayList<>();
     }
 }
