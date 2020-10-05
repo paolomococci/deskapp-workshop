@@ -37,10 +37,10 @@ public class CustomerRetrieverService {
 
     public Collection<Customer> readAll() {
         Flux<Customer> customerFlux = this.customerWebClient.readAll();
-        Collection<Customer> customers = customerFlux.collectSortedList().block();
-        if (customers.isEmpty()) {
-            return new ArrayList<>();
+        if (customerFlux != null && !customerFlux.collectList().block().isEmpty()) {
+            Collection<Customer> customers = customerFlux.collectSortedList().block();
+            return customers;
         }
-        return customers;
+        return new ArrayList<>();
     }
 }
