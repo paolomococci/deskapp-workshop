@@ -18,21 +18,44 @@
 
 package local.example.seed.client;
 
+import io.netty.channel.ChannelOption;
+import io.netty.handler.timeout.ReadTimeoutHandler;
+import io.netty.handler.timeout.WriteTimeoutHandler;
 import local.example.seed.model.Address;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.netty.http.client.HttpClient;
+import reactor.netty.tcp.TcpClient;
+
+import java.util.concurrent.TimeUnit;
 
 public class AddressWebClient {
 
     private final WebClient webClient;
 
     public AddressWebClient() {
+        TcpClient tcpClient = TcpClient.create()
+                .option(
+                        ChannelOption.CONNECT_TIMEOUT_MILLIS, 6000
+                )
+                .doOnConnected(
+                        connection -> {
+                            connection.addHandlerLast(
+                                    new ReadTimeoutHandler(6000, TimeUnit.MILLISECONDS));
+                            connection.addHandlerLast(
+                                    new WriteTimeoutHandler(6000, TimeUnit.MILLISECONDS));
+                        }
+                );
         webClient = WebClient.builder()
                 .baseUrl("http://localhost:8080")
+                .clientConnector(
+                        new ReactorClientHttpConnector(HttpClient.from(tcpClient))
+                )
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }
@@ -67,7 +90,13 @@ public class AddressWebClient {
                 .get()
                 .uri("/addresses")
                 .retrieve()
-                .bodyToFlux(Address.class);
+                .onStatus(
+                        HttpStatus::isError,
+                        clientResponse -> Mono.empty()
+                )
+                .bodyToFlux(Address.class)
+                //.doOnError(exception -> System.out.println("Connection refused, probably the host is down!"))
+                .onErrorResume(exception -> Mono.empty());
     }
 
     public Mono<Address> update(Address address, String id) {
