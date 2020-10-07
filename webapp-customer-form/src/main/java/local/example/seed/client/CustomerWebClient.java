@@ -74,7 +74,7 @@ public class CustomerWebClient {
                 .bodyToMono(Customer.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp + "ERROR: --- Connection refused, probably the host is down! ---");
+                    System.out.println(timestamp + " ERROR: --- Connection refused, probably the host is down! ---");
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -91,7 +91,7 @@ public class CustomerWebClient {
                 .bodyToMono(Customer.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp + "ERROR: --- Connection refused, probably the host is down! ---");
+                    System.out.println(timestamp + " ERROR: --- Connection refused, probably the host is down! ---");
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -108,7 +108,7 @@ public class CustomerWebClient {
                 .bodyToFlux(Customer.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp + "ERROR: --- Connection refused, probably the host is down! ---");
+                    System.out.println(timestamp + " ERROR: --- Connection refused, probably the host is down! ---");
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -126,7 +126,7 @@ public class CustomerWebClient {
                 .bodyToMono(Customer.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp + "ERROR: --- Connection refused, probably the host is down! ---");
+                    System.out.println(timestamp + " ERROR: --- Connection refused, probably the host is down! ---");
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -144,7 +144,7 @@ public class CustomerWebClient {
                 .bodyToMono(Customer.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp + "ERROR: --- Connection refused, probably the host is down! ---");
+                    System.out.println(timestamp + " ERROR: --- Connection refused, probably the host is down! ---");
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -157,14 +157,15 @@ public class CustomerWebClient {
                 .onStatus(
                         httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
                         clientResponse -> {
-                            System.out.println("HTTP status error: customer not found!");
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            System.out.println(timestamp + " HTTP status error: 404 --- customer not found! ---");
                             return Mono.empty();
                         }
                 )
                 .bodyToMono(Void.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp + "ERROR: --- Connection refused, probably the host is down! ---");
+                    System.out.println(timestamp + " ERROR: --- Connection refused, probably the host is down! ---");
                 });
     }
 }
