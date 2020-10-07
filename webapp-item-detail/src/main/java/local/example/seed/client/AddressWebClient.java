@@ -32,6 +32,7 @@ import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.TcpClient;
 
+import java.sql.Timestamp;
 import java.util.concurrent.TimeUnit;
 
 public class AddressWebClient {
@@ -71,7 +72,10 @@ public class AddressWebClient {
                         clientResponse -> Mono.empty()
                 )
                 .bodyToMono(Address.class)
-                .doOnError(exception -> System.out.println("Connection refused, probably the host is down!"))
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    System.out.println(timestamp + "ERROR: --- Connection refused, probably the host is down! ---");
+                })
                 .onErrorResume(exception -> Mono.empty());
     }
 
@@ -85,7 +89,10 @@ public class AddressWebClient {
                         clientResponse -> Mono.empty()
                 )
                 .bodyToMono(Address.class)
-                .doOnError(exception -> System.out.println("Connection refused, probably the host is down!"))
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    System.out.println(timestamp + "ERROR: --- Connection refused, probably the host is down! ---");
+                })
                 .onErrorResume(exception -> Mono.empty());
     }
 
@@ -99,7 +106,10 @@ public class AddressWebClient {
                         clientResponse -> Mono.empty()
                 )
                 .bodyToFlux(Address.class)
-                .doOnError(exception -> System.out.println("Connection refused, probably the host is down!"))
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    System.out.println(timestamp + "ERROR: --- Connection refused, probably the host is down! ---");
+                })
                 .onErrorResume(exception -> Mono.empty());
     }
 
@@ -114,7 +124,10 @@ public class AddressWebClient {
                         clientResponse -> Mono.empty()
                 )
                 .bodyToMono(Address.class)
-                .doOnError(exception -> System.out.println("Connection refused, probably the host is down!"))
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    System.out.println(timestamp + "ERROR: --- Connection refused, probably the host is down! ---");
+                })
                 .onErrorResume(exception -> Mono.empty());
     }
 
@@ -129,7 +142,10 @@ public class AddressWebClient {
                         clientResponse -> Mono.empty()
                 )
                 .bodyToMono(Address.class)
-                .doOnError(exception -> System.out.println("Connection refused, probably the host is down!"))
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    System.out.println(timestamp + "ERROR: --- Connection refused, probably the host is down! ---");
+                })
                 .onErrorResume(exception -> Mono.empty());
     }
 
@@ -146,6 +162,9 @@ public class AddressWebClient {
                         }
                 )
                 .bodyToMono(Void.class)
-                .doOnError(exception -> System.out.println("Connection refused, probably the host is down!"));
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    System.out.println(timestamp + "ERROR: --- Connection refused, probably the host is down! ---");
+                });
     }
 }
