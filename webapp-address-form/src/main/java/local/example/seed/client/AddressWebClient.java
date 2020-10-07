@@ -70,7 +70,9 @@ public class AddressWebClient {
                         httpStatus -> !HttpStatus.CREATED.equals(httpStatus),
                         clientResponse -> Mono.empty()
                 )
-                .bodyToMono(Address.class);
+                .bodyToMono(Address.class)
+                .doOnError(exception -> System.out.println("Connection refused, probably the host is down!"))
+                .onErrorResume(exception -> Mono.empty());
     }
 
     public Mono<Address> read(String id) {
@@ -82,7 +84,9 @@ public class AddressWebClient {
                         httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
                         clientResponse -> Mono.empty()
                 )
-                .bodyToMono(Address.class);
+                .bodyToMono(Address.class)
+                .doOnError(exception -> System.out.println("Connection refused, probably the host is down!"))
+                .onErrorResume(exception -> Mono.empty());
     }
 
     public Flux<Address> readAll() {
@@ -95,7 +99,7 @@ public class AddressWebClient {
                         clientResponse -> Mono.empty()
                 )
                 .bodyToFlux(Address.class)
-                //.doOnError(exception -> System.out.println("Connection refused, probably the host is down!"))
+                .doOnError(exception -> System.out.println("Connection refused, probably the host is down!"))
                 .onErrorResume(exception -> Mono.empty());
     }
 
@@ -109,7 +113,9 @@ public class AddressWebClient {
                         httpStatus -> !HttpStatus.OK.equals(httpStatus),
                         clientResponse -> Mono.empty()
                 )
-                .bodyToMono(Address.class);
+                .bodyToMono(Address.class)
+                .doOnError(exception -> System.out.println("Connection refused, probably the host is down!"))
+                .onErrorResume(exception -> Mono.empty());
     }
 
     public Mono<Address> partialUpdate(Address address, String id) {
@@ -122,7 +128,9 @@ public class AddressWebClient {
                         httpStatus -> !HttpStatus.OK.equals(httpStatus),
                         clientResponse -> Mono.empty()
                 )
-                .bodyToMono(Address.class);
+                .bodyToMono(Address.class)
+                .doOnError(exception -> System.out.println("Connection refused, probably the host is down!"))
+                .onErrorResume(exception -> Mono.empty());
     }
 
     public Mono<Void> delete(String id) {
@@ -130,6 +138,14 @@ public class AddressWebClient {
                 .delete()
                 .uri("/addresses/"+id)
                 .retrieve()
-                .bodyToMono(Void.class);
+                .onStatus(
+                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        clientResponse -> {
+                            System.out.println("HTTP status error: address not found!");
+                            return Mono.empty();
+                        }
+                )
+                .bodyToMono(Void.class)
+                .doOnError(exception -> System.out.println("Connection refused, probably the host is down!"));
     }
 }
