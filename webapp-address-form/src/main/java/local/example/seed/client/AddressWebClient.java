@@ -74,7 +74,8 @@ public class AddressWebClient {
                 .bodyToMono(Address.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp + " ERROR: --- Connection refused, probably the host is down! ---");
+                    System.out.println(timestamp + 
+                            " ERROR: --- Connection refused occurred during a request create(), probably the host is down! ---");
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -89,14 +90,15 @@ public class AddressWebClient {
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             System.out.println(timestamp +
-                                    " HTTP status error: 404 --- address not found, occurred during a request read() ---");
+                                    " HTTP status error: 404 --- address not found occurred during a request read() ---");
                             return Mono.empty();
                         }
                 )
                 .bodyToMono(Address.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp + " ERROR: --- Connection refused, probably the host is down! ---");
+                    System.out.println(timestamp + 
+                            " ERROR: --- Connection refused occurred during a request read(), probably the host is down! ---");
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -113,7 +115,8 @@ public class AddressWebClient {
                 .bodyToFlux(Address.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp + " ERROR: --- Connection refused, probably the host is down! ---");
+                    System.out.println(timestamp + 
+                            " ERROR: --- Connection refused occurred during a request readAll(), probably the host is down! ---");
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -131,7 +134,8 @@ public class AddressWebClient {
                 .bodyToMono(Address.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp + " ERROR: --- Connection refused, probably the host is down! ---");
+                    System.out.println(timestamp + 
+                            " ERROR: --- Connection refused occurred during a request update(), probably the host is down! ---");
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -149,7 +153,8 @@ public class AddressWebClient {
                 .bodyToMono(Address.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp + " ERROR: --- Connection refused, probably the host is down! ---");
+                    System.out.println(timestamp + 
+                            " ERROR: --- Connection refused occurred during a request partialUpdate(), probably the host is down! ---");
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -163,14 +168,14 @@ public class AddressWebClient {
                         httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                            System.out.println(timestamp + " HTTP status error: 404 --- address not found! ---");
+                            System.out.println(timestamp + " HTTP status error: 404 --- address not found occurred during a request delete() ---");
                             return Mono.empty();
                         }
                 )
                 .bodyToMono(Void.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp + " ERROR: --- Connection refused, probably the host is down! ---");
+                    System.out.println(timestamp + " ERROR: --- Connection refused occurred during a request delete(), probably the host is down! ---");
                 });
     }
 }
