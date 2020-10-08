@@ -35,6 +35,10 @@ public class CustomerRetrieverService {
         this.customerWebClient = new CustomerWebClient();
     }
 
+    public void create() {
+        // TODO
+    }
+
     public Collection<Customer> readAll() {
         Flux<Customer> customerFlux = this.customerWebClient.readAll();
         if (customerFlux != null && !customerFlux.collectList().block().isEmpty()) {
@@ -42,5 +46,13 @@ public class CustomerRetrieverService {
             return customers;
         }
         return new ArrayList<>();
+    }
+
+    public void update() {
+        // TODO
+    }
+
+    public void delete() {
+        // TODO
     }
 }
