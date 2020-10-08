@@ -23,6 +23,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
@@ -64,7 +65,7 @@ public class AddressView
     public AddressView() {
         addClassName("main-view");
 
-        this.addressGrid = new Grid<>(Address.class);
+        this.addressGrid = new Grid<>();
         this.addressBinder = new Binder<>(Address.class);
         this.addressBinder.bindInstanceFields(this);
 
@@ -87,10 +88,21 @@ public class AddressView
         this.splitLayout = new SplitLayout();
         this.splitLayout.setSizeFull();
 
-        this.addressGrid.setColumns(
-                "country", "city", "street", "civic", "code"
-        );
-        // TODO: import data values
+        this.addressGrid.addColumn(
+                address -> this.address.getCountry()
+        ).setHeader("country").setSortable(true).setTextAlign(ColumnTextAlign.START);
+        this.addressGrid.addColumn(
+                address -> this.address.getCity()
+        ).setHeader("city").setSortable(true);
+        this.addressGrid.addColumn(
+                address -> this.address.getStreet()
+        ).setHeader("street").setSortable(true);
+        this.addressGrid.addColumn(
+                address -> this.address.getCivic()
+        ).setHeader("civic").setSortable(true);
+        this.addressGrid.addColumn(
+                address -> this.address.getCode()
+        ).setHeader("code").setSortable(true);
         this.addressGrid.setItems(this.addressRetrieverService.readAll());
         this.addressGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
         this.addressGrid.setHeightFull();
