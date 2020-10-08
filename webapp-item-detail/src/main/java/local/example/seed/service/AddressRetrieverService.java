@@ -35,6 +35,10 @@ public class AddressRetrieverService {
         this.addressWebClient = new AddressWebClient();
     }
 
+    public void create() {
+        // TODO
+    }
+
     public Collection<Address> readAll() {
         Flux<Address> addressFlux = this.addressWebClient.readAll();
         if (addressFlux != null && !addressFlux.collectList().block().isEmpty()) {
@@ -42,5 +46,13 @@ public class AddressRetrieverService {
             return addresses;
         }
         return new ArrayList<>();
+    }
+
+    public void update() {
+        // TODO
+    }
+
+    public void delete() {
+        // TODO
     }
 }
