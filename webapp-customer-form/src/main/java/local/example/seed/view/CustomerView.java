@@ -23,6 +23,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
@@ -62,7 +63,7 @@ public class CustomerView
     public CustomerView() {
         addClassName("main-view");
 
-        this.customerGrid = new Grid<>(Customer.class);
+        this.customerGrid = new Grid<>();
         this.customerBinder = new Binder<>(Customer.class);
         this.customerBinder.bindInstanceFields(this);
 
@@ -85,10 +86,15 @@ public class CustomerView
         this.splitLayout = new SplitLayout();
         this.splitLayout.setSizeFull();
 
-        this.customerGrid.setColumns(
-                "name", "surname", "email"
-        );
-        // TODO: import data values
+        this.customerGrid.addColumn(
+                customer -> this.customer.getName()
+        ).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
+        this.customerGrid.addColumn(
+                customer -> this.customer.getSurname()
+        ).setHeader("surname").setSortable(true);
+        this.customerGrid.addColumn(
+                customer -> this.customer.getEmail()
+        ).setHeader("email").setSortable(false);
         this.customerGrid.setItems(customerRetrieverService.readAll());
         this.customerGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
         this.customerGrid.setHeightFull();
