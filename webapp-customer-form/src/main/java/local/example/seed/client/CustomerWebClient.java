@@ -88,7 +88,8 @@ public class CustomerWebClient {
                         httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                            System.out.println(timestamp + " HTTP status error: 404 --- customer not found! ---");
+                            System.out.println(timestamp +
+                                    " HTTP status error: 404 --- customer not found, occurred during a request read() ---");
                             return Mono.empty();
                         }
                 )
