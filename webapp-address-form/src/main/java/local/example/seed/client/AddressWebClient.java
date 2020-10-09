@@ -75,7 +75,7 @@ public class AddressWebClient {
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     System.out.println(timestamp +
-                            " ERROR: --- Connection refused occurred during a request create address, probably the host is down! ---/n" +
+                            " ERROR: --- Connection refused occurred during a request create address, probably the host is down! ---\n" +
                             address.toString());
                 })
                 .onErrorResume(exception -> Mono.empty());
