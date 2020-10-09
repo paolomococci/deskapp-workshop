@@ -22,6 +22,7 @@ import local.example.seed.client.CustomerWebClient;
 import local.example.seed.model.Customer;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,7 +36,8 @@ public class CustomerRetrieverService {
         this.customerWebClient = new CustomerWebClient();
     }
 
-    public void create() {
+    public void create(String id) {
+        Mono<Customer> customerMono = this.customerWebClient.read(id);
         // TODO
     }
 
@@ -48,11 +50,15 @@ public class CustomerRetrieverService {
         return new ArrayList<>();
     }
 
-    public void update() {
+    public void update(Customer customer, String id) {
+        Mono<Customer> customerMono = this.customerWebClient.update(customer, id);
         // TODO
     }
 
-    public void delete() {
-        // TODO
+    public void delete(String id) {
+        Mono<Customer> customerMono = this.customerWebClient.read(id);
+        if (customerMono.block() != null && customerMono.block() != Mono.empty().block()) {
+            // TODO
+        }
     }
 }
