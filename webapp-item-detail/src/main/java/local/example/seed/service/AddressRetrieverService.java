@@ -22,6 +22,7 @@ import local.example.seed.client.AddressWebClient;
 import local.example.seed.model.Address;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,7 +36,8 @@ public class AddressRetrieverService {
         this.addressWebClient = new AddressWebClient();
     }
 
-    public void create() {
+    public void create(String id) {
+        Mono<Address> addressMono = this.addressWebClient.read(id);
         // TODO
     }
 
@@ -48,11 +50,15 @@ public class AddressRetrieverService {
         return new ArrayList<>();
     }
 
-    public void update() {
+    public void update(Address address, String id) {
+        Mono<Address> addressMono = this.addressWebClient.update(address, id);
         // TODO
     }
 
-    public void delete() {
-        // TODO
+    public void delete(String id) {
+        Mono<Address> addressMono = this.addressWebClient.read(id);
+        if (addressMono.block() != null && addressMono.block() != Mono.empty().block()) {
+            // TODO
+        }
     }
 }
