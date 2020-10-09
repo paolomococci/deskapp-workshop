@@ -75,7 +75,8 @@ public class CustomerWebClient {
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     System.out.println(timestamp +
-                            " ERROR: --- Connection refused occurred during a request create(), probably the host is down! ---");
+                            " ERROR: --- Connection refused occurred during a request create customer, probably the host is down! ---\n" +
+                            customer.toString());
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -89,16 +90,22 @@ public class CustomerWebClient {
                         httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                            System.out.println(timestamp +
-                                    " HTTP status error: 404 --- customer not found occurred during a request read() ---");
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- customer not found occurred during a request read customer id: %s ---",
+                                    id
+                            );
+                            System.out.println(timestamp + errorMessage);
                             return Mono.empty();
                         }
                 )
                 .bodyToMono(Customer.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp +
-                            " ERROR: --- Connection refused occurred during a request read(), probably the host is down! ---");
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused occurred during a request read customer id: %s, probably the host is down! ---",
+                            id
+                    );
+                    System.out.println(timestamp + errorMessage);
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -116,7 +123,7 @@ public class CustomerWebClient {
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     System.out.println(timestamp +
-                            " ERROR: --- Connection refused occurred during a request readAll(), probably the host is down! ---");
+                            " ERROR: --- Connection refused occurred during a request read all customers, probably the host is down! ---");
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -134,8 +141,11 @@ public class CustomerWebClient {
                 .bodyToMono(Customer.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp +
-                            " ERROR: --- Connection refused occurred during a request update(), probably the host is down! ---");
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused occurred during a request update customer id: %s, probably the host is down! ---",
+                            id
+                    );
+                    System.out.println(timestamp + errorMessage);
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -153,8 +163,11 @@ public class CustomerWebClient {
                 .bodyToMono(Customer.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp +
-                            " ERROR: --- Connection refused occurred during a request partialUpdate(), probably the host is down! ---");
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused occurred during a request partial update customer id: %s, probably the host is down! ---",
+                            id
+                    );
+                    System.out.println(timestamp + errorMessage);
                 })
                 .onErrorResume(exception -> Mono.empty());
     }
@@ -168,16 +181,22 @@ public class CustomerWebClient {
                         httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                            System.out.println(timestamp + 
-                                    " HTTP status error: 404 --- customer not found occurred during a request delete() ---");
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- customer not found occurred during a request delete customer id: %s ---",
+                                    id
+                            );
+                            System.out.println(timestamp + errorMessage);
                             return Mono.empty();
                         }
                 )
                 .bodyToMono(Void.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp +
-                            " ERROR: --- Connection refused occurred during a request delete(), probably the host is down! ---");
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused occurred during a request delete customer id: %s, probably the host is down! ---",
+                            id
+                    );
+                    System.out.println(timestamp + errorMessage);
                 });
     }
 }
