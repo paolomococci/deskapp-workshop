@@ -23,7 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.sql.Timestamp;
@@ -54,10 +53,10 @@ public class AddressWebClient {
                 .onErrorResume(exception -> Mono.empty());
     }
 
-    public Mono<Address> read(String id) {
+    public Mono<Address> read(String uri) {
         return this.webClient
                 .get()
-                .uri("http://localhost:8080/addresses/{id}", id)
+                .uri(uri)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
@@ -66,7 +65,7 @@ public class AddressWebClient {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
                                     " HTTP status error: 404 --- address not found occurred during a request read address id: %s ---",
-                                    id
+                                    uri
                             );
                             System.out.println(timestamp + errorMessage);
                             return Mono.empty();
@@ -77,7 +76,7 @@ public class AddressWebClient {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
                             " ERROR: --- Connection refused occurred during a request read address id: %s, probably the host is down! ---",
-                            id
+                            uri
                     );
                     System.out.println(timestamp + errorMessage);
                 })
