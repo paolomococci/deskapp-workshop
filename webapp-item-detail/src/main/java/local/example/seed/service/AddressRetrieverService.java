@@ -31,6 +31,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AddressRetrieverService {
@@ -48,9 +49,9 @@ public class AddressRetrieverService {
         // TODO
     }
 
-    public void read(String id) {
-        Mono<Address> addressMono = this.addressWebClient.read(id);
-        // TODO
+    public Optional<Address> read(String uri) {
+        Mono<Address> addressMono = this.addressWebClient.read(uri);
+        return Optional.ofNullable(addressMono.block());
     }
 
     public Collection<Address> readAll() {
