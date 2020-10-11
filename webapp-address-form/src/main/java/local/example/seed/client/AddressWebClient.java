@@ -18,54 +18,27 @@
 
 package local.example.seed.client;
 
-import io.netty.channel.ChannelOption;
-import io.netty.handler.timeout.ReadTimeoutHandler;
-import io.netty.handler.timeout.WriteTimeoutHandler;
 import local.example.seed.model.Address;
-import org.springframework.http.HttpHeaders;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.netty.http.client.HttpClient;
-import reactor.netty.tcp.TcpClient;
 
 import java.sql.Timestamp;
-import java.util.concurrent.TimeUnit;
 
 public class AddressWebClient {
 
-    private final WebClient webClient;
-
-    public AddressWebClient() {
-        TcpClient tcpClient = TcpClient.create()
-                .option(
-                        ChannelOption.CONNECT_TIMEOUT_MILLIS, 6000
-                )
-                .doOnConnected(
-                        connection -> {
-                            connection.addHandlerLast(
-                                    new ReadTimeoutHandler(6000, TimeUnit.MILLISECONDS));
-                            connection.addHandlerLast(
-                                    new WriteTimeoutHandler(6000, TimeUnit.MILLISECONDS));
-                        }
-                );
-        webClient = WebClient.builder()
-                .baseUrl("http://localhost:8080")
-                .clientConnector(
-                        new ReactorClientHttpConnector(HttpClient.from(tcpClient))
-                )
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .build();
-    }
+    @Autowired
+    private WebClient webClient = WebClient.create();
 
     public Mono<Address> create(Address address) {
         return this.webClient
                 .post()
-                .uri("/addresses")
+                .uri("http://localhost:8080/addresses")
                 .body(Mono.just(address), Address.class)
+                .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
                         httpStatus -> !HttpStatus.CREATED.equals(httpStatus),
@@ -84,7 +57,8 @@ public class AddressWebClient {
     public Mono<Address> read(String id) {
         return this.webClient
                 .get()
-                .uri("/addresses/"+id)
+                .uri("http://localhost:8080/addresses/"+id)
+                .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
                         httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
@@ -110,29 +84,12 @@ public class AddressWebClient {
                 .onErrorResume(exception -> Mono.empty());
     }
 
-    public Flux<Address> readAll() {
-        return this.webClient
-                .get()
-                .uri("/addresses")
-                .retrieve()
-                .onStatus(
-                        HttpStatus::isError,
-                        clientResponse -> Mono.empty()
-                )
-                .bodyToFlux(Address.class)
-                .doOnError(exception -> {
-                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    System.out.println(timestamp +
-                            " ERROR: --- Connection refused occurred during a request read all addresses, probably the host is down! ---");
-                })
-                .onErrorResume(exception -> Mono.empty());
-    }
-
     public Mono<Address> update(Address address, String id) {
         return this.webClient
                 .put()
-                .uri("/addresses/"+id)
+                .uri("http://localhost:8080/addresses/"+id)
                 .body(Mono.just(address), Address.class)
+                .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
                         httpStatus -> !HttpStatus.OK.equals(httpStatus),
@@ -153,8 +110,9 @@ public class AddressWebClient {
     public Mono<Address> partialUpdate(Address address, String id) {
         return this.webClient
                 .patch()
-                .uri("/addresses/"+id)
+                .uri("http://localhost:8080/addresses/"+id)
                 .body(Mono.just(address), Address.class)
+                .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
                         httpStatus -> !HttpStatus.OK.equals(httpStatus),
@@ -175,7 +133,8 @@ public class AddressWebClient {
     public Mono<Void> delete(String id) {
         return this.webClient
                 .delete()
-                .uri("/addresses/"+id)
+                .uri("http://localhost:8080/addresses/"+id)
+                .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
                         httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
