@@ -26,10 +26,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Address {
-    private String id;
     private String country;
     private String city;
     private String street;
     private String civic;
     private String code;
+    private Customer customer;
 }
