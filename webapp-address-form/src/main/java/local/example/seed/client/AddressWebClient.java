@@ -57,7 +57,7 @@ public class AddressWebClient {
     public Mono<Address> read(String id) {
         return this.webClient
                 .get()
-                .uri("http://localhost:8080/addresses/"+id)
+                .uri("http://localhost:8080/addresses/{id}", id)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
@@ -87,7 +87,7 @@ public class AddressWebClient {
     public Mono<Address> update(Address address, String id) {
         return this.webClient
                 .put()
-                .uri("http://localhost:8080/addresses/"+id)
+                .uri("http://localhost:8080/addresses/{id}", id)
                 .body(Mono.just(address), Address.class)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
@@ -110,7 +110,7 @@ public class AddressWebClient {
     public Mono<Address> partialUpdate(Address address, String id) {
         return this.webClient
                 .patch()
-                .uri("http://localhost:8080/addresses/"+id)
+                .uri("http://localhost:8080/addresses/{id}", id)
                 .body(Mono.just(address), Address.class)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
@@ -133,7 +133,7 @@ public class AddressWebClient {
     public Mono<Void> delete(String id) {
         return this.webClient
                 .delete()
-                .uri("http://localhost:8080/addresses/"+id)
+                .uri("http://localhost:8080/addresses/{id}", id)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
