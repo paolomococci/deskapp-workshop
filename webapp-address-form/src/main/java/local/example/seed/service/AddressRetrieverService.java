@@ -20,15 +20,22 @@ package local.example.seed.service;
 
 import local.example.seed.client.AddressWebClient;
 import local.example.seed.model.Address;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.client.Traverson;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class AddressRetrieverService {
+
+    private static final URI RESTFUL_ADDRESS_BASE_URI = URI.create("http://127.0.0.1:8080/");
 
     private final AddressWebClient addressWebClient;
 
@@ -36,18 +43,29 @@ public class AddressRetrieverService {
         this.addressWebClient = new AddressWebClient();
     }
 
-    public void create(String id) {
+    public void create(Address address) {
+        Mono<Address> addressMono = this.addressWebClient.create(address);
+        // TODO
+    }
+
+    public void read(String id) {
         Mono<Address> addressMono = this.addressWebClient.read(id);
         // TODO
     }
 
     public Collection<Address> readAll() {
-        Flux<Address> addressFlux = this.addressWebClient.readAll();
-        if (addressFlux != null && !addressFlux.collectList().block().isEmpty()) {
-            Collection<Address> addresses = addressFlux.collectSortedList().block();
-            return addresses;
-        }
-        return new ArrayList<>();
+        Traverson traverson = new Traverson(
+                RESTFUL_ADDRESS_BASE_URI,
+                MediaTypes.HAL_JSON
+        );
+        Traverson.TraversalBuilder traversalBuilder = traverson.follow("addresses");
+        ParameterizedTypeReference<CollectionModel<Address>> parameterizedTypeReference;
+        parameterizedTypeReference = new ParameterizedTypeReference<>() {};
+        CollectionModel<Address> collectionModelOfAddresses;
+        collectionModelOfAddresses = traversalBuilder.toObject(parameterizedTypeReference);
+        Collection<Address> collectionOfAddresses = collectionModelOfAddresses.getContent();
+        List<Address> addresses = new ArrayList<>(collectionOfAddresses);
+        return addresses;
     }
 
     public void update(Address address, String id) {
