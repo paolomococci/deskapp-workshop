@@ -56,7 +56,7 @@ public class CustomerWebClient {
     public Mono<Customer> read(String id) {
         return this.webClient
                 .get()
-                .uri("http://127.0.0.1:8080/customers/"+id)
+                .uri("http://127.0.0.1:8080/customers/{id}", id)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
@@ -86,7 +86,7 @@ public class CustomerWebClient {
     public Mono<Customer> update(Customer customer, String id) {
         return this.webClient
                 .put()
-                .uri("http://127.0.0.1:8080/customers/"+id)
+                .uri("http://127.0.0.1:8080/customers/{id}", id)
                 .body(Mono.just(customer), Customer.class)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
@@ -109,7 +109,7 @@ public class CustomerWebClient {
     public Mono<Customer> partialUpdate(Customer customer, String id) {
         return this.webClient
                 .patch()
-                .uri("http://127.0.0.1:8080/customers/"+id)
+                .uri("http://127.0.0.1:8080/customers/{id}", id)
                 .body(Mono.just(customer), Customer.class)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
@@ -132,7 +132,7 @@ public class CustomerWebClient {
     public Mono<Void> delete(String id) {
         return this.webClient
                 .delete()
-                .uri("http://127.0.0.1:8080/customers/"+id)
+                .uri("http://127.0.0.1:8080/customers/{id}", id)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
@@ -161,7 +161,7 @@ public class CustomerWebClient {
     public Mono<Customer> findByEmail(String email) {
         return this.webClient
                 .get()
-                .uri("http://127.0.0.1:8080/customers/search/findByEmail?email="+email)
+                .uri("http://127.0.0.1:8080/customers/search/findByEmail?email={email}", email)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
