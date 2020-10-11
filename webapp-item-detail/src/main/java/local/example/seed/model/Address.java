@@ -32,4 +32,5 @@ public class Address {
     private String civic;
     private String code;
     private Customer customer;
+    private Link _links;
 }
