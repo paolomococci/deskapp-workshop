@@ -37,6 +37,8 @@ import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Address;
 import local.example.seed.service.AddressRetrieverService;
 
+import java.util.Optional;
+
 @PageTitle("address")
 @CssImport("style.css")
 @Route(value = "address", layout = MainLayout.class)
@@ -92,7 +94,18 @@ public class AddressView
         this.addressGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
         this.addressGrid.setHeightFull();
         this.addressGrid.asSingleSelect().addValueChangeListener(listener -> {
-            // TODO
+            if (listener.getValue() != null) {
+                Optional<Address> addressFromBackend = addressRetrieverService.read(
+                        listener.getValue().get_links().getSelf().getHref()
+                );
+                if (addressFromBackend.isPresent()) {
+                    this.populate(addressFromBackend.get());
+                } else {
+                    this.refresh();
+                }
+            } else {
+                this.clear();
+            }
         });
 
         this.createGridLayout(splitLayout);
