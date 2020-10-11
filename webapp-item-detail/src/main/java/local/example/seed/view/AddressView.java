@@ -65,7 +65,7 @@ public class AddressView
     public AddressView() {
         addClassName("main-view");
 
-        this.addressGrid = new Grid<>();
+        this.addressGrid = new Grid<>(Address.class);
         this.addressBinder = new Binder<>(Address.class);
         this.addressBinder.bindInstanceFields(this);
 
@@ -88,21 +88,7 @@ public class AddressView
         this.splitLayout = new SplitLayout();
         this.splitLayout.setSizeFull();
 
-        this.addressGrid.addColumn(
-                address -> this.address.getCountry()
-        ).setHeader("country").setSortable(true).setTextAlign(ColumnTextAlign.START);
-        this.addressGrid.addColumn(
-                address -> this.address.getCity()
-        ).setHeader("city").setSortable(true);
-        this.addressGrid.addColumn(
-                address -> this.address.getStreet()
-        ).setHeader("street").setSortable(true);
-        this.addressGrid.addColumn(
-                address -> this.address.getCivic()
-        ).setHeader("civic").setSortable(true);
-        this.addressGrid.addColumn(
-                address -> this.address.getCode()
-        ).setHeader("code").setSortable(true);
+        this.addressGrid.setColumns("country", "city", "street", "civic", "code");
         this.addressGrid.setItems(this.addressRetrieverService.readAll());
         this.addressGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
         this.addressGrid.setHeightFull();
