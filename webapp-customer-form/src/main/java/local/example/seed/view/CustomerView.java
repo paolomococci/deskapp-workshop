@@ -23,7 +23,6 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
@@ -37,6 +36,8 @@ import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
 import local.example.seed.service.CustomerRetrieverService;
+
+import java.util.Optional;
 
 @PageTitle("customer")
 @CssImport("style.css")
@@ -63,7 +64,7 @@ public class CustomerView
     public CustomerView() {
         addClassName("main-view");
 
-        this.customerGrid = new Grid<>();
+        this.customerGrid = new Grid<>(Customer.class);
         this.customerBinder = new Binder<>(Customer.class);
         this.customerBinder.bindInstanceFields(this);
 
@@ -86,20 +87,21 @@ public class CustomerView
         this.splitLayout = new SplitLayout();
         this.splitLayout.setSizeFull();
 
-        this.customerGrid.addColumn(
-                customer -> this.customer.getName()
-        ).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
-        this.customerGrid.addColumn(
-                customer -> this.customer.getSurname()
-        ).setHeader("surname").setSortable(true);
-        this.customerGrid.addColumn(
-                customer -> this.customer.getEmail()
-        ).setHeader("email").setSortable(false);
+        this.customerGrid.setColumns("name", "surname", "email");
         this.customerGrid.setItems(customerRetrieverService.readAll());
         this.customerGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
         this.customerGrid.setHeightFull();
         this.customerGrid.asSingleSelect().addValueChangeListener(listener -> {
-            // TODO
+            if (listener.getValue() != null) {
+                Optional<Customer> customerFromBackend = customerRetrieverService.findByEmail(listener.getValue().getEmail());
+                if (customerFromBackend.isPresent()) {
+                    this.populate(customerFromBackend.get());
+                } else {
+                    this.refresh();
+                }
+            } else {
+                this.clear();
+            }
         });
 
         this.createGridLayout(splitLayout);
