@@ -20,23 +20,16 @@ package local.example.seed.service;
 
 import local.example.seed.client.CustomerWebClient;
 import local.example.seed.model.Customer;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.MediaTypes;
-import org.springframework.hateoas.client.Traverson;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CustomerRetrieverService {
-
-    private static final URI RESTFUL_CUSTOMER_BASE_URI = URI.create("http://127.0.0.1:8080/");
 
     private CustomerWebClient customerWebClient;
 
@@ -46,32 +39,24 @@ public class CustomerRetrieverService {
 
     public void create(Customer customer) {
         Mono<Customer> customerMono = this.customerWebClient.create(customer);
-        // TODO
     }
 
-    public void read(String id) {
+    public Optional<Customer> read(String id) {
         Mono<Customer> customerMono = this.customerWebClient.read(id);
-        // TODO
+        return Optional.ofNullable(customerMono.block());
     }
 
     public Collection<Customer> readAll() {
-        Traverson traverson = new Traverson(
-                RESTFUL_CUSTOMER_BASE_URI,
-                MediaTypes.HAL_JSON
-        );
-        Traverson.TraversalBuilder traversalBuilder = traverson.follow("customers");
-        ParameterizedTypeReference<CollectionModel<Customer>> parameterizedTypeReference;
-        parameterizedTypeReference = new ParameterizedTypeReference<>() {};
-        CollectionModel<Customer> collectionModelOfCustomers;
-        collectionModelOfCustomers = traversalBuilder.toObject(parameterizedTypeReference);
-        Collection<Customer> collectionOfCustomers = collectionModelOfCustomers.getContent();
-        List<Customer> customers = new ArrayList<>(collectionOfCustomers);
-        return customers;
+        Flux<Customer> customerFlux = this.customerWebClient.readAll();
+        if (customerFlux != null && !customerFlux.collectList().block().isEmpty()) {
+            Collection<Customer> customers = customerFlux.collectSortedList().block();
+            return customers;
+        }
+        return new ArrayList<>();
     }
 
     public void update(Customer customer, String id) {
         Mono<Customer> customerMono = this.customerWebClient.update(customer, id);
-        // TODO
     }
 
     public void delete(String id) {
@@ -79,10 +64,5 @@ public class CustomerRetrieverService {
         if (customerMono.block() != null && customerMono.block() != Mono.empty().block()) {
             // TODO
         }
-    }
-
-    public Optional<Customer> findByEmail(String email) {
-        Mono<Customer> customerMono = this.customerWebClient.findByEmail(email);
-        return Optional.ofNullable(customerMono.block());
     }
 }
