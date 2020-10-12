@@ -33,7 +33,7 @@ public class CustomerWebClient {
 
     @Autowired
     private WebClient webClient = WebClient.create();
-    
+
     private final static URI CUSTOMERS_RESTFUL_URI = URI.create("http://127.0.0.1:8080/customers");
 
     public Mono<Customer> create(Customer customer) {
@@ -107,8 +107,16 @@ public class CustomerWebClient {
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> !HttpStatus.OK.equals(httpStatus),
-                        clientResponse -> Mono.empty()
+                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- customer not found, an error occurred during a request to the customer's uri: %s ---",
+                                    uri
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
                 )
                 .bodyToMono(Customer.class)
                 .doOnError(exception -> {
@@ -130,8 +138,16 @@ public class CustomerWebClient {
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> !HttpStatus.OK.equals(httpStatus),
-                        clientResponse -> Mono.empty()
+                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- customer not found, an error occurred during a request to the customer's uri: %s ---",
+                                    uri
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
                 )
                 .bodyToMono(Customer.class)
                 .doOnError(exception -> {
