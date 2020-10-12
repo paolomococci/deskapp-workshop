@@ -47,11 +47,11 @@ import java.util.Optional;
 public class CustomerView
         extends Main {
 
-    private Grid<Customer> customerGrid;
-    private Binder<Customer> customerBinder;
+    private final Grid<Customer> customerGrid;
+    private final Binder<Customer> customerBinder;
 
     private Customer customer;
-    private CustomerRetrieverService customerRetrieverService;
+    private final CustomerRetrieverService customerRetrieverService;
 
     private TextField name;
     private TextField surname;
@@ -60,8 +60,6 @@ public class CustomerView
     private final Button cancel;
     private final Button update;
     private final Button delete;
-
-    private final SplitLayout splitLayout;
 
     public CustomerView() {
         addClassName("main-view");
@@ -114,8 +112,8 @@ public class CustomerView
             }
         });
 
-        this.splitLayout = new SplitLayout();
-        this.splitLayout.setSizeFull();
+        SplitLayout splitLayout = new SplitLayout();
+        splitLayout.setSizeFull();
 
         this.customerGrid.setColumns(
                 "name", "surname", "email"
@@ -140,7 +138,7 @@ public class CustomerView
 
         this.createGridLayout(splitLayout);
         this.createEditorLayout(splitLayout);
-        this.add(this.splitLayout);
+        this.add(splitLayout);
     }
 
     private void createEditorLayout(
