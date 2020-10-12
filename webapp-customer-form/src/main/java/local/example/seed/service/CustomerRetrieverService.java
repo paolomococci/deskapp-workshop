@@ -41,8 +41,8 @@ public class CustomerRetrieverService {
         Mono<Customer> customerMono = this.customerWebClient.create(customer);
     }
 
-    public Optional<Customer> read(String id) {
-        Mono<Customer> customerMono = this.customerWebClient.read(id);
+    public Optional<Customer> read(String uri) {
+        Mono<Customer> customerMono = this.customerWebClient.read(uri);
         return Optional.ofNullable(customerMono.block());
     }
 
@@ -59,10 +59,10 @@ public class CustomerRetrieverService {
         Mono<Customer> customerMono = this.customerWebClient.update(customer, uri);
     }
 
-    public void delete(String id) {
-        Mono<Customer> customerMono = this.customerWebClient.read(id);
+    public void delete(String uri) {
+        Mono<Customer> customerMono = this.customerWebClient.read(uri);
         if (customerMono.block() != null && customerMono.block() != Mono.empty().block()) {
-            // TODO
+            this.customerWebClient.delete(uri);
         }
     }
 }
