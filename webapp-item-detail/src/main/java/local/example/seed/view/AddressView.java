@@ -75,7 +75,8 @@ public class AddressView
 
         this.cancel = new Button("cancel");
         this.cancel.addClickListener(listener -> {
-            // TODO: behaviour
+            this.clear();
+            this.refresh();
         });
         this.save = new Button("save");
         this.save.addClickListener(listener -> {
