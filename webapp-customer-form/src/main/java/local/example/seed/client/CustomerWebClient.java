@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.sql.Timestamp;
@@ -83,10 +84,22 @@ public class CustomerWebClient {
                 .onErrorResume(exception -> Mono.empty());
     }
 
-    public Mono<Customer> update(Customer customer, String id) {
+    public Flux<Customer> readAll() {
+        Flux<Customer> customerFlux = this.webClient.get()
+                .uri("http://127.0.0.1:8080/customers")
+                .accept(MediaTypes.HAL_JSON)
+                .retrieve()
+                .bodyToFlux(Customer.class);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println(timestamp + " INFO: --- List of customers:");
+        customerFlux.subscribe(System.out::println);
+        return customerFlux;
+    }
+
+    public Mono<Customer> update(Customer customer, String uri) {
         return this.webClient
                 .put()
-                .uri("http://127.0.0.1:8080/customers/{id}", id)
+                .uri(uri)
                 .body(Mono.just(customer), Customer.class)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
@@ -99,7 +112,7 @@ public class CustomerWebClient {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
                             " ERROR: --- Connection refused occurred during a request update customer id: %s, probably the host is down! ---",
-                            id
+                            uri
                     );
                     System.out.println(timestamp + errorMessage);
                 })
