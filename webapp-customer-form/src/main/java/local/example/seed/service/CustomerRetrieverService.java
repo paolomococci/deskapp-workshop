@@ -55,8 +55,8 @@ public class CustomerRetrieverService {
         return new ArrayList<>();
     }
 
-    public void update(Customer customer, String id) {
-        Mono<Customer> customerMono = this.customerWebClient.update(customer, id);
+    public void update(Customer customer, String uri) {
+        Mono<Customer> customerMono = this.customerWebClient.update(customer, uri);
     }
 
     public void delete(String id) {
