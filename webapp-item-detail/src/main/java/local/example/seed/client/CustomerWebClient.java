@@ -169,7 +169,7 @@ public class CustomerWebClient {
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
-                                    " HTTP status error: 404 --- customer not found occurred during a request read customer id: %s ---",
+                                    " HTTP status error: 404 --- customer not found, an error occurred during a search request for the customer's email: %s ---",
                                     email
                             );
                             System.out.println(timestamp + errorMessage);
@@ -180,7 +180,7 @@ public class CustomerWebClient {
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
-                            " ERROR: --- Connection refused occurred during a request read customer id: %s, probably the host is down! ---",
+                            " ERROR: --- Connection refused, an error occurred during a search request for the customer's email: %s, probably the host is down! ---",
                             email
                     );
                     System.out.println(timestamp + errorMessage);
