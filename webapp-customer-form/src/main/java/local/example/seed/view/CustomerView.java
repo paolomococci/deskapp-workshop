@@ -73,7 +73,8 @@ public class CustomerView
 
         this.cancel = new Button("cancel");
         this.cancel.addClickListener(listener -> {
-            // TODO: behaviour
+            this.clear();
+            this.refresh();
         });
         this.update = new Button("update");
         this.update.addClickListener(listener -> {
