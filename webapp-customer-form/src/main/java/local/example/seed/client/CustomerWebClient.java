@@ -142,10 +142,10 @@ public class CustomerWebClient {
                 .onErrorResume(exception -> Mono.empty());
     }
 
-    public Mono<Void> delete(String id) {
+    public Mono<Void> delete(String uri) {
         return this.webClient
                 .delete()
-                .uri("http://127.0.0.1:8080/customers/{id}", id)
+                .uri(uri)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
@@ -153,8 +153,8 @@ public class CustomerWebClient {
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
-                                    " HTTP status error: 404 --- customer not found occurred during a request delete customer id: %s ---",
-                                    id
+                                    " HTTP status error: 404 --- customer not found, an error occurred during a request to the customer's uri: %s ---",
+                                    uri
                             );
                             System.out.println(timestamp + errorMessage);
                             return Mono.empty();
@@ -164,8 +164,8 @@ public class CustomerWebClient {
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
-                            " ERROR: --- Connection refused occurred during a request delete customer id: %s, probably the host is down! ---",
-                            id
+                            " ERROR: --- Connection refused, an error occurred during a request to the customer's uri: %s, probably the host is down! ---",
+                            uri
                     );
                     System.out.println(timestamp + errorMessage);
                 });
