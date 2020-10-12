@@ -26,19 +26,16 @@ import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class CustomerRetrieverService {
 
-    private CustomerWebClient customerWebClient;
-
-    public CustomerRetrieverService() {
-        this.customerWebClient = new CustomerWebClient();
-    }
+    private final CustomerWebClient customerWebClient = new CustomerWebClient();
 
     public void create(Customer customer) {
-        Mono<Customer> customerMono = this.customerWebClient.create(customer);
+        this.customerWebClient.create(customer);
     }
 
     public Optional<Customer> read(String uri) {
@@ -48,15 +45,15 @@ public class CustomerRetrieverService {
 
     public Collection<Customer> readAll() {
         Flux<Customer> customerFlux = this.customerWebClient.readAll();
-        if (customerFlux != null && !customerFlux.collectList().block().isEmpty()) {
-            Collection<Customer> customers = customerFlux.collectSortedList().block();
-            return customers;
+        if (customerFlux != null && !Objects.requireNonNull(customerFlux.collectList().block()).isEmpty()) {
+            return customerFlux.collectSortedList().block();
+        } else {
+            return new ArrayList<>();
         }
-        return new ArrayList<>();
     }
 
     public void update(Customer customer, String uri) {
-        Mono<Customer> customerMono = this.customerWebClient.update(customer, uri);
+        this.customerWebClient.update(customer, uri);
     }
 
     public void delete(String uri) {
