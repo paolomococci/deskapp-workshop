@@ -27,10 +27,12 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
@@ -78,7 +80,21 @@ public class CustomerView
         });
         this.update = new Button("update");
         this.update.addClickListener(listener -> {
-            // TODO: behaviour
+            try {
+                if (this.customer != null) {
+                    this.customerBinder.writeBean(this.customer);
+                    this.customerRetrieverService.update(
+                            this.customer,
+                            this.customer.get_links().getSelf().getHref()
+                    );
+                    this.clear();
+                    this.refresh();
+                    Notification.show("customer details have been updated");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the customer details have not been updated");
+                validationException.printStackTrace();
+            }
         });
         this.delete = new Button("delete");
         this.delete.addClickListener(listener -> {
@@ -88,13 +104,17 @@ public class CustomerView
         this.splitLayout = new SplitLayout();
         this.splitLayout.setSizeFull();
 
-        this.customerGrid.setColumns("name", "surname", "email");
+        this.customerGrid.setColumns(
+                "name", "surname", "email"
+        );
         this.customerGrid.setItems(customerRetrieverService.readAll());
         this.customerGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
         this.customerGrid.setHeightFull();
         this.customerGrid.asSingleSelect().addValueChangeListener(listener -> {
             if (listener.getValue() != null) {
-                Optional<Customer> customerFromBackend = customerRetrieverService.findByEmail(listener.getValue().getEmail());
+                Optional<Customer> customerFromBackend = this.customerRetrieverService.read(
+                        listener.getValue().get_links().getSelf().getHref()
+                );
                 if (customerFromBackend.isPresent()) {
                     this.populate(customerFromBackend.get());
                 } else {
