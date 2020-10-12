@@ -32,7 +32,7 @@ import java.sql.Timestamp;
 public class CustomerWebClient {
 
     @Autowired
-    private WebClient webClient = WebClient.create();
+    private final WebClient webClient = WebClient.create();
 
     private final static URI CUSTOMERS_RESTFUL_URI = URI.create("http://127.0.0.1:8080/customers");
 
@@ -161,8 +161,8 @@ public class CustomerWebClient {
                 .onErrorResume(exception -> Mono.empty());
     }
 
-    public Mono<Void> delete(String uri) {
-        return this.webClient
+    public void delete(String uri) {
+        this.webClient
                 .delete()
                 .uri(uri)
                 .accept(MediaTypes.HAL_JSON)
