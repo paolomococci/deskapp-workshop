@@ -111,7 +111,7 @@ public class CustomerWebClient {
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
-                            " ERROR: --- Connection refused occurred during a request update customer uri: %s, probably the host is down! ---",
+                            " ERROR: --- Connection refused, an error occurred during a request to the customer's uri: %s, probably the host is down! ---",
                             uri
                     );
                     System.out.println(timestamp + errorMessage);
@@ -119,10 +119,10 @@ public class CustomerWebClient {
                 .onErrorResume(exception -> Mono.empty());
     }
 
-    public Mono<Customer> partialUpdate(Customer customer, String id) {
+    public Mono<Customer> partialUpdate(Customer customer, String uri) {
         return this.webClient
                 .patch()
-                .uri("http://127.0.0.1:8080/customers/{id}", id)
+                .uri(uri)
                 .body(Mono.just(customer), Customer.class)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
@@ -134,8 +134,8 @@ public class CustomerWebClient {
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
-                            " ERROR: --- Connection refused occurred during a request partial update customer id: %s, probably the host is down! ---",
-                            id
+                            " ERROR: --- Connection refused, an error occurred during a request to the customer's uri: %s, probably the host is down! ---",
+                            uri
                     );
                     System.out.println(timestamp + errorMessage);
                 })
