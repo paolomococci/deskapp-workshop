@@ -111,7 +111,7 @@ public class CustomerWebClient {
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
-                            " ERROR: --- Connection refused occurred during a request update customer id: %s, probably the host is down! ---",
+                            " ERROR: --- Connection refused occurred during a request update customer uri: %s, probably the host is down! ---",
                             uri
                     );
                     System.out.println(timestamp + errorMessage);
