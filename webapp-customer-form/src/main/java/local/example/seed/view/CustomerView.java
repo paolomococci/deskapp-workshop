@@ -56,7 +56,7 @@ public class CustomerView
     private TextField email;
 
     private final Button cancel;
-    private final Button save;
+    private final Button update;
     private final Button delete;
 
     private final SplitLayout splitLayout;
@@ -75,8 +75,8 @@ public class CustomerView
         this.cancel.addClickListener(listener -> {
             // TODO: behaviour
         });
-        this.save = new Button("save");
-        this.save.addClickListener(listener -> {
+        this.update = new Button("update");
+        this.update.addClickListener(listener -> {
             // TODO: behaviour
         });
         this.delete = new Button("delete");
@@ -130,9 +130,9 @@ public class CustomerView
         buttonHorizontalLayout.setWidthFull();
         buttonHorizontalLayout.setSpacing(true);
         this.cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-        this.save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        this.update.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         this.delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
-        buttonHorizontalLayout.add(this.cancel, this.save, this.delete);
+        buttonHorizontalLayout.add(this.cancel, this.update, this.delete);
         buttonHorizontalLayout.setSpacing(true);
         buttonHorizontalLayout.setMargin(true);
         divEditorLayout.add(buttonHorizontalLayout);
