@@ -98,7 +98,20 @@ public class CustomerView
         });
         this.delete = new Button("delete");
         this.delete.addClickListener(listener -> {
-            // TODO: behaviour
+            try {
+                if (this.customer != null) {
+                    this.customerBinder.writeBean(this.customer);
+                    this.customerRetrieverService.delete(
+                            this.customer.get_links().getSelf().getHref()
+                    );
+                    this.clear();
+                    this.refresh();
+                    Notification.show("the selected customer has been deleted");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the selected customer has not been deleted");
+                validationException.printStackTrace();
+            }
         });
 
         this.splitLayout = new SplitLayout();
