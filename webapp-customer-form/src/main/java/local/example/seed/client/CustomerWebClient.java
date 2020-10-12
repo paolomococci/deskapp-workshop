@@ -26,17 +26,20 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.net.URI;
 import java.sql.Timestamp;
 
 public class CustomerWebClient {
 
     @Autowired
     private WebClient webClient = WebClient.create();
+    
+    private final static URI CUSTOMERS_RESTFUL_URI = URI.create("http://127.0.0.1:8080/customers");
 
     public Mono<Customer> create(Customer customer) {
         return this.webClient
                 .post()
-                .uri("http://127.0.0.1:8080/customers")
+                .uri(CUSTOMERS_RESTFUL_URI)
                 .body(Mono.just(customer), Customer.class)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
@@ -86,7 +89,7 @@ public class CustomerWebClient {
 
     public Flux<Customer> readAll() {
         Flux<Customer> customerFlux = this.webClient.get()
-                .uri("http://127.0.0.1:8080/customers")
+                .uri(CUSTOMERS_RESTFUL_URI)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .bodyToFlux(Customer.class);
