@@ -19,15 +19,20 @@
 package local.example.seed.client;
 
 import local.example.seed.model.Customer;
+import local.example.seed.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerWebClient {
 
@@ -41,6 +46,7 @@ public class CustomerWebClient {
                 .post()
                 .uri(CUSTOMERS_RESTFUL_URI)
                 .body(Mono.just(customer), Customer.class)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
@@ -87,22 +93,20 @@ public class CustomerWebClient {
                 .onErrorResume(exception -> Mono.empty());
     }
 
-    public Flux<Customer> readAll() {
-        Flux<Customer> customerFlux = this.webClient.get()
+    public List<Customer> readAll() {
+        return this.webClient.get()
                 .uri(CUSTOMERS_RESTFUL_URI)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
-                .bodyToFlux(Customer.class);
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println(timestamp + " INFO: --- List of customers:");
-        customerFlux.subscribe(System.out::println);
-        return customerFlux;
+                .bodyToFlux(Response.class)
+                .blockFirst().get_embedded().getCustomers();
     }
 
     public Mono<Customer> update(Customer customer, String uri) {
         return this.webClient
                 .put()
                 .uri(uri)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(Mono.just(customer), Customer.class)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
@@ -134,6 +138,7 @@ public class CustomerWebClient {
         return this.webClient
                 .patch()
                 .uri(uri)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(Mono.just(customer), Customer.class)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
