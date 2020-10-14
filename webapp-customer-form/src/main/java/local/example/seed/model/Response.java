@@ -28,4 +28,5 @@ import lombok.NoArgsConstructor;
 public class Response {
     Embedded _embedded;
     Link _links;
+    Page page;
 }
