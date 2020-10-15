@@ -98,6 +98,34 @@ public class CustomerWebClient {
         ).blockFirst().get_embedded().getCustomers();
     }
 
+    public Flux<Response> readAllPaged(int page) {
+        return this.webClient.get()
+                .uri(CUSTOMERS_RESTFUL_URI+"?page={page}&size=10", page)
+                .accept(MediaTypes.HAL_JSON)
+                .retrieve()
+                .onStatus(
+                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- customer not found, an error occurred during a request to the customers uri: %s ---",
+                                    CUSTOMERS_RESTFUL_URI.toString()
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
+                )
+                .bodyToFlux(Response.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a request to the customers uri: %s, probably the host is down! ---",
+                            CUSTOMERS_RESTFUL_URI.toString()
+                    );
+                    System.out.println(timestamp + errorMessage);
+                });
+    }
+
     public void update(Customer customer, String uri) {
         this.webClient
                 .put()
