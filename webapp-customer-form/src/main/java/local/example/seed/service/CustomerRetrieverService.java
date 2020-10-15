@@ -20,7 +20,9 @@ package local.example.seed.service;
 
 import local.example.seed.client.CustomerWebClient;
 import local.example.seed.model.Customer;
+import local.example.seed.model.Response;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
@@ -49,6 +51,10 @@ public class CustomerRetrieverService {
         } else {
             return new ArrayList<>();
         }
+    }
+
+    public Flux<Response> readAllPaged(int page) {
+            return this.customerWebClient.readAllPaged(page);
     }
 
     public void update(Customer customer, String uri) {
