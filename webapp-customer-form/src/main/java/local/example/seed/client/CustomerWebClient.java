@@ -26,6 +26,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
@@ -39,8 +40,8 @@ public class CustomerWebClient {
 
     private final static URI CUSTOMERS_RESTFUL_URI = URI.create("http://127.0.0.1:8080/customers");
 
-    public Mono<Customer> create(Customer customer) {
-        return this.webClient
+    public void create(Customer customer) {
+        this.webClient
                 .post()
                 .uri(CUSTOMERS_RESTFUL_URI)
                 .body(Mono.just(customer), Customer.class)
@@ -58,7 +59,7 @@ public class CustomerWebClient {
                             " ERROR: --- Connection refused occurred during a request create customer, probably the host is down! ---\n" +
                             customer.toString());
                 })
-                .onErrorResume(exception -> Mono.empty());
+                .block();
     }
 
     public Mono<Customer> read(String uri) {
@@ -92,32 +93,9 @@ public class CustomerWebClient {
     }
 
     public List<Customer> readAll() {
-        return this.webClient.get()
-                .uri(CUSTOMERS_RESTFUL_URI)
-                .accept(MediaTypes.HAL_JSON)
-                .retrieve()
-                .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
-                        clientResponse -> {
-                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                            String errorMessage = String.format(
-                                    " HTTP status error: 404 --- customer not found, an error occurred during a request to the customers uri: %s ---",
-                                    CUSTOMERS_RESTFUL_URI.toString()
-                            );
-                            System.out.println(timestamp + errorMessage);
-                            return Mono.empty();
-                        }
-                )
-                .bodyToFlux(Response.class)
-                .doOnError(exception -> {
-                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    String errorMessage = String.format(
-                            " ERROR: --- Connection refused, an error occurred during a request to the customers uri: %s, probably the host is down! ---",
-                            CUSTOMERS_RESTFUL_URI.toString()
-                    );
-                    System.out.println(timestamp + errorMessage);
-                })
-                .blockFirst().get_embedded().getCustomers();
+        return this.getResponseFlux(
+                this.getResponseFlux(0).blockFirst().getPage().getTotalElements()
+        ).blockFirst().get_embedded().getCustomers();
     }
 
     public void update(Customer customer, String uri) {
@@ -148,7 +126,8 @@ public class CustomerWebClient {
                             uri
                     );
                     System.out.println(timestamp + errorMessage);
-                }).block();
+                })
+                .block();
     }
 
     public Mono<Customer> partialUpdate(Customer customer, String uri) {
@@ -208,7 +187,8 @@ public class CustomerWebClient {
                             uri
                     );
                     System.out.println(timestamp + errorMessage);
-                }).block();
+                })
+                .block();
     }
 
     public Mono<Customer> findByEmail(String email) {
@@ -239,5 +219,33 @@ public class CustomerWebClient {
                     System.out.println(timestamp + errorMessage);
                 })
                 .onErrorResume(exception -> Mono.empty());
+    }
+
+    private Flux<Response> getResponseFlux(int size) {
+        return this.webClient.get()
+                .uri(CUSTOMERS_RESTFUL_URI+"?page=0&size={size}", size)
+                .accept(MediaTypes.HAL_JSON)
+                .retrieve()
+                .onStatus(
+                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- customer not found, an error occurred during a request to the customers uri: %s ---",
+                                    CUSTOMERS_RESTFUL_URI.toString()
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
+                )
+                .bodyToFlux(Response.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a request to the customers uri: %s, probably the host is down! ---",
+                            CUSTOMERS_RESTFUL_URI.toString()
+                    );
+                    System.out.println(timestamp + errorMessage);
+                });
     }
 }
