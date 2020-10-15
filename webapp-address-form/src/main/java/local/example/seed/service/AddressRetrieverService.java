@@ -71,7 +71,6 @@ public class AddressRetrieverService {
 
     public void update(Address address, String id) {
         Mono<Address> addressMono = this.addressWebClient.update(address, id);
-        // TODO
     }
 
     public void delete(String id) {
