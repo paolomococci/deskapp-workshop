@@ -18,6 +18,7 @@
 
 package local.example.seed.client;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import local.example.seed.model.Customer;
 import local.example.seed.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
+import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,12 +101,32 @@ public class CustomerWebClient {
                 .uri(CUSTOMERS_RESTFUL_URI)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
+                .onStatus(
+                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- customer not found, an error occurred during a request to the customers uri: %s ---",
+                                    CUSTOMERS_RESTFUL_URI.toString()
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
+                )
                 .bodyToFlux(Response.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a request to the customers uri: %s, probably the host is down! ---",
+                            CUSTOMERS_RESTFUL_URI.toString()
+                    );
+                    System.out.println(timestamp + errorMessage);
+                })
                 .blockFirst().get_embedded().getCustomers();
     }
 
-    public Mono<Customer> update(Customer customer, String uri) {
-        return this.webClient
+    public void update(Customer customer, String uri) {
+        this.webClient
                 .put()
                 .uri(uri)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -122,7 +145,7 @@ public class CustomerWebClient {
                             return Mono.empty();
                         }
                 )
-                .bodyToMono(Customer.class)
+                .bodyToMono(Void.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
@@ -130,8 +153,7 @@ public class CustomerWebClient {
                             uri
                     );
                     System.out.println(timestamp + errorMessage);
-                })
-                .onErrorResume(exception -> Mono.empty());
+                }).block();
     }
 
     public Mono<Customer> partialUpdate(Customer customer, String uri) {
@@ -170,7 +192,6 @@ public class CustomerWebClient {
         this.webClient
                 .delete()
                 .uri(uri)
-                .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
                         httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
@@ -192,7 +213,7 @@ public class CustomerWebClient {
                             uri
                     );
                     System.out.println(timestamp + errorMessage);
-                });
+                }).block();
     }
 
     public Mono<Customer> findByEmail(String email) {
