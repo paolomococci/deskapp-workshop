@@ -19,6 +19,7 @@
 package local.example.seed.view;
 
 import com.vaadin.flow.component.AbstractField;
+import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -37,6 +38,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
+import local.example.seed.model.Link;
 import local.example.seed.service.CustomerRetrieverService;
 
 import java.util.Optional;
@@ -59,6 +61,7 @@ public class CustomerView
 
     private final Button cancel;
     private final Button update;
+    private final Button create;
     private final Button delete;
 
     public CustomerView() {
@@ -95,6 +98,34 @@ public class CustomerView
                 validationException.printStackTrace();
             }
         });
+        this.create = new Button("create");
+        this.create.addClickListener(listener -> {
+            try {
+                if (
+                        !this.name.getValue().isEmpty() &
+                        !this.surname.getValue().isEmpty() &
+                        !this.email.getValue().isEmpty()
+                ) {
+                    this.customer = new Customer(
+                            this.name.getValue(),
+                            this.surname.getValue(),
+                            this.email.getValue(),
+                            new Link()
+                    );
+                    this.customerBinder.writeBean(this.customer);
+                    this.customerRetrieverService.create(
+                            this.customer
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("new customer's details have been created");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the customer details have not been created");
+                validationException.printStackTrace();
+            }
+        });
         this.delete = new Button("delete");
         this.delete.addClickListener(listener -> {
             try {
@@ -122,7 +153,7 @@ public class CustomerView
         );
         this.customerGrid.setItems(customerRetrieverService.readAll());
         this.customerGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
-        this.customerGrid.setHeightFull();
+        this.customerGrid.setHeightByRows(true);
         this.customerGrid.asSingleSelect().addValueChangeListener(listener -> {
             if (listener.getValue() != null) {
                 Optional<Customer> customerFromBackend = this.customerRetrieverService.read(
@@ -150,6 +181,10 @@ public class CustomerView
         Div divEditor = new Div();
         divEditorLayout.add(divEditor);
         FormLayout formLayout = new FormLayout();
+        this.name.setAutofocus(true);
+        this.name.setMinWidth(100, Unit.PIXELS);
+        this.surname.setMinWidth(100, Unit.PIXELS);
+        this.email.setMinWidth(100, Unit.PIXELS);
         addFormItem(divEditor, formLayout, this.name, "name");
         addFormItem(divEditor, formLayout, this.surname, "surname");
         addFormItem(divEditor, formLayout, this.email, "email");
@@ -165,8 +200,11 @@ public class CustomerView
         buttonHorizontalLayout.setSpacing(true);
         this.cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         this.update.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        this.create.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
         this.delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
-        buttonHorizontalLayout.add(this.cancel, this.update, this.delete);
+        buttonHorizontalLayout.add(
+                this.cancel, this.update, this.create, this.delete
+        );
         buttonHorizontalLayout.setSpacing(true);
         buttonHorizontalLayout.setMargin(true);
         divEditorLayout.add(buttonHorizontalLayout);
