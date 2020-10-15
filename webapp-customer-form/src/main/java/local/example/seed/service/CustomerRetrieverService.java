@@ -53,8 +53,8 @@ public class CustomerRetrieverService {
         }
     }
 
-    public Flux<Response> readAllPaged(int page) {
-            return this.customerWebClient.readAllPaged(page);
+    public Flux<Response> browseAll(int page) {
+            return this.customerWebClient.browseAll(page);
     }
 
     public void update(Customer customer, String uri) {
