@@ -87,6 +87,7 @@ public class CustomerView
                     );
                     this.clear();
                     this.refresh();
+                    this.reload();
                     Notification.show("customer details have been updated");
                 }
             } catch (ValidationException validationException) {
@@ -104,6 +105,7 @@ public class CustomerView
                     );
                     this.clear();
                     this.refresh();
+                    this.reload();
                     Notification.show("the selected customer has been deleted");
                 }
             } catch (ValidationException validationException) {
@@ -201,5 +203,9 @@ public class CustomerView
     private void populate(Customer customer) {
         this.customer = customer;
         this.customerBinder.readBean(this.customer);
+    }
+
+    private void reload() {
+        this.customerGrid.setItems(customerRetrieverService.readAll());
     }
 }
