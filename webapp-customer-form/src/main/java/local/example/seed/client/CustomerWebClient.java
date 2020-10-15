@@ -18,7 +18,6 @@
 
 package local.example.seed.client;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import local.example.seed.model.Customer;
 import local.example.seed.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +26,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.Disposable;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
-import java.net.URL;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerWebClient {
