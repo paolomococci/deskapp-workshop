@@ -21,10 +21,13 @@ package local.example.seed.client;
 import local.example.seed.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.net.URI;
 import java.sql.Timestamp;
 
 public class AddressWebClient {
@@ -32,10 +35,13 @@ public class AddressWebClient {
     @Autowired
     private WebClient webClient = WebClient.create();
 
-    public Mono<Address> create(Address address) {
-        return this.webClient
+    private final static URI ADDRESSES_RESTFUL_URI = URI.create("http://localhost:8080/addresses");
+
+    public void create(Address address) {
+        this.webClient
                 .post()
-                .uri("http://localhost:8080/addresses")
+                .uri(ADDRESSES_RESTFUL_URI)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(Mono.just(address), Address.class)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
@@ -43,14 +49,14 @@ public class AddressWebClient {
                         httpStatus -> !HttpStatus.CREATED.equals(httpStatus),
                         clientResponse -> Mono.empty()
                 )
-                .bodyToMono(Address.class)
+                .bodyToMono(Void.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     System.out.println(timestamp +
-                            " ERROR: --- Connection refused occurred during a request create address, probably the host is down! ---\n" +
+                            " ERROR: --- Connection refused, an error occurred during a request create address, probably the host is down! ---\n" +
                             address.toString());
                 })
-                .onErrorResume(exception -> Mono.empty());
+                .block();
     }
 
     public Mono<Address> read(String uri) {
@@ -64,7 +70,7 @@ public class AddressWebClient {
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
-                                    " HTTP status error: 404 --- address not found occurred during a request read address id: %s ---",
+                                    " HTTP status error: 404 --- address not found, an error occurred during a request read address's uri: %s ---",
                                     uri
                             );
                             System.out.println(timestamp + errorMessage);
@@ -75,7 +81,7 @@ public class AddressWebClient {
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
-                            " ERROR: --- Connection refused occurred during a request read address id: %s, probably the host is down! ---",
+                            " ERROR: --- Connection refused, an error occurred during a request read address's uri': %s, probably the host is down! ---",
                             uri
                     );
                     System.out.println(timestamp + errorMessage);
@@ -83,56 +89,12 @@ public class AddressWebClient {
                 .onErrorResume(exception -> Mono.empty());
     }
 
-    public Mono<Address> update(Address address, String id) {
-        return this.webClient
+    public void update(Address address, String uri) {
+        this.webClient
                 .put()
-                .uri("http://localhost:8080/addresses/{id}", id)
+                .uri(uri)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(Mono.just(address), Address.class)
-                .accept(MediaTypes.HAL_JSON)
-                .retrieve()
-                .onStatus(
-                        httpStatus -> !HttpStatus.OK.equals(httpStatus),
-                        clientResponse -> Mono.empty()
-                )
-                .bodyToMono(Address.class)
-                .doOnError(exception -> {
-                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    String errorMessage = String.format(
-                            " ERROR: --- Connection refused occurred during a request update address id: %s, probably the host is down! ---",
-                            id
-                    );
-                    System.out.println(timestamp + errorMessage);
-                })
-                .onErrorResume(exception -> Mono.empty());
-    }
-
-    public Mono<Address> partialUpdate(Address address, String id) {
-        return this.webClient
-                .patch()
-                .uri("http://localhost:8080/addresses/{id}", id)
-                .body(Mono.just(address), Address.class)
-                .accept(MediaTypes.HAL_JSON)
-                .retrieve()
-                .onStatus(
-                        httpStatus -> !HttpStatus.OK.equals(httpStatus),
-                        clientResponse -> Mono.empty()
-                )
-                .bodyToMono(Address.class)
-                .doOnError(exception -> {
-                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    String errorMessage = String.format(
-                            " ERROR: --- Connection refused occurred during a request partial update address id: %s, probably the host is down! ---",
-                            id
-                    );
-                    System.out.println(timestamp + errorMessage);
-                })
-                .onErrorResume(exception -> Mono.empty());
-    }
-
-    public Mono<Void> delete(String id) {
-        return this.webClient
-                .delete()
-                .uri("http://localhost:8080/addresses/{id}", id)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
@@ -140,8 +102,8 @@ public class AddressWebClient {
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
-                                    " HTTP status error: 404 --- address not found occurred during a request delete address id: %s ---",
-                                    id
+                                    " HTTP status error: 404 --- customer not found, an error occurred during a request to the address's uri: %s ---",
+                                    uri
                             );
                             System.out.println(timestamp + errorMessage);
                             return Mono.empty();
@@ -151,10 +113,64 @@ public class AddressWebClient {
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
-                            " ERROR: --- Connection refused occurred during a request delete address id: %s, probably the host is down! ---",
-                            id
+                            " ERROR: --- Connection refused, an error occurred during a request update address's uri: %s, probably the host is down! ---",
+                            uri
                     );
                     System.out.println(timestamp + errorMessage);
-                });
+                })
+                .block();
+    }
+
+    public Mono<Address> partialUpdate(Address address, String uri) {
+        return this.webClient
+                .patch()
+                .uri(uri)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .body(Mono.just(address), Address.class)
+                .accept(MediaTypes.HAL_JSON)
+                .retrieve()
+                .onStatus(
+                        httpStatus -> !HttpStatus.OK.equals(httpStatus),
+                        clientResponse -> Mono.empty()
+                )
+                .bodyToMono(Address.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a request partial update address's id: %s, probably the host is down! ---",
+                            uri
+                    );
+                    System.out.println(timestamp + errorMessage);
+                })
+                .onErrorResume(exception -> Mono.empty());
+    }
+
+    public void delete(String uri) {
+        this.webClient
+                .delete()
+                .uri(uri)
+                .retrieve()
+                .onStatus(
+                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- address not found, an error occurred during a request delete address's uri: %s ---",
+                                    uri
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
+                )
+                .bodyToMono(Void.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a request delete address's uri: %s, probably the host is down! ---",
+                            uri
+                    );
+                    System.out.println(timestamp + errorMessage);
+                })
+                .block();
     }
 }
