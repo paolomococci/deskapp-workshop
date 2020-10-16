@@ -104,8 +104,8 @@ public class CustomerView
             try {
                 if (
                         !this.name.getValue().isEmpty() &
-                        !this.surname.getValue().isEmpty() &
-                        !this.email.getValue().isEmpty()
+                                !this.surname.getValue().isEmpty() &
+                                !this.email.getValue().isEmpty()
                 ) {
                     this.customer = new Customer(
                             this.name.getValue(),
