@@ -25,10 +25,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CustomerRetrieverService {
@@ -46,11 +43,7 @@ public class CustomerRetrieverService {
 
     public Collection<Customer> readAll() {
         List<Customer> customers = this.customerWebClient.readAll();
-        if (customers != null) {
-            return customers;
-        } else {
-            return new ArrayList<>();
-        }
+        return Objects.requireNonNullElseGet(customers, ArrayList::new);
     }
 
     public Flux<Response> browseAll(int page) {
