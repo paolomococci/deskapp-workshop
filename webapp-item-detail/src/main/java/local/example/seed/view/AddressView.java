@@ -27,14 +27,17 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Address;
+import local.example.seed.model.Link;
 import local.example.seed.service.AddressRetrieverService;
 
 import java.util.Optional;
@@ -49,7 +52,7 @@ public class AddressView
     private final Binder<Address> addressBinder;
 
     private Address address;
-    private AddressRetrieverService addressRetrieverService;
+    private final AddressRetrieverService addressRetrieverService;
 
     private TextField country;
     private TextField city;
@@ -59,6 +62,7 @@ public class AddressView
 
     private final Button cancel;
     private final Button update;
+    private final Button create;
     private final Button delete;
 
     private final SplitLayout splitLayout;
@@ -78,13 +82,75 @@ public class AddressView
             this.clear();
             this.refresh();
         });
-        this.update = new Button("save");
+        this.update = new Button("update");
         this.update.addClickListener(listener -> {
-            // TODO: behaviour
+            try {
+                if (this.address != null) {
+                    this.addressBinder.writeBean(this.address);
+                    this.addressRetrieverService.update(
+                            this.address,
+                            this.address.get_links().getSelf().getHref()
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("address details have been updated");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the address details have not been updated");
+                validationException.printStackTrace();
+            }
+        });
+        this.create = new Button("create");
+        this.create.addClickListener(listener -> {
+            try {
+                if (
+                        !this.country.getValue().isEmpty() &
+                                !this.city.getValue().isEmpty() &
+                                !this.street.getValue().isEmpty() &
+                                !this.civic.getValue().isEmpty() &
+                                !this.code.getValue().isEmpty()
+                ) {
+                    this.address = new Address(
+                            this.country.getValue(),
+                            this.city.getValue(),
+                            this.street.getValue(),
+                            this.civic.getValue(),
+                            this.code.getValue(),
+                            null,
+                            new Link()
+                    );
+                    this.addressBinder.writeBean(this.address);
+                    this.addressRetrieverService.create(
+                            this.address
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("new address's details have been created");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the address details have not been created");
+                validationException.printStackTrace();
+            }
         });
         this.delete = new Button("delete");
         this.delete.addClickListener(listener -> {
-            // TODO: behaviour
+            try {
+                if (this.address != null) {
+                    this.addressBinder.writeBean(this.address);
+                    this.addressRetrieverService.delete(
+                            this.address.get_links().getSelf().getHref()
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("the selected address has been deleted");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the selected address has not been deleted");
+                validationException.printStackTrace();
+            }
         });
 
         this.splitLayout = new SplitLayout();
@@ -138,8 +204,10 @@ public class AddressView
         buttonHorizontalLayout.setSpacing(true);
         this.cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         this.update.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        this.create.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
         this.delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
-        buttonHorizontalLayout.add(this.cancel, this.update, this.delete);
+        buttonHorizontalLayout.add(
+                this.cancel, this.update, this.create, this.delete);
         buttonHorizontalLayout.setSpacing(true);
         buttonHorizontalLayout.setMargin(true);
         divEditorLayout.add(buttonHorizontalLayout);
@@ -176,5 +244,9 @@ public class AddressView
     private void populate(Address address) {
         this.address = address;
         this.addressBinder.readBean(this.address);
+    }
+
+    private void reload() {
+        this.addressGrid.setItems(addressRetrieverService.readAll());
     }
 }
