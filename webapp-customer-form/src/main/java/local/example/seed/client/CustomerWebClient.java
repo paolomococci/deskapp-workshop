@@ -32,6 +32,7 @@ import reactor.core.publisher.Mono;
 import java.net.URI;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 public class CustomerWebClient {
 
@@ -93,12 +94,13 @@ public class CustomerWebClient {
     }
 
     public List<Customer> readAll() {
-        return this.getResponseFlux(
-                this.getResponseFlux(0).blockFirst().getPage().getTotalElements()
-        ).blockFirst().get_embedded().getCustomers();
+        return Objects.requireNonNull(this.getResponseFlux(
+                Objects.requireNonNull(
+                        this.getResponseFlux(0).blockFirst()).getPage().getTotalElements()
+        ).blockFirst()).get_embedded().getCustomers();
     }
 
-    public Flux<Response> readAllPaged(int page) {
+    public Flux<Response> browseAll(int page) {
         return this.webClient.get()
                 .uri(CUSTOMERS_RESTFUL_URI+"?page={page}&size=10", page)
                 .accept(MediaTypes.HAL_JSON)
