@@ -45,15 +45,15 @@ public class CustomerWebClient {
         this.webClient
                 .post()
                 .uri(CUSTOMERS_RESTFUL_URI)
-                .body(Mono.just(customer), Customer.class)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .body(Mono.just(customer), Customer.class)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
                         httpStatus -> !HttpStatus.CREATED.equals(httpStatus),
                         clientResponse -> Mono.empty()
                 )
-                .bodyToMono(Customer.class)
+                .bodyToMono(Void.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     System.out.println(timestamp +
