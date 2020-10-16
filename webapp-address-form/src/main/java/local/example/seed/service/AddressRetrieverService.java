@@ -45,8 +45,7 @@ public class AddressRetrieverService {
     }
 
     public void create(Address address) {
-        Mono<Address> addressMono = this.addressWebClient.create(address);
-        // TODO
+        this.addressWebClient.create(address);
     }
 
     public Optional<Address> read(String uri) {
@@ -69,14 +68,14 @@ public class AddressRetrieverService {
         return addresses;
     }
 
-    public void update(Address address, String id) {
-        Mono<Address> addressMono = this.addressWebClient.update(address, id);
+    public void update(Address address, String uri) {
+        this.addressWebClient.update(address, uri);
     }
 
-    public void delete(String id) {
-        Mono<Address> addressMono = this.addressWebClient.read(id);
+    public void delete(String uri) {
+        Mono<Address> addressMono = this.addressWebClient.read(uri);
         if (addressMono.block() != null && addressMono.block() != Mono.empty().block()) {
-            // TODO
+            this.addressWebClient.delete(uri);
         }
     }
 }
