@@ -31,6 +31,7 @@ import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
+import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
@@ -57,7 +58,7 @@ public class CustomerView
 
     private TextField name;
     private TextField surname;
-    private TextField email;
+    private EmailField email;
 
     private final Button cancel;
     private final Button update;
@@ -185,6 +186,7 @@ public class CustomerView
         this.name.setMinWidth(100, Unit.PIXELS);
         this.surname.setMinWidth(100, Unit.PIXELS);
         this.email.setMinWidth(100, Unit.PIXELS);
+        this.email.setClearButtonVisible(true);
         addFormItem(divEditor, formLayout, this.name, "name");
         addFormItem(divEditor, formLayout, this.surname, "surname");
         addFormItem(divEditor, formLayout, this.email, "email");
