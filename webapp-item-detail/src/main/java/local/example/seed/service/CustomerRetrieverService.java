@@ -20,7 +20,7 @@ package local.example.seed.service;
 
 import local.example.seed.client.CustomerWebClient;
 import local.example.seed.model.Customer;
-import local.example.seed.model.Response;
+import local.example.seed.response.CustomerResponse;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -46,7 +46,7 @@ public class CustomerRetrieverService {
         return Objects.requireNonNullElseGet(customers, ArrayList::new);
     }
 
-    public Flux<Response> browseAll(int page) {
+    public Flux<CustomerResponse> browseAll(int page) {
         return this.customerWebClient.browseAll(page);
     }
 
