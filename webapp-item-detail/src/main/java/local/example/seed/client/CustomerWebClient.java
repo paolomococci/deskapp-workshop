@@ -19,7 +19,7 @@
 package local.example.seed.client;
 
 import local.example.seed.model.Customer;
-import local.example.seed.model.Response;
+import local.example.seed.response.CustomerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
@@ -100,7 +100,7 @@ public class CustomerWebClient {
         ).blockFirst()).get_embedded().getCustomers();
     }
 
-    public Flux<Response> browseAll(int page) {
+    public Flux<CustomerResponse> browseAll(int page) {
         return this.webClient.get()
                 .uri(CUSTOMERS_RESTFUL_URI+"?page={page}&size=10", page)
                 .accept(MediaTypes.HAL_JSON)
@@ -117,7 +117,7 @@ public class CustomerWebClient {
                             return Mono.empty();
                         }
                 )
-                .bodyToFlux(Response.class)
+                .bodyToFlux(CustomerResponse.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
@@ -251,7 +251,7 @@ public class CustomerWebClient {
                 .onErrorResume(exception -> Mono.empty());
     }
 
-    private Flux<Response> getResponseFlux(int size) {
+    private Flux<CustomerResponse> getResponseFlux(int size) {
         return this.webClient.get()
                 .uri(CUSTOMERS_RESTFUL_URI+"?page=0&size={size}", size)
                 .accept(MediaTypes.HAL_JSON)
@@ -268,7 +268,7 @@ public class CustomerWebClient {
                             return Mono.empty();
                         }
                 )
-                .bodyToFlux(Response.class)
+                .bodyToFlux(CustomerResponse.class)
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
