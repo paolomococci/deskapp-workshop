@@ -16,8 +16,9 @@
  *
  */
 
-package local.example.seed.model;
+package local.example.seed.model.util;
 
+import local.example.seed.model.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
