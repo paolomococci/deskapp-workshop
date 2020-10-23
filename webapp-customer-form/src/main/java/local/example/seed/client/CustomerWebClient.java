@@ -19,7 +19,7 @@
 package local.example.seed.client;
 
 import local.example.seed.model.Customer;
-import local.example.seed.model.Response;
+import local.example.seed.model.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
