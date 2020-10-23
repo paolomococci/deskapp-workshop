@@ -18,6 +18,7 @@
 
 package local.example.seed.model;
 
+import local.example.seed.model.util.Link;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
