@@ -70,7 +70,7 @@ public class CustomerWebClient {
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
@@ -106,7 +106,7 @@ public class CustomerWebClient {
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
@@ -137,7 +137,7 @@ public class CustomerWebClient {
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
@@ -169,7 +169,7 @@ public class CustomerWebClient {
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
@@ -198,7 +198,7 @@ public class CustomerWebClient {
                 .uri(uri)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
@@ -228,7 +228,7 @@ public class CustomerWebClient {
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
@@ -257,7 +257,7 @@ public class CustomerWebClient {
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
