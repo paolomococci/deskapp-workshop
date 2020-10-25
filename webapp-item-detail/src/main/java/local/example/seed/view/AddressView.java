@@ -37,7 +37,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Address;
-import local.example.seed.model.Link;
+import local.example.seed.model.util.Link;
 import local.example.seed.service.AddressRetrieverService;
 
 import java.util.Optional;
@@ -64,8 +64,6 @@ public class AddressView
     private final Button update;
     private final Button create;
     private final Button delete;
-
-    private final SplitLayout splitLayout;
 
     public AddressView() {
         addClassName("main-view");
@@ -153,8 +151,8 @@ public class AddressView
             }
         });
 
-        this.splitLayout = new SplitLayout();
-        this.splitLayout.setSizeFull();
+        SplitLayout splitLayout = new SplitLayout();
+        splitLayout.setSizeFull();
 
         this.addressGrid.setColumns("country", "city", "street", "civic", "code");
         this.addressGrid.setItems(this.addressRetrieverService.readAll());
@@ -177,7 +175,7 @@ public class AddressView
 
         this.createGridLayout(splitLayout);
         this.createEditorLayout(splitLayout);
-        this.add(this.splitLayout);
+        this.add(splitLayout);
     }
 
     private void createEditorLayout(
