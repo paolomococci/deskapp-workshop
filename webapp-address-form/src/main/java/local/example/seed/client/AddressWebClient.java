@@ -33,7 +33,7 @@ import java.sql.Timestamp;
 public class AddressWebClient {
 
     @Autowired
-    private WebClient webClient = WebClient.create();
+    private final WebClient webClient = WebClient.create();
 
     private final static URI ADDRESSES_RESTFUL_URI = URI.create("http://localhost:8080/addresses");
 
@@ -66,7 +66,7 @@ public class AddressWebClient {
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
@@ -98,7 +98,7 @@ public class AddressWebClient {
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
@@ -151,7 +151,7 @@ public class AddressWebClient {
                 .uri(uri)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
