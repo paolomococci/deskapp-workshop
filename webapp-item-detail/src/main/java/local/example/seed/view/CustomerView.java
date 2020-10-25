@@ -39,7 +39,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
-import local.example.seed.model.Link;
+import local.example.seed.model.util.Link;
 import local.example.seed.service.CustomerRetrieverService;
 
 import java.util.Optional;
