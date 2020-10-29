@@ -18,7 +18,7 @@ html(lang:'en') {
             }
         }
         hr()
-        div(class: 'container'){
+        div(class: 'container', style: 'margin-top: 30px;'){
             form(action: '', method: 'post'){
                 div(class: 'row d-flex align-content-center flex-wrap'){
                     div(class: 'col'){
