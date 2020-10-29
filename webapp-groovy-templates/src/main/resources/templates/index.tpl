@@ -20,7 +20,7 @@ html(lang:'en') {
         }
         hr()
         div(class: 'container', style: 'margin-top: 100px;'){
-            h1('web application admin')
+            h1('web application for data administration')
             p('this web application implement a CRUD access to data stored into an NoSQL database')
         }
     }
