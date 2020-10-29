@@ -8,7 +8,8 @@ html(lang:'en') {
     body {
         nav(class: 'navbar navbar-expand-md navbar-dark bg-dark'){
             a(href: "#", class: "navbar-brand", "customer-update")
-            ui(class: 'navbar-nav mr-auto'){
+            input(class: 'form-control form-control-dark w-100', type: 'text', placeholder: 'search')
+            ui(class: 'navbar-nav mr-auto', style: 'margin-left: 10px;'){
                 li(class: 'nav-item active') {
                     a(href: "/index", class: "navbar-brand", "index")
                 }
@@ -18,7 +19,7 @@ html(lang:'en') {
             }
         }
         hr()
-        div(class: 'container', style: 'margin-top: 30px;'){
+        div(class: 'container', style: 'margin-top: 100px;'){
             form(action: '', method: 'post'){
                 div(class: 'row d-flex align-content-center flex-wrap'){
                     div(class: 'col'){
