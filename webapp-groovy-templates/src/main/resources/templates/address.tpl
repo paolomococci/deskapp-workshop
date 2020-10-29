@@ -41,7 +41,7 @@ html(lang:'en') {
                     }
                 }
             }
-            table(class: 'table', style: 'margin-top: 20px;'){
+            table(class: 'table', style: 'margin-top: 30px;'){
                 thead(){
                     tr(){
                         th('country')
