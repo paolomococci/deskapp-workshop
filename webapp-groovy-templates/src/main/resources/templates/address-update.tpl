@@ -8,36 +8,27 @@ html(lang:'en') {
     body {
         nav(class: 'navbar navbar-expand-md navbar-dark bg-dark'){
             a(href: "#", class: "navbar-brand", "address-update")
-            input(class: 'form-control form-control-dark w-100', type: 'text', placeholder: 'search')
-            ui(class: 'navbar-nav mr-auto', style: 'margin-left: 10px;'){
-                li(class: 'nav-item active') {
-                    a(href: "/index", class: "navbar-brand", "index")
-                }
-                li(class: 'nav-item') {
-                    a(href: "/address", class: "navbar-brand", "address")
-                }
-            }
         }
         hr()
         div(class: 'container', style: 'margin-top: 100px;'){
-            form(action: '', method: 'post'){
+            form(action: '/address-update', method: 'post'){
                 div(class: 'row d-flex align-content-center flex-wrap'){
                     div(class: 'col'){
-                        input(type: 'text', class: 'form-control', placeholder: 'country', value: "", name: 'country')
+                        input(type: 'text', class: 'form-control', placeholder: 'country', value: "$address.country", name: 'country')
                     }
                     div(class: 'col'){
-                        input(type: 'text', class: 'form-control', placeholder: 'city', value: "", name: 'city')
+                        input(type: 'text', class: 'form-control', placeholder: 'city', value: "$address.city", name: 'city')
                     }
                     div(class: 'col'){
-                        input(type: 'text', class: 'form-control', placeholder: 'street', value: "", name: 'street')
+                        input(type: 'text', class: 'form-control', placeholder: 'street', value: "$address.street", name: 'street')
                     }
                     div(class: 'col'){
-                        input(type: 'text', class: 'form-control', placeholder: 'civic', value: "", name: 'civic')
+                        input(type: 'text', class: 'form-control', placeholder: 'civic', value: "$address.civic", name: 'civic')
                     }
                     div(class: 'col'){
-                        input(type: 'text', class: 'form-control', placeholder: 'code', value: "", name: 'code')
+                        input(type: 'text', class: 'form-control', placeholder: 'code', value: "$address.code", name: 'code')
                     }
-                    input(type: 'hidden',  value: "", name: 'uri')
+                    input(type: 'hidden',  value: "$address.id", name: 'id')
                     div(class: 'col'){
                         input(type: 'submit', class: 'btn btn-primary', value: 'update')
                     }
