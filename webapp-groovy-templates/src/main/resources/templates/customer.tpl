@@ -20,7 +20,7 @@ html(lang:'en') {
         }
         hr()
         div(class: 'container', style: 'margin-top: 100px;'){
-            form(action: '', method: 'post'){
+            form(action: '/customer-create', method: 'post'){
                 div(class: 'row'){
                     div(class: 'col'){
                         input(type: 'text', class: 'form-control', placeholder: 'name', name: 'name')
@@ -46,17 +46,17 @@ html(lang:'en') {
                     }
                 }
                 tbody(){
-                    //customer.each { customer ->
+                    customers.each { customer ->
                         tr(){
-                            td("some")
-                            td("some")
-                            td("someone")
-                            td("crud"){
-                                a(href: "/customer-update", class: "btn btn-info btn-sm", style: 'margin-right: 5px;', "update")
-                                //a(href: "/delete/$customer.uri", class: "btn btn-danger btn-sm", "delete")
+                            td($customer.name)
+                            td($customer.surname)
+                            td($customer.email)
+                            td(){
+                                a(href: "/customer-update/$customer.id", class: "btn btn-info btn-sm", style: 'margin-right: 5px;', "update")
+                                a(href: "/customer-delete/$customer.id", class: "btn btn-danger btn-sm", "delete")
                             }
                         }
-                    //}
+                    }
                 }
             }
         }
