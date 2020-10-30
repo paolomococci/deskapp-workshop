@@ -8,30 +8,21 @@ html(lang:'en') {
     body {
         nav(class: 'navbar navbar-expand-md navbar-dark bg-dark'){
             a(href: "#", class: "navbar-brand", "customer-update")
-            input(class: 'form-control form-control-dark w-100', type: 'text', placeholder: 'search')
-            ui(class: 'navbar-nav mr-auto', style: 'margin-left: 10px;'){
-                li(class: 'nav-item active') {
-                    a(href: "/index", class: "navbar-brand", "index")
-                }
-                li(class: 'nav-item') {
-                    a(href: "/customer", class: "navbar-brand", "customer")
-                }
-            }
         }
         hr()
         div(class: 'container', style: 'margin-top: 100px;'){
-            form(action: '', method: 'post'){
+            form(action: '/customer-update', method: 'post'){
                 div(class: 'row d-flex align-content-center flex-wrap'){
                     div(class: 'col'){
-                        input(type: 'text', class: 'form-control', placeholder: 'name', value: "", name: 'name')
+                        input(type: 'text', class: 'form-control', placeholder: 'name', value: "$customer.name", name: 'name')
                     }
                     div(class: 'col'){
-                        input(type: 'text', class: 'form-control', placeholder: 'surname', value: "", name: 'surname')
+                        input(type: 'text', class: 'form-control', placeholder: 'surname', value: "$customer.surname", name: 'surname')
                     }
                     div(class: 'col'){
-                        input(type: 'text', class: 'form-control', placeholder: 'email', value: "", name: 'email')
+                        input(type: 'text', class: 'form-control', placeholder: 'email', value: "$customer.email", name: 'email')
                     }
-                    input(type: 'hidden',  value: "", name: 'uri')
+                    input(type: 'hidden',  value: "$customer.id", name: 'id')
                     div(class: 'col'){
                         input(type: 'submit', class: 'btn btn-primary', value: 'update')
                     }
