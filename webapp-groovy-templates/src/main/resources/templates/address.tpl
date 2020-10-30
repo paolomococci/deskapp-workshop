@@ -20,7 +20,7 @@ html(lang:'en') {
         }
         hr()
         div(class: 'container', style: 'margin-top: 100px;'){
-            form(action: '', method: 'post'){
+            form(action: '/address-create', method: 'post'){
                 div(class: 'row d-flex align-content-center flex-wrap'){
                     div(class: 'col'){
                         input(type: 'text', class: 'form-control', placeholder: 'country', name: 'country')
@@ -54,19 +54,19 @@ html(lang:'en') {
                     }
                 }
                 tbody(){
-                    //address.each { address ->
+                    addresses.each { address ->
                         tr(){
-                            td("some")
-                            td("some")
-                            td("some")
-                            td("some")
-                            td("some")
-                            td("crud"){
-                                a(href: "/address-update", class: "btn btn-info btn-sm", style: 'margin-right: 5px;', "update")
-                                //a(href: "/delete/$address.uri", class: "btn btn-danger btn-sm", "delete")
+                            td($address.country)
+                            td($address.city)
+                            td($address.street)
+                            td($address.civic)
+                            td($address.code)
+                            td(){
+                                a(href: "/address-update/$address.id", class: "btn btn-info btn-sm", style: 'margin-right: 5px;', "update")
+                                a(href: "/address-delete/$address.id", class: "btn btn-danger btn-sm", "delete")
                             }
                         }
-                    //}
+                    }
                 }
             }
         }
