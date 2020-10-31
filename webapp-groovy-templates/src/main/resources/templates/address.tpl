@@ -50,7 +50,7 @@ html(lang:'en') {
                         th('street')
                         th('civic')
                         th('code')
-                        th('actions')
+                        th('')
                     }
                 }
                 tbody(){
