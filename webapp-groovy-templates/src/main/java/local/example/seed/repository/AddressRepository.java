@@ -21,11 +21,9 @@ package local.example.seed.repository;
 import local.example.seed.document.Address;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface AddressRepository
         extends MongoRepository<Address, String> {
 
