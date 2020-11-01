@@ -19,5 +19,10 @@
 package local.example.seed.dom.element
 
 class TitleElement : DomElement() {
+    
     private var title:String? = null
+    
+    override fun wrap(domElement: Collection<DomElement>) {
+        TODO("Not yet implemented")
+    }
 }
