@@ -19,6 +19,11 @@
 package local.example.seed.dom.element
 
 class HeadElement : DomElement() {
+    
     private lateinit var meta:ArrayList<MetaElement>
     private lateinit var link:ArrayList<LinkElement>
+    
+    override fun wrap(domElement: Collection<DomElement>) {
+        TODO("Not yet implemented")
+    }
 }
