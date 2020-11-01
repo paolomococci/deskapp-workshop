@@ -19,7 +19,12 @@
 package local.example.seed.dom.element
 
 class MetaElement : DomElement() {
+    
     private var name:String? = null
     private var content:String? = null
     private val httpEquiv:String? = null
+    
+    override fun wrap(domElement: Collection<DomElement>) {
+        TODO("Not yet implemented")
+    }
 }
