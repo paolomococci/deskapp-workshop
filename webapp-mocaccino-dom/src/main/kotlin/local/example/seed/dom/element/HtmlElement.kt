@@ -19,8 +19,13 @@
 package local.example.seed.dom.element
 
 class HtmlElement : DomElement() {
+    
     private var doctype: String = "<!doctype html>"
     private var lang: String = "en"
     private var headElement: HeadElement? = null
     private var bodyElement: BodyElement? = null
+    
+    override fun wrap(domElement: Collection<DomElement>) {
+        TODO("Not yet implemented")
+    }
 }
