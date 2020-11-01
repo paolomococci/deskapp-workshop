@@ -19,8 +19,13 @@
 package local.example.seed.dom.element
 
 class LinkElement : DomElement() {
+    
     private var rel:String? = null
     private var href:String? = null
     private var type: String? = null
     private var media:String? = null
+    
+    override fun wrap(domElement: Collection<DomElement>) {
+        TODO("Not yet implemented")
+    }
 }
