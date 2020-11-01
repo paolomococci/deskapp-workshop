@@ -30,7 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -47,7 +47,7 @@ public class CustomerController {
 
     @GetMapping("/customer")
     public ModelAndView customers() {
-        LinkedHashMap<String, List<Customer>> linkedHashMap;
+        Map<String, Iterable<Customer>> linkedHashMap;
         linkedHashMap = new LinkedHashMap<>();
         linkedHashMap.put("customers", this.customerRepository.findAll());
         return new ModelAndView("customer", linkedHashMap);
@@ -78,9 +78,9 @@ public class CustomerController {
 
     @GetMapping("/customer-update/{id}")
     public ModelAndView updateCustomerById(@PathVariable("id") String id) {
-        LinkedHashMap<String, Optional<Customer>> linkedHashMap;
-        linkedHashMap = new LinkedHashMap<>();
-        linkedHashMap.put("customer", this.customerRepository.findById(id));
+        Map<String, Customer> linkedHashMap;
+        linkedHashMap = new LinkedHashMap<>(1);
+        linkedHashMap.put("updated", this.customerRepository.findById(id).get());
         return new ModelAndView("customer-update", linkedHashMap);
     }
 
