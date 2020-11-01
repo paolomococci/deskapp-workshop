@@ -19,4 +19,8 @@
 package local.example.seed.dom.element
 
 class BodyElement : DomElement() {
+    
+    override fun wrap(domElement: Collection<DomElement>) {
+        TODO("Not yet implemented")
+    }
 }
