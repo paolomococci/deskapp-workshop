@@ -29,8 +29,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -47,10 +47,10 @@ public class AddressController {
 
     @GetMapping("/address")
     public ModelAndView readAll() {
-        HashMap<String, List<Address>> hashMap;
-        hashMap = new HashMap<>();
-        hashMap.put("addresses", this.addressRepository.findAll());
-        return new ModelAndView("address", hashMap);
+        Map<String, Iterable<Address>> linkedHashMap;
+        linkedHashMap = new LinkedHashMap<>(1);
+        linkedHashMap.put("addresses", this.addressRepository.findAll());
+        return new ModelAndView("address", linkedHashMap);
     }
 
     @PostMapping("/address-update")
@@ -80,10 +80,10 @@ public class AddressController {
 
     @GetMapping("/address-update/{id}")
     public ModelAndView updateAddressById(@PathVariable("id") String id) {
-        HashMap<String, Optional<Address>> hashMap;
-        hashMap = new HashMap<>();
-        hashMap.put("address", this.addressRepository.findById(id));
-        return new ModelAndView("address-update", hashMap);
+        Map<String, Address> linkedHashMap;
+        linkedHashMap = new LinkedHashMap<>(1);
+        linkedHashMap.put("updated", this.addressRepository.findById(id).get());
+        return new ModelAndView("address-update", linkedHashMap);
     }
 
     @GetMapping("/address-delete/{id}")
