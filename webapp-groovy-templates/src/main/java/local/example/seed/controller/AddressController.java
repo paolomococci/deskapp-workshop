@@ -46,7 +46,7 @@ public class AddressController {
     }
 
     @GetMapping("/address")
-    public ModelAndView readAll() {
+    public ModelAndView readAllAddress() {
         Map<String, Iterable<Address>> linkedHashMap;
         linkedHashMap = new LinkedHashMap<>(1);
         linkedHashMap.put("addresses", this.addressRepository.findAll());
@@ -55,9 +55,8 @@ public class AddressController {
 
     @PostMapping("/address-update")
     public String updateAddress(@ModelAttribute("address") Address address) {
-        Optional<Address> optionalAddress;
         try {
-            optionalAddress = this.addressRepository.findById(address.getId()).map(
+            this.addressRepository.findById(address.getId()).ifPresent(
                     updatable -> {
                         updatable.setCountry(address.getCountry());
                         updatable.setCity(address.getCity());
@@ -65,11 +64,10 @@ public class AddressController {
                         updatable.setCivic(address.getCivic());
                         updatable.setCode(address.getCode());
                         this.addressRepository.save(updatable);
-                        return updatable;
                     }
             );
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println(timestamp + " --- INFO --- Address data has been correctly updated: " + optionalAddress.toString());
+            System.out.println(timestamp + " --- INFO --- Data has been correctly updated, address id: " + address.getId());
         } catch (NullPointerException nullPointerException) {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println(timestamp + "ERROR --- An error occurred while trying to update the address data by ID: " + address.getId());
@@ -82,7 +80,9 @@ public class AddressController {
     public ModelAndView updateAddressById(@PathVariable("id") String id) {
         Map<String, Address> linkedHashMap;
         linkedHashMap = new LinkedHashMap<>(1);
-        linkedHashMap.put("updated", this.addressRepository.findById(id).get());
+        Optional<Address> optionalAddress;
+        optionalAddress = this.addressRepository.findById(id);
+        linkedHashMap.put("updated", optionalAddress.get());
         return new ModelAndView("address-update", linkedHashMap);
     }
 
