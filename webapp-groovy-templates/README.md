@@ -20,7 +20,7 @@ This demo directly accesses the data stored in the NoSQL database, instead of us
 
 ### update a customer:
 
-![update a customer]()
+![update a customer](https://github.com/paolomococci/webapp-workshop/blob/master/webapp-groovy-templates/screenshot/webapp-groovy-templates_update_a_customer.png)
 
 ### customer updated:
 
