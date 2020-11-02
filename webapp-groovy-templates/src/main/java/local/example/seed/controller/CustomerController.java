@@ -46,28 +46,26 @@ public class CustomerController {
     }
 
     @GetMapping("/customer")
-    public ModelAndView customers() {
+    public ModelAndView readAllCustomers() {
         Map<String, Iterable<Customer>> linkedHashMap;
-        linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap = new LinkedHashMap<>(1);
         linkedHashMap.put("customers", this.customerRepository.findAll());
         return new ModelAndView("customer", linkedHashMap);
     }
 
     @PostMapping("/customer-update")
     public String updateCustomer(@ModelAttribute("customer") Customer customer) {
-        Optional<Customer> optionalCustomer;
         try {
-            optionalCustomer = this.customerRepository.findById(customer.getId()).map(
+            this.customerRepository.findById(customer.getId()).ifPresent(
                     updatable -> {
                         updatable.setName(customer.getName());
                         updatable.setSurname(customer.getSurname());
                         updatable.setEmail(customer.getEmail());
                         this.customerRepository.save(updatable);
-                        return updatable;
                     }
             );
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println(timestamp + " --- INFO --- Customer data has been correctly updated: " + optionalCustomer.toString());
+            System.out.println(timestamp + " --- INFO --- Data has been correctly updated, customer id: " + customer.getId());
         } catch (NullPointerException nullPointerException) {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println(timestamp + " --- ERROR --- An error occurred while trying to update the customer data by ID: " + customer.getId());
@@ -80,7 +78,9 @@ public class CustomerController {
     public ModelAndView updateCustomerById(@PathVariable("id") String id) {
         Map<String, Customer> linkedHashMap;
         linkedHashMap = new LinkedHashMap<>(1);
-        linkedHashMap.put("updated", this.customerRepository.findById(id).get());
+        Optional<Customer> optionalCustomer;
+        optionalCustomer = this.customerRepository.findById(id);
+        linkedHashMap.put("updated", optionalCustomer.get());
         return new ModelAndView("customer-update", linkedHashMap);
     }
 
