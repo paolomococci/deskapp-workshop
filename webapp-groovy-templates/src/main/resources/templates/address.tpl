@@ -56,11 +56,11 @@ html(lang:'en') {
                 tbody(){
                     addresses.each { address ->
                         tr(){
-                            td($address.country)
-                            td($address.city)
-                            td($address.street)
-                            td($address.civic)
-                            td($address.code)
+                            td("$address.country")
+                            td("$address.city")
+                            td("$address.street")
+                            td("$address.civic")
+                            td("$address.code")
                             td(){
                                 a(href: "/address-update/$address.id", class: "btn btn-info btn-sm", style: 'margin-right: 5px;', "update")
                                 a(href: "/address-delete/$address.id", class: "btn btn-danger btn-sm", "delete")
