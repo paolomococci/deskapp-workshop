@@ -48,9 +48,9 @@ html(lang:'en') {
                 tbody(){
                     customers.each { customer ->
                         tr(){
-                            td($customer.name)
-                            td($customer.surname)
-                            td($customer.email)
+                            td("$customer.name")
+                            td("$customer.surname")
+                            td("$customer.email")
                             td(){
                                 a(href: "/customer-update/$customer.id", class: "btn btn-info btn-sm", style: 'margin-right: 5px;', "update")
                                 a(href: "/customer-delete/$customer.id", class: "btn btn-danger btn-sm", "delete")
