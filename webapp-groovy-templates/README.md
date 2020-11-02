@@ -7,3 +7,9 @@ This demo directly accesses the data stored in the NoSQL database, instead of us
 ```
 	implementation 'org.codehaus.groovy:groovy:3.0.6'
 ```
+
+## Screenshots
+
+### read a list of all customers:
+
+![read a list of all customers]()
