@@ -12,4 +12,4 @@ This demo directly accesses the data stored in the NoSQL database, instead of us
 
 ### read a list of all customers:
 
-![read a list of all customers]()
+![read a list of all customers](https://github.com/paolomococci/webapp-workshop/blob/master/webapp-groovy-templates/webapp-groovy-templates_customer_read_all.png)
