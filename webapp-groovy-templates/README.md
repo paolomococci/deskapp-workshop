@@ -24,4 +24,4 @@ This demo directly accesses the data stored in the NoSQL database, instead of us
 
 ### updated customer data:
 
-![updated customer data]()
+![updated customer data](https://github.com/paolomococci/webapp-workshop/blob/master/webapp-groovy-templates/screenshot/webapp-groovy-templates_customer_data_updated.png)
