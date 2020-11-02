@@ -12,7 +12,7 @@ This demo directly accesses the data stored in the NoSQL database, instead of us
 
 ### index page:
 
-![index page]()
+![index page](https://github.com/paolomococci/webapp-workshop/blob/master/webapp-groovy-templates/screenshot/webapp-groovy-templates_index.png)
 
 ### read a list of all customers:
 
