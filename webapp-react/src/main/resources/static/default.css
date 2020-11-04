@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+#react {
+    padding: 0.5em;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid #555;
+    padding: 0.3em;
+    text-align: left;
+}
