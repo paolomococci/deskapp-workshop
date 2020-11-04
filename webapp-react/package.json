@@ -4,7 +4,8 @@
   "description": "sample of react web application",
   "author": "Paolo Mococci",
   "license": "Apache-2.0",
-  "homepage": "",
+  "homepage": "https://github.com/paolomococci/webapp-workshop/tree/master/webapp-react/",
+  "keywords": ["crud", "restful"],
   "dependencies": {
   },
   "scripts": {
