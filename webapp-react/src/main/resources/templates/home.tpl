@@ -7,6 +7,6 @@ html(lang:'en') {
     }
     body {
         div(id: "react"){}
-        script(src: "js/brochure.js", type: "text/javascript"){}
+        script(src: "js/app.js", type: "text/javascript"){}
     }
 }
