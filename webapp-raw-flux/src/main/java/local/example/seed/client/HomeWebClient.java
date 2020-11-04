@@ -1,4 +1,4 @@
-  /**
+/**
  *
  * Copyright 2020 paolo mococci
  *
@@ -18,5 +18,23 @@
 
 package local.example.seed.client;
 
+import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.client.ClientResponse;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+
 public class HomeWebClient {
+
+    private WebClient webClient = WebClient.create("http://127.0.0.1:8000");
+
+    private Mono<ClientResponse> clientResponseMono = webClient.get()
+            .uri("/")
+            .accept(MediaType.TEXT_HTML)
+            .exchange();
+
+    public String getClientResponseMono() {
+        return clientResponseMono.flatMap(
+                clientResponse -> clientResponse.bodyToMono(String.class)
+        ).block();
+    }
 }
