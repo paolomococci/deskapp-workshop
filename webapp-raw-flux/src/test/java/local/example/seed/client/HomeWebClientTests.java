@@ -19,12 +19,24 @@
 package local.example.seed.client;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class HomeWebClientTests {
 
+    @Autowired
+    private WebTestClient webTestClient;
+
     @Test
-    void sampleTest() {
+    void homePageTest() {
+        this.webTestClient.get()
+                .uri("/")
+                .accept(MediaType.TEXT_HTML)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(String.class).isEqualTo("<h1>sample home page</h1>");
     }
 }
