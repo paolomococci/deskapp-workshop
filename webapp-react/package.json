@@ -1,0 +1,14 @@
+{
+  "name": "webapp-react",
+  "version": "0.0.1",
+  "description": "sample of react web application",
+  "author": "Paolo Mococci",
+  "license": "Apache-2.0",
+  "homepage": "",
+  "dependencies": {
+  },
+  "scripts": {
+  },
+  "devDependencies": {
+  }
+}
