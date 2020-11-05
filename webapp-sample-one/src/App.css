@@ -1,0 +1,19 @@
+.app {
+  text-align: center;
+}
+
+.app-title {
+  font-size: 30px;
+  color: #205;
+}
+
+.app-header {
+  background-color: #add;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #ffc;
+}
