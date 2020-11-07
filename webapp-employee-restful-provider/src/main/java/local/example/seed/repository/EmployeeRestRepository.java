@@ -31,5 +31,6 @@ public interface EmployeeRestRepository
 
     List<Employee> findByName(@Param("name") String name);
     List<Employee> findBySurname(@Param("surname") String surname);
+    List<Employee> findByProfession(@Param("profession") String profession);
     Employee findByEmail(@Param("email") String email);
 }
