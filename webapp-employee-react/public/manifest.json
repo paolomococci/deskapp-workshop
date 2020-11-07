@@ -1,0 +1,8 @@
+{
+  "short_name": "employee",
+  "name": "webapp-employee-react",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000",
+  "background_color": "#fff"
+}
