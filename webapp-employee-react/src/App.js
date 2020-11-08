@@ -1,11 +1,11 @@
 import './App.css';
+import HeaderEmployeeComponent from './component/HeaderEmployeeComponent';
 
 const App = () => {
+  
   return (
     <div className="App">
-      <header className="App-header">
-          <h1>employee</h1>
-      </header>
+      <HeaderEmployeeComponent/>
     </div>
   );
 }
