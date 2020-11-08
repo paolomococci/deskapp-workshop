@@ -12,15 +12,13 @@ export default class FooterEmployeeComponent extends Component {
 
     render() {
         return (
-            <div>
-                <footer>
-                    <nav>
-                        <div>
-                            <p>employee data management</p>
-                        </div>
-                    </nav>
-                </footer>
-            </div>
+            <footer>
+                <nav>
+                    <div>
+                        <p>employee data management</p>
+                    </div>
+                </nav>
+            </footer>
         )
     }
 }
