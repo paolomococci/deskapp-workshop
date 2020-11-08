@@ -1,7 +1,14 @@
 # webapp-employee-react
 
-## From within the project directory:
-I installed Bootstrap with the following command:
+After creating the project with the command:
+```
+npx create-react-app webapp-employee-react
+```
+I changed the directory with:
+```
+cd webapp-employee-react
+```
+And from within the project directory, I installed Bootstrap with the following command:
 ```
 npm i bootstrap
 ```
