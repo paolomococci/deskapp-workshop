@@ -10,13 +10,11 @@ export default class HeaderEmployeeComponent extends Component {
 
     render() {
         return (
-            <div>
-                <header>
-                    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-                        <h2 class="navbar-brand">employee data management</h2>
-                    </nav>
-                </header>
-            </div>
+            <header>
+                <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+                    <h2 className="navbar-brand">employee data management</h2>
+                </nav>
+            </header>
         )
     }
 }
