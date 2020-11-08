@@ -14,11 +14,10 @@ export default class MainEmployeeComponent extends Component {
         return (
             <div>
                 <main>
-                    <nav>
-                        <div>
-                            <p>TODO</p>
-                        </div>
-                    </nav>
+                    <div>
+                        <h1>employee</h1>
+                        <p>TODO</p>
+                    </div>
                 </main>
             </div>
         )
