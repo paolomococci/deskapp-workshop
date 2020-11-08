@@ -1,6 +1,7 @@
 {
   "name": "webapp-employee-react",
   "version": "0.0.1",
+  "private": true,
   "description": "sample of react web application",
   "author": "Paolo Mococci",
   "license": "Apache-2.0",
