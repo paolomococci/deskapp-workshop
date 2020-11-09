@@ -24,3 +24,7 @@ and:
 ```
 yarn add axios
 ```
+Finally I add react-feather:
+```
+npm i react-feather
+```
