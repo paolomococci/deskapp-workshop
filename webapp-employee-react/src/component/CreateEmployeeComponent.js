@@ -24,8 +24,21 @@ export default class CreateEmployeeComponent extends Component {
         super(props);
 
         this.state = {
-            
+            id: this.props.match.params.id,
+            name: '', 
+            surname: '',
+            email: '',
+            profession: ''
         };
+        this.changeNameHandler = this.changeNameHandler.bind(this);
+        this.changeSurnameHandler = this.changeSurnameHandler.bind(this);
+        this.changeEmailHandler = this.changeEmailHandler.bind(this);
+        this.changeProfessionHandler = this.changeProfessionHandler.bind(this);
+        this.saveEmployee = this.saveEmployee.bind(this);
+    }
+
+    componentDidMount() {
+        // TODO
     }
 
     render() {
