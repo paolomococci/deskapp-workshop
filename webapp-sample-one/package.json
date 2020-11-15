@@ -2,7 +2,7 @@
   "name": "webapp-sample-one",
   "version": "0.0.1",
   "private": true,
-  "description": "sample of react web application",
+  "description": "example of react web application",
   "author": "Paolo Mococci",
   "license": "Apache-2.0",
   "homepage": "https://github.com/paolomococci/webapp-workshop/tree/master/webapp-sample-one",
