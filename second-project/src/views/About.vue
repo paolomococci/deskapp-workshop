@@ -9,12 +9,12 @@
 </style>
 
 <script>
-import WelcomeComponent from '@/components/WelcomeComponent';
+import WelcomeComponent from '@/components/WelcomeComponent'
 
 export default {
   name: 'Home',
   components: {
-    'welcome': WelcomeComponent
+    welcome: WelcomeComponent
   }
 }
 </script>
