@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: AlertExampleComponent,
+  name: AvatarExampleComponent,
   data: () => ({
     // TODO
   }),
