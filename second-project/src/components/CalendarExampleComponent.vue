@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: CalendarExampleComponent,
+  name: 'CalendarExampleComponent',
   data: () => ({
     // TODO
   }),
