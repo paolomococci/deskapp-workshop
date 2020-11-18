@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: BreadcrumbExampleComponent,
+  name: 'BreadcrumbExampleComponent',
   data: () => ({
     // TODO
   }),
