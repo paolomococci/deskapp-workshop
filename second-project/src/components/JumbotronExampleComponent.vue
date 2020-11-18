@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: JumbotronExampleComponent,
+  name: 'JumbotronExampleComponent',
   data: () => ({
     // TODO
   }),
