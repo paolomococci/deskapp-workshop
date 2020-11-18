@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: TooltipExampleComponent,
+  name: 'TooltipExampleComponent',
   data: () => ({
     // TODO
   }),
