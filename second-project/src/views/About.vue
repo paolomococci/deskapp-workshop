@@ -12,7 +12,7 @@
 import WelcomeComponent from '@/components/WelcomeComponent'
 
 export default {
-  name: 'Home',
+  name: 'About',
   components: {
     welcome: WelcomeComponent
   }
