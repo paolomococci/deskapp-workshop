@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: PaginationExampleComponent,
+  name: 'PaginationExampleComponent',
   data: () => ({
     // TODO
   }),
