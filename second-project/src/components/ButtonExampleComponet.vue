@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: ButtonExampleComponent,
+  name: 'ButtonExampleComponent',
   data: () => ({
     // TODO
   }),
