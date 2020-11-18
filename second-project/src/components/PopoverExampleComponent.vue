@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: PopoverExampleComponent,
+  name: 'PopoverExampleComponent',
   data: () => ({
     // TODO
   }),
