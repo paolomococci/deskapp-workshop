@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: TabExampleComponent,
+  name: 'TabExampleComponent',
   data: () => ({
     // TODO
   }),
