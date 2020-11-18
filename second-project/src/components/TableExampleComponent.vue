@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: TableExampleComponent,
+  name: 'TableExampleComponent',
   data: () => ({
     // TODO
   }),
