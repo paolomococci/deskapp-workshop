@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: FormExampleComponent,
+  name: 'FormExampleComponent',
   data: () => ({
     // TODO
   }),
