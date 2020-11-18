@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: ToastExampleComponent,
+  name: 'ToastExampleComponent',
   data: () => ({
     // TODO
   }),
