@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: NavExampleComponent,
+  name: 'NavExampleComponent',
   data: () => ({
     // TODO
   }),
