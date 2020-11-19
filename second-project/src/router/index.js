@@ -66,9 +66,24 @@ const routes = [
     component: () => import('../views/Modal.vue')
   },
   {
+    path: '/nav',
+    name: 'Nav',
+    component: () => import('../views/Nav.vue')
+  },
+  {
     path: '/navbar',
     name: 'Navbar',
     component: () => import('../views/Navbar.vue')
+  },
+  {
+    path: '/pagination',
+    name: 'Pagination',
+    component: () => import('../views/Pagination.vue')
+  },
+  {
+    path: '/popover',
+    name: 'Popover',
+    component: () => import('../views/Popover.vue')
   },
   {
     path: '/preference',
