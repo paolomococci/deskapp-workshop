@@ -89,6 +89,41 @@ const routes = [
     path: '/preference',
     name: 'Preference',
     component: () => import('../views/Preference.vue')
+  },
+  {
+    path: '/sidebar',
+    name: 'Sidebar',
+    component: () => import('../views/Sidebar.vue')
+  },
+  {
+    path: '/skeleton',
+    name: 'Skeleton',
+    component: () => import('../views/Skeleton.vue')
+  },
+  {
+    path: '/tab',
+    name: 'Tab',
+    component: () => import('../views/Tab.vue')
+  },
+  {
+    path: '/table',
+    name: 'Table',
+    component: () => import('../views/Table.vue')
+  },
+  {
+    path: '/time',
+    name: 'Time',
+    component: () => import('../views/Time.vue')
+  },
+  {
+    path: '/toast',
+    name: 'Toast',
+    component: () => import('../views/Toast.vue')
+  },
+  {
+    path: '/tooltip',
+    name: 'Tooltip',
+    component: () => import('../views/Tooltip.vue')
   }
 ]
 
