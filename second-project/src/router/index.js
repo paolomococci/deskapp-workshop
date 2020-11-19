@@ -16,9 +16,19 @@ const routes = [
     component: () => import('../views/About.vue')
   },
   {
+    path: '/alert',
+    name: 'Alert',
+    component: () => import('../views/Alert.vue')
+  },
+  {
     path: '/navbar',
     name: 'Navbar',
     component: () => import('../views/Navbar.vue')
+  },
+  {
+    path: '/preference',
+    name: 'Preference',
+    component: () => import('../views/Preference.vue')
   }
 ]
 
