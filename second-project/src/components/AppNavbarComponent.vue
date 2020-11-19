@@ -26,8 +26,8 @@
           <b-dropdown-item to="form">form</b-dropdown-item>
           <b-dropdown-item to="/jumbotron">jumbotron</b-dropdown-item>
           <b-dropdown-item to="/modal">modal</b-dropdown-item>
-          <b-dropdown-item to="/navbar">navbar</b-dropdown-item>
           <b-dropdown-item to="/nav">nav</b-dropdown-item>
+          <b-dropdown-item to="/navbar">navbar</b-dropdown-item>
           <b-dropdown-item to="/pagination">pagination</b-dropdown-item>
           <b-dropdown-item to="/popover">popover</b-dropdown-item>
           <b-dropdown-item to="/preference">preference</b-dropdown-item>
