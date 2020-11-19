@@ -51,6 +51,21 @@ const routes = [
     component: () => import('../views/Card.vue')
   },
   {
+    path: '/form',
+    name: 'Form',
+    component: () => import('../views/Form.vue')
+  },
+  {
+    path: '/jumbotron',
+    name: 'Jumbotron',
+    component: () => import('../views/Jumbotron.vue')
+  },
+  {
+    path: '/modal',
+    name: 'Modal',
+    component: () => import('../views/Modal.vue')
+  },
+  {
     path: '/navbar',
     name: 'Navbar',
     component: () => import('../views/Navbar.vue')
