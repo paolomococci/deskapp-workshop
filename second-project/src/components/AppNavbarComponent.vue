@@ -17,27 +17,27 @@
             <em>examples</em>
           </template>
           <b-dropdown-item to="/alert">alert</b-dropdown-item>
-          <b-dropdown-item href="#">avatar</b-dropdown-item>
-          <b-dropdown-item href="#">badge</b-dropdown-item>
-          <b-dropdown-item href="#">breadcrumb</b-dropdown-item>
-          <b-dropdown-item href="#">button</b-dropdown-item>
-          <b-dropdown-item href="#">calendar</b-dropdown-item>
-          <b-dropdown-item href="#">card</b-dropdown-item>
-          <b-dropdown-item href="#">form</b-dropdown-item>
-          <b-dropdown-item href="#">jumbotron</b-dropdown-item>
-          <b-dropdown-item href="#">modal</b-dropdown-item>
+          <b-dropdown-item to="/avatar">avatar</b-dropdown-item>
+          <b-dropdown-item to="/badge">badge</b-dropdown-item>
+          <b-dropdown-item to="/breadcrumb">breadcrumb</b-dropdown-item>
+          <b-dropdown-item to="/button">button</b-dropdown-item>
+          <b-dropdown-item to="/calendar">calendar</b-dropdown-item>
+          <b-dropdown-item to="/card">card</b-dropdown-item>
+          <b-dropdown-item to="form">form</b-dropdown-item>
+          <b-dropdown-item to="/jumbotron">jumbotron</b-dropdown-item>
+          <b-dropdown-item to="/modal">modal</b-dropdown-item>
           <b-dropdown-item to="/navbar">navbar</b-dropdown-item>
-          <b-dropdown-item href="#">nav</b-dropdown-item>
-          <b-dropdown-item href="#">pagination</b-dropdown-item>
-          <b-dropdown-item href="#">popover</b-dropdown-item>
+          <b-dropdown-item to="/nav">nav</b-dropdown-item>
+          <b-dropdown-item to="/pagination">pagination</b-dropdown-item>
+          <b-dropdown-item to="/popover">popover</b-dropdown-item>
           <b-dropdown-item to="/preference">preference</b-dropdown-item>
-          <b-dropdown-item href="#">sidebar</b-dropdown-item>
-          <b-dropdown-item href="#">skeleton</b-dropdown-item>
-          <b-dropdown-item href="#">tab</b-dropdown-item>
-          <b-dropdown-item href="#">table</b-dropdown-item>
-          <b-dropdown-item href="#">time</b-dropdown-item>
-          <b-dropdown-item href="#">toast</b-dropdown-item>
-          <b-dropdown-item href="#">tootip</b-dropdown-item>
+          <b-dropdown-item to="/sidebar">sidebar</b-dropdown-item>
+          <b-dropdown-item to="/skeleton">skeleton</b-dropdown-item>
+          <b-dropdown-item to="/tab">tab</b-dropdown-item>
+          <b-dropdown-item to="/table">table</b-dropdown-item>
+          <b-dropdown-item to="/time">time</b-dropdown-item>
+          <b-dropdown-item to="/toast">toast</b-dropdown-item>
+          <b-dropdown-item to="/tooltip">tootip</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
