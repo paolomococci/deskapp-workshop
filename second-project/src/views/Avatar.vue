@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="avatar todo"/>
+    <welcome titleOfPage="example of avatar type buttons"/>
+    <avatar/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import AvatarExampleComponent from '@/components/AvatarExampleComponent'
 
 export default {
   name: 'Avatar',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    avatar: AvatarExampleComponent
   }
 }
 </script>
