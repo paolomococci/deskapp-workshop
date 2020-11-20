@@ -16,7 +16,7 @@
         </b-nav-form>
         <b-nav-item-dropdown right>
           <template #button-content>
-            <em>forms</em>
+            <em>surveys</em>
           </template>
           <b-dropdown-item to="/preference">preference</b-dropdown-item>
         </b-nav-item-dropdown>
