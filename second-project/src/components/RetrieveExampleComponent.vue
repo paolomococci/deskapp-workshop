@@ -18,13 +18,13 @@ export default {
   mounted () {
     // axios.get('http://127.0.0.1:8080/customers').then(response => (this.customers = response));
   },
-  destroyed () {
-    // TODO
-  },
   activated () {
     // TODO
   },
   deactivated () {
+    // TODO
+  },
+  destroyed () {
     // TODO
   },
   props: {
