@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="alert todo"/>
+    <welcome titleOfPage="alert example"/>
+    <alert/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import AlertExampleComponent from '@/components/AlertExampleComponent'
 
 export default {
   name: 'Alert',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    alert: AlertExampleComponent
   }
 }
 </script>
