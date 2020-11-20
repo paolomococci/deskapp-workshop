@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: ModalExampleComponent,
+  name: 'ModalExampleComponent',
   data: () => ({
     // TODO
   }),
