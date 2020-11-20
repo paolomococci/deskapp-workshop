@@ -124,6 +124,11 @@ const routes = [
     path: '/tooltip',
     name: 'Tooltip',
     component: () => import('../views/Tooltip.vue')
+  },
+  {
+    path: '/customer',
+    name: 'Customer',
+    component: () => import('../views/Customer.vue')
   }
 ]
 
