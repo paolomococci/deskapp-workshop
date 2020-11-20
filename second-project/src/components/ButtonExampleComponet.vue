@@ -12,13 +12,16 @@
 export default {
   name: 'ButtonExampleComponent',
   data: () => ({
-    // TODO
+    grain: false,
+    buttons: []
   }),
   methods: {
     // TODO
   },
   computed: {
-    // TODO
+    buttonStates () {
+      return this.buttons.map(button => button.state)
+    }
   }
 }
 </script>
