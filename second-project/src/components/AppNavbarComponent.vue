@@ -18,7 +18,7 @@
           <template #button-content>
             <em>applications</em>
           </template>
-          <b-dropdown-item href="#">customer</b-dropdown-item>
+          <b-dropdown-item to="/customer">customer</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown right>
           <template #button-content>
