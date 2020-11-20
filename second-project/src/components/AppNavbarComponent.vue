@@ -1,6 +1,8 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#">second project</b-navbar-brand>
+    <b-navbar-brand href="#">
+      <b-avatar size="4em" rounded>second<br>project</b-avatar>
+    </b-navbar-brand>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
@@ -12,6 +14,12 @@
           <b-form-input size="sm" class="mr-sm-2" placeholder="search"></b-form-input>
           <b-button size="sm" class="my-2 my-sm-0" type="submit">search</b-button>
         </b-nav-form>
+        <b-nav-item-dropdown right>
+          <template #button-content>
+            <em>forms</em>
+          </template>
+          <b-dropdown-item to="/preference">preference</b-dropdown-item>
+        </b-nav-item-dropdown>
         <b-nav-item-dropdown right>
           <template #button-content>
             <em>examples</em>
@@ -30,7 +38,6 @@
           <b-dropdown-item to="/navbar">navbar</b-dropdown-item>
           <b-dropdown-item to="/pagination">pagination</b-dropdown-item>
           <b-dropdown-item to="/popover">popover</b-dropdown-item>
-          <b-dropdown-item to="/preference">preference</b-dropdown-item>
           <b-dropdown-item to="/sidebar">sidebar</b-dropdown-item>
           <b-dropdown-item to="/skeleton">skeleton</b-dropdown-item>
           <b-dropdown-item to="/tab">tab</b-dropdown-item>
