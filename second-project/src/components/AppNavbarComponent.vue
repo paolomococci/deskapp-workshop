@@ -16,6 +16,12 @@
         </b-nav-form>
         <b-nav-item-dropdown right>
           <template #button-content>
+            <em>applications</em>
+          </template>
+          <b-dropdown-item href="#">customer</b-dropdown-item>
+        </b-nav-item-dropdown>
+        <b-nav-item-dropdown right>
+          <template #button-content>
             <em>surveys</em>
           </template>
           <b-dropdown-item to="/preference">preference</b-dropdown-item>
