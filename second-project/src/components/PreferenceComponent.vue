@@ -94,7 +94,9 @@ export default {
       this.personalDataForm.fruit = null
       this.personalDataForm.checked = []
       this.show = false
-      // TODO
+      this.$nextTick(() => {
+        this.show = true
+      })
     }
   },
   computed: {
