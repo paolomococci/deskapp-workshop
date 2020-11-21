@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="button todo"/>
+    <welcome titleOfPage="example of many buttons"/>
+    <exampleOfButton/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import ButtonExampleComponent from '@/components/ButtonExampleComponent'
 
 export default {
   name: 'Button',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    exampleOfButton: ButtonExampleComponent
   }
 }
 </script>
