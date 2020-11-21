@@ -11,6 +11,8 @@ import VueAxios from 'vue-axios'
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+Vue.use(axios)
+Vue.use(VueAxios)
 
 new Vue({
   router,
