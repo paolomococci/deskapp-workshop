@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="tab todo"/>
+    <welcome titleOfPage="example of vertical tabs"/>
+    <exampleOfTab/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import TabExampleComponent from '@/components/TabExampleComponent'
 
 export default {
   name: 'Tab',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    exampleOfTab: TabExampleComponent
   }
 }
 </script>
