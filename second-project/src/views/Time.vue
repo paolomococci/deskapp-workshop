@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="time todo"/>
+    <welcome titleOfPage="example of time picker"/>
+    <exampleOfTime/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import TimeExampleComponent from '@/components/TimeExampleComponent'
 
 export default {
   name: 'Time',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    exampleOfTime: TimeExampleComponent
   }
 }
 </script>
