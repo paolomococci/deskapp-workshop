@@ -1,7 +1,7 @@
 <template>
   <div>
     <welcome titleOfPage="example of avatar type buttons"/>
-    <avatar/>
+    <avatarExample/>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
   name: 'Avatar',
   components: {
     welcome: WelcomeComponent,
-    avatar: AvatarExampleComponent
+    avatarExample: AvatarExampleComponent
   }
 }
 </script>
