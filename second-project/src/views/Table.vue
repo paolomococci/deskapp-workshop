@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="table todo"/>
+    <welcome titleOfPage="example of table"/>
+    <exampleOfTable/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import TableExampleComponent from '@/components/TableExampleComponent'
 
 export default {
   name: 'Table',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    exampleOfTable: TableExampleComponent
   }
 }
 </script>
