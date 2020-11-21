@@ -1,6 +1,13 @@
 <template>
   <div>
-    <!-- TODO -->
+    <b-jumbotron>
+      <p>some text</p>
+      <b-link href="#">simplyLink</b-link>
+      <span> &#173; </span>
+      <b-button variant="primary" href="#">link button</b-button>
+      <span> &#173; </span>
+      <b-button variant="success" href="#">link button</b-button>
+    </b-jumbotron>
   </div>
 </template>
 
@@ -10,15 +17,6 @@
 
 <script>
 export default {
-  name: 'JumbotronExampleComponent',
-  data: () => ({
-    // TODO
-  }),
-  methods: {
-    // TODO
-  },
-  computed: {
-    // TODO
-  }
+  name: 'JumbotronExampleComponent'
 }
 </script>
