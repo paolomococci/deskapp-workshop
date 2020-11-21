@@ -1,7 +1,7 @@
 <template>
   <div>
     <welcome titleOfPage="alert example"/>
-    <alert/>
+    <alertExample/>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
   name: 'Alert',
   components: {
     welcome: WelcomeComponent,
-    alert: AlertExampleComponent
+    alertExample: AlertExampleComponent
   }
 }
 </script>
