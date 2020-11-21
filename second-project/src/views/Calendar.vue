@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="calendar todo"/>
+    <welcome titleOfPage="example of calendar picker"/>
+    <exampleOfCalendar/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import CalendarExampleComponent from '@/components/CalendarExampleComponent'
 
 export default {
   name: 'Calendar',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    exampleOfCalendar: CalendarExampleComponent
   }
 }
 </script>
