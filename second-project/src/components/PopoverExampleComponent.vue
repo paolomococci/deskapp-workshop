@@ -1,6 +1,8 @@
 <template>
   <div>
-    <!-- TODO -->
+    <b-button v-b-popover.hover.top="'example of directive popover content'" title="title of popover">
+    example
+  </b-button>
   </div>
 </template>
 
