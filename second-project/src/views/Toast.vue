@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="toast todo"/>
+    <welcome titleOfPage="examples of some toast components"/>
+    <exampleOfToast/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import ToastExampleComponent from '@/components/ToastExampleComponent'
 
 export default {
   name: 'Toast',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    exampleOfToast: ToastExampleComponent
   }
 }
 </script>
