@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="tooltip todo"/>
+    <welcome titleOfPage="examples of two tooltip type"/>
+    <exampleOfTooltip/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import TooltipExampleComponent from '@/components/TooltipExampleComponent'
 
 export default {
   name: 'Tooltip',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    exampleOfTooltip: TooltipExampleComponent
   }
 }
 </script>
