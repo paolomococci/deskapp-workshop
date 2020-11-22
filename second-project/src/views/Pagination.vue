@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="pagination todo"/>
+    <welcome titleOfPage="example of pagination"/>
+    <exampleOfPagination/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import PaginationExampleComponent from '@/components/PaginationExampleComponent'
 
 export default {
   name: 'Pagination',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    exampleOfPagination: PaginationExampleComponent
   }
 }
 </script>
