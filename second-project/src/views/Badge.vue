@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="badge todo"/>
+    <welcome titleOfPage="examples of some badge components"/>
+    <exampleOfBadge/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import BadgeExampleComponent from '@/components/BadgeExampleComponent'
 
 export default {
   name: 'Badge',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    exampleOfBadge: BadgeExampleComponent
   }
 }
 </script>
