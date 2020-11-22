@@ -1,6 +1,9 @@
 <template>
   <div>
-    <!-- TODO -->
+    <b-skeleton-table
+    :rows="6"
+    :columns="3"
+    :table-props="{ bordered: true, striped: true }"></b-skeleton-table>
   </div>
 </template>
 
