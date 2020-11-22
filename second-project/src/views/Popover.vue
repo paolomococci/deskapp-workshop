@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="popover todo"/>
+    <welcome titleOfPage="example of popover"/>
+    <exampleOfPopover/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import PopoverExampleComponent from '@/components/PopoverExampleComponent'
 
 export default {
   name: 'Popover',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    exampleOfPopover: PopoverExampleComponent
   }
 }
 </script>
