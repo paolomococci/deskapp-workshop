@@ -1,6 +1,6 @@
 <template>
   <div>
-    <welcome titleOfPage="examples of two tooltip type"/>
+    <welcome titleOfPage="examples of two types of tooltips"/>
     <exampleOfTooltip/>
   </div>
 </template>
