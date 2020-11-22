@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="breadcrumb todo"/>
+    <welcome titleOfPage="example of breadcrumb"/>
+    <exampleOfBreadcrumb/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import BreadcrumbExampleComponent from '@/components/BreadcrumbExampleComponent'
 
 export default {
   name: 'Breadcrumb',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    exampleOfBreadcrumb: BreadcrumbExampleComponent
   }
 }
 </script>
