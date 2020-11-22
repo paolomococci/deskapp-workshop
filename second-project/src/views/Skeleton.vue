@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="skeleton todo"/>
+    <welcome titleOfPage="example of skeleton"/>
+    <exampleOfSkeleton/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import SkeletonExampleComponent from '@/components/SkeletonExampleComponent'
 
 export default {
   name: 'Skeleton',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    exampleOfSkeleton: SkeletonExampleComponent
   }
 }
 </script>
