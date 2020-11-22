@@ -1,6 +1,7 @@
 <template>
   <div>
-    <welcome titleOfPage="sidebar todo"/>
+    <welcome titleOfPage="example of sidebar"/>
+    <exampleOfSidebar/>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 
 <script>
 import WelcomeComponent from '@/components/WelcomeComponent'
+import SidebarExampleComponent from '@/components/SidebarExampleComponent'
 
 export default {
   name: 'Sidebar',
   components: {
-    welcome: WelcomeComponent
+    welcome: WelcomeComponent,
+    exampleOfSidebar: SidebarExampleComponent
   }
 }
 </script>
