@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- TODO -->
+    <b-breadcrumb :items="items"></b-breadcrumb>
   </div>
 </template>
 
@@ -12,7 +12,20 @@
 export default {
   name: 'BreadcrumbExampleComponent',
   data: () => ({
-    // TODO
+    items: [
+      {
+        text: 'webapp',
+        href: '#'
+      },
+      {
+        text: 'src',
+        href: '#'
+      },
+      {
+        text: 'components',
+        active: true
+      }
+    ]
   }),
   methods: {
     // TODO
