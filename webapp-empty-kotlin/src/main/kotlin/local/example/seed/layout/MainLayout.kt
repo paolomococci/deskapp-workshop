@@ -31,15 +31,12 @@ import com.vaadin.flow.component.tabs.Tabs
 import com.vaadin.flow.component.tabs.TabsVariant
 import com.vaadin.flow.router.PageTitle
 import com.vaadin.flow.router.RouterLink
-import com.vaadin.flow.theme.Theme
-import com.vaadin.flow.theme.lumo.Lumo
 import local.example.seed.view.AboutView
 import local.example.seed.view.AlternativeView
 import local.example.seed.view.HelpView
 import local.example.seed.view.MainView
 import java.util.*
 
-@Theme(value = Lumo::class, variant = Lumo.DARK)
 class MainLayout : AppLayout() {
 
     private var menu: Tabs
