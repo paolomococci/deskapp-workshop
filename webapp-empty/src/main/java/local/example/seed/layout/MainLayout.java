@@ -32,8 +32,6 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.theme.Theme;
-import com.vaadin.flow.theme.lumo.Lumo;
 import local.example.seed.view.AboutView;
 import local.example.seed.view.HelpView;
 import local.example.seed.view.MainView;
@@ -41,7 +39,6 @@ import local.example.seed.view.MainView;
 import java.util.Optional;
 
 @CssImport("style.css")
-@Theme(value = Lumo.class, variant = Lumo.DARK)
 public class MainLayout
         extends AppLayout {
 
