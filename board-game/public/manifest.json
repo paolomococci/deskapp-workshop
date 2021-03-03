@@ -1,0 +1,9 @@
+{
+  "short_name": "Game Board",
+  "name": "Game Board demo React web application",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000",
+  "background_color": "#fff"
+}
