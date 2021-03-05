@@ -10,6 +10,10 @@ export default class Square extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  handleClick() {
+    this.setState((prevState, props) => {});
+  }
+
   render() {
     return (
       <button className="square">
