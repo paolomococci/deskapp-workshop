@@ -1,15 +1,11 @@
+import React from "react";
 import './App.css';
+import Game from './component/Game';
 
 export default class App extends React.Component {
   render() {
     return (
-      <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
-    </div>
+      <Game/>
     );
   }
 }
