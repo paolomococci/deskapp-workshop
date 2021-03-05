@@ -5,7 +5,11 @@ import Game from './component/Game';
 export default class App extends React.Component {
   render() {
     return (
-      <Game/>
+      <div className="App">
+        <header className="App-header">
+          <Game/>
+        </header>
+      </div>
     );
   }
 }
