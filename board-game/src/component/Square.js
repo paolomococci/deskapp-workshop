@@ -11,7 +11,9 @@ export default class Square extends React.Component {
   }
 
   handleClick() {
-    this.setState((prevState, props) => {});
+    this.setState((prevState, props) => {
+      return {text: "clicked"};
+    });
   }
 
   render() {
