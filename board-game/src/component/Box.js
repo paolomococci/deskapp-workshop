@@ -18,7 +18,7 @@ export default class Box extends React.Component {
 
   render() {
     return (
-      <button className="App-box" onClick={function(){alert('You clicked on a box.');}}>
+      <button className="App-box" onClick={() => alert('You clicked on a box.')}>
         {
           this.props.value
         }
