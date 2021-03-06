@@ -5,6 +5,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+ol, ul {
+  padding-left: 30px;
+}
+
 code {
   font-family: monospace;
 }
