@@ -2,6 +2,14 @@ import React from "react";
 import Box from './Box';
 
 export default class Board extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      boxes: Array(9).fill(null)
+    };
+  }
+
   renderBox(arg) {
     return <Box value={arg}/>;
   }
