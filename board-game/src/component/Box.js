@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class Square extends React.Component {
+export default class Box extends React.Component {
 
   constructor(props) {
     super(props);
@@ -18,7 +18,7 @@ export default class Square extends React.Component {
 
   render() {
     return (
-      <button className="App-square" onClick={function(){alert('You clicked on a box.');}}>
+      <button className="App-box" onClick={function(){alert('You clicked on a box.');}}>
         {
           this.props.value
         }
