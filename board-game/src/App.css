@@ -50,6 +50,12 @@
   background: #ddd;
 }
 
+.App-board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
 .App-game {
   display: flex;
   flex-direction: row;
