@@ -11,7 +11,7 @@ export default class Board extends React.Component {
   }
 
   renderBox(arg) {
-    return <Box value={arg}/>;
+    return <Box value={this.state.boxes[arg]}/>;
   }
   
   render() {
