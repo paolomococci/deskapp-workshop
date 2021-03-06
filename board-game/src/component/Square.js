@@ -18,7 +18,7 @@ export default class Square extends React.Component {
 
   render() {
     return (
-      <button className="square">
+      <button className="App-square">
         {
           this.props.value
         }
