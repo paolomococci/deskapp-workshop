@@ -51,6 +51,10 @@
   flex-direction: row;
 }
 
+.App-game-info {
+  margin-left: 20px;
+}
+
 .App-error {
   background: #c00;
   color: #fff;
