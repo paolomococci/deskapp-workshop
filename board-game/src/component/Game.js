@@ -4,11 +4,11 @@ import Board from './Board';
 export default class Game extends React.Component {
   render() {
     return (
-      <div className="game">
-        <div className="game-board">
+      <div className="App-game">
+        <div className="App-game-board">
           <Board/>
         </div>
-        <div className="game-info">
+        <div className="App-game-info">
           <div>{
               // TODO status
           }</div>
