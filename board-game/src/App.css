@@ -26,7 +26,7 @@
   margin-bottom: 10px;
 }
 
-.App-square {
+.App-box {
   background: #fff;
   border: 1px solid #999;
   float: left;
@@ -41,7 +41,7 @@
   width: 44px;
 }
 
-.App-square:focus {
+.App-box:focus {
   outline: none;
   background: #fba;
 }
