@@ -46,6 +46,11 @@
   background: #ddd;
 }
 
+.App-game {
+  display: flex;
+  flex-direction: row;
+}
+
 .App-error {
   background: #c00;
   color: #fff;
