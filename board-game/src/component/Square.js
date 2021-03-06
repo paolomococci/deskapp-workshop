@@ -18,7 +18,7 @@ export default class Square extends React.Component {
 
   render() {
     return (
-      <button className="App-square">
+      <button className="App-square" onClick={function(){alert('You clicked on a box.');}}>
         {
           this.props.value
         }
