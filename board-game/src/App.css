@@ -39,6 +39,11 @@
 
 .App-square:focus {
   outline: none;
+  background: #ddd;
+}
+
+.App-keyboard-navigation {
+  background: #ddd;
 }
 
 .App-error {
