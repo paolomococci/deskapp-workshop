@@ -15,7 +15,7 @@ export default class Board extends React.Component {
   }
   
   render() {
-    const status = 'Player: X';
+    const status = 'Player: 🔴';
 
     return (
       <div>
