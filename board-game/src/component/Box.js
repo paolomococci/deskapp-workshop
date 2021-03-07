@@ -5,7 +5,7 @@ export default class Box extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "clickable"
+      text: null
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -18,9 +18,11 @@ export default class Box extends React.Component {
 
   render() {
     return (
-      <button className="App-box" onClick={() => alert('You clicked on a box.')}>
+      <button 
+        className="App-box" 
+        onClick={() => this.setState({value: '🔴'})}>
         {
-          this.props.value
+          this.state.value
         }
       </button>
     );
