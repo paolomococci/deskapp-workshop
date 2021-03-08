@@ -3,23 +3,16 @@ import Box from './Box';
 
 export default class Board extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      boxes: Array(9).fill(null)
-    };
-  }
-
   renderBox(arg) {
-    return <Box value={this.state.boxes[arg]}/>;
+    return <Box 
+      value={this.props.boxes[arg]} 
+      onClick={() => this.props.onClick(arg)}
+    />;
   }
   
   render() {
-    const status = 'Player: 🔴';
-
     return (
       <div>
-        <div className="App-status">{status}</div>
         <div className="App-board-row">
           {this.renderBox(0)}
           {this.renderBox(1)}
