@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
 .App-header {
   background-color: #223;
   min-height: 100vh;
@@ -58,13 +63,4 @@
 
 .App-game-info {
   margin-left: 20px;
-}
-
-.App-error {
-  background: #c00;
-  color: #fff;
-  display: none;
-  margin: -20px -20px 20px;
-  padding: 20px;
-  white-space: pre-wrap;
 }
