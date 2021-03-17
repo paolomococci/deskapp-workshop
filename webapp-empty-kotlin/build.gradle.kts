@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "2.4.3"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	id("com.vaadin") version "0.17.0.1"
 	kotlin("jvm") version "1.4.10"
 	kotlin("plugin.spring") version "1.4.10"
 }
@@ -16,7 +15,7 @@ repositories {
 	mavenCentral()
 }
 
-extra["vaadinVersion"] = "18.0.7"
+extra["vaadinVersion"] = "19.0.0"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-hateoas")
