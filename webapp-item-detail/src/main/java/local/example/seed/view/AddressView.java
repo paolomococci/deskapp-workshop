@@ -21,7 +21,6 @@ package local.example.seed.view;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
@@ -43,7 +42,6 @@ import local.example.seed.service.AddressRetrieverService;
 import java.util.Optional;
 
 @PageTitle("address")
-@CssImport("style.css")
 @Route(value = "address", layout = MainLayout.class)
 public class AddressView
         extends Main {
