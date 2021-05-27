@@ -21,7 +21,6 @@ package local.example.seed.view
 import com.github.mvysny.karibudsl.v10.*
 import com.vaadin.flow.component.Key
 import com.vaadin.flow.component.button.Button
-import com.vaadin.flow.component.dependency.CssImport
 import com.vaadin.flow.component.notification.Notification
 import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.router.PageTitle
@@ -29,7 +28,6 @@ import com.vaadin.flow.router.Route
 import local.example.seed.layout.MainLayout
 
 @PageTitle("alternative")
-@CssImport(value = "style.css")
 @Route("alternative", layout = MainLayout::class)
 class AlternativeView  : KComposite() {
 
