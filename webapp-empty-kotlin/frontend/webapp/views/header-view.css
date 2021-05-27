@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.header-view h1 {
+    opacity: 0.9;
+    padding: 5px;
+    background: linear-gradient(to top right, #0ad, #bef);
+    border-radius: 15px 3px 3px 7px;
+    width: 150px;
+    display: flex;
+    color: #000;
+    font-size: small;
+    font-weight: bold;
+}
