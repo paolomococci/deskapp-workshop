@@ -22,7 +22,6 @@ import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
@@ -45,7 +44,6 @@ import local.example.seed.service.CustomerRetrieverService;
 import java.util.Optional;
 
 @PageTitle("customer")
-@CssImport("style.css")
 @Route(value = "customer", layout = MainLayout.class)
 public class CustomerView
         extends Main {
