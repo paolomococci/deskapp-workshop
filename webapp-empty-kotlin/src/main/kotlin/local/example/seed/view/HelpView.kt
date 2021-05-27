@@ -18,7 +18,6 @@
 
 package local.example.seed.view
 
-import com.vaadin.flow.component.dependency.CssImport
 import com.vaadin.flow.component.html.Div
 import com.vaadin.flow.component.html.Label
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
@@ -27,7 +26,6 @@ import com.vaadin.flow.router.Route
 import local.example.seed.layout.MainLayout
 
 @PageTitle("help")
-@CssImport(value = "style.css")
 @Route("help", layout = MainLayout::class)
 class HelpView : Div() {
 
