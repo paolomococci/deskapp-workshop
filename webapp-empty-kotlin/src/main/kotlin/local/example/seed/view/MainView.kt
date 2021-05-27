@@ -22,7 +22,6 @@ import com.github.mvysny.karibudsl.v10.button
 import com.github.mvysny.karibudsl.v10.formLayout
 import com.github.mvysny.karibudsl.v10.onLeftClick
 import com.github.mvysny.karibudsl.v10.textField
-import com.vaadin.flow.component.dependency.CssImport
 import com.vaadin.flow.component.html.Main
 import com.vaadin.flow.component.icon.Icon
 import com.vaadin.flow.component.icon.VaadinIcon
@@ -34,7 +33,6 @@ import com.vaadin.flow.router.RouteAlias
 import local.example.seed.layout.MainLayout
 
 @PageTitle("main")
-@CssImport(value = "style.css")
 @Route("main", layout = MainLayout::class)
 @RouteAlias("", layout = MainLayout::class)
 class MainView : Main() {
