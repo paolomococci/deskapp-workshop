@@ -20,11 +20,14 @@ package local.example.seed;
 
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.server.PWA;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
+@Theme(value = "webapp", variant = Lumo.LIGHT)
 @PWA(name = "address-form", shortName = "address")
 public class Application
 		extends SpringBootServletInitializer
